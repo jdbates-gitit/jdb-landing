@@ -1,755 +1,138 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jason Dale Bates — Mortgage Operations & AI</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --ink: #0f0f0f;
-    --ink-mid: #444;
-    --ink-soft: #888;
-    --rule: #e0ddd8;
-    --bg: #f8f6f2;
-    --bg-card: #ffffff;
-    --accent: #1a3a5c;
-    --accent-warm: #c45c2a;
-    --accent-light: #e8f0f8;
-    --mono: 'Courier New', monospace;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: rgba(248,246,242,0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--rule);
-    padding: 0 2rem;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .nav-logo {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--ink-mid);
-    letter-spacing: 0.08em;
-    text-decoration: none;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-size: 13px;
-    color: var(--ink-soft);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--ink); }
-
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 7rem 2rem 4rem;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .hero-eyebrow {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    color: var(--accent-warm);
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-  }
-
-  .hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2.4rem, 6vw, 4.8rem);
-    line-height: 1.08;
-    color: var(--ink);
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
-  }
-
-  .hero h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
-
-  .hero-sub {
-    font-size: 1.1rem;
-    color: var(--ink-mid);
-    max-width: 580px;
-    line-height: 1.75;
-    margin-bottom: 2.5rem;
-  }
-
-  .hero-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 3rem;
-  }
-
-  .tag {
-    font-size: 12px;
-    font-family: var(--mono);
-    letter-spacing: 0.06em;
-    padding: 5px 12px;
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-    color: var(--ink-mid);
-    background: var(--bg-card);
-  }
-
-  .hero-cta {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--accent);
-    color: #fff;
-    padding: 12px 24px;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    border-radius: 3px;
-    transition: background 0.2s;
-    letter-spacing: 0.02em;
-  }
-
-  .btn-primary:hover { background: #0d2440; }
-
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: transparent;
-    color: var(--ink-mid);
-    padding: 12px 24px;
-    font-size: 14px;
-    font-weight: 400;
-    text-decoration: none;
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    transition: all 0.2s;
-  }
-
-  .btn-secondary:hover { border-color: var(--ink-mid); color: var(--ink); }
-
-  .hero-rule {
-    margin-top: 5rem;
-    border: none;
-    border-top: 1px solid var(--rule);
-  }
-
-  .stats-bar {
-    background: var(--accent);
-    color: #fff;
-    padding: 2rem;
-  }
-
-  .stats-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 2rem;
-  }
-
-  .stat-number {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2.5rem;
-    line-height: 1;
-    margin-bottom: 4px;
-    color: #fff;
-  }
-
-  .stat-label {
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    color: rgba(255,255,255,0.6);
-    font-family: var(--mono);
-    text-transform: uppercase;
-  }
-
-  section {
-    padding: 5rem 2rem;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .section-eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    color: var(--accent-warm);
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-
-  .section-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.01em;
-  }
-
-  .section-body {
-    font-size: 1rem;
-    color: var(--ink-mid);
-    max-width: 620px;
-    line-height: 1.75;
-    margin-bottom: 2rem;
-  }
-
-  hr.divider {
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: 0 2rem;
-  }
-
-  .builds-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
-
-  .build-card {
-    background: var(--bg-card);
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-    padding: 1.5rem;
-    transition: box-shadow 0.2s, transform 0.2s;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .build-card:hover {
-    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-    transform: translateY(-2px);
-  }
-
-  .build-card.coming-soon {
-    opacity: 0.65;
-    border-style: dashed;
-    cursor: default;
-  }
-
-  .build-card.coming-soon:hover {
-    box-shadow: none;
-    transform: none;
-  }
-
-  .build-type {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--accent-warm);
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-  }
-
-  .build-type.soon {
-    color: var(--ink-soft);
-  }
-
-  .build-card h3 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.2;
-  }
-
-  .build-card p {
-    font-size: 14px;
-    color: var(--ink-mid);
-    line-height: 1.6;
-    flex: 1;
-    margin-bottom: 1.25rem;
-  }
-
-  .build-link {
-    font-size: 13px;
-    color: var(--accent);
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .build-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid var(--rule);
-  }
-
-  .stack-tag {
-    font-size: 11px;
-    font-family: var(--mono);
-    color: var(--ink-soft);
-    background: var(--bg);
-    padding: 3px 8px;
-    border-radius: 2px;
-  }
-
-  .expertise-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-    overflow: hidden;
-    margin-top: 2rem;
-  }
-
-  .expertise-item {
-    background: var(--bg-card);
-    padding: 1.5rem;
-  }
-
-  .expertise-item h4 {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--ink);
-  }
-
-  .expertise-item p {
-    font-size: 13px;
-    color: var(--ink-soft);
-    line-height: 1.5;
-  }
-
-  .timeline {
-    margin-top: 2rem;
-    position: relative;
-  }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 8px;
-    bottom: 0;
-    width: 1px;
-    background: var(--rule);
-  }
-
-  .timeline-item {
-    padding-left: 2rem;
-    padding-bottom: 2.5rem;
-    position: relative;
-  }
-
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -4px;
-    top: 8px;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid var(--bg);
-    box-shadow: 0 0 0 1px var(--accent);
-  }
-
-  .timeline-date {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-soft);
-    letter-spacing: 0.08em;
-    margin-bottom: 4px;
-  }
-
-  .timeline-role {
-    font-weight: 600;
-    font-size: 15px;
-    margin-bottom: 2px;
-  }
-
-  .timeline-company {
-    font-size: 13px;
-    color: var(--ink-mid);
-    margin-bottom: 0.5rem;
-  }
-
-  .timeline-desc {
-    font-size: 13px;
-    color: var(--ink-soft);
-    line-height: 1.6;
-    max-width: 580px;
-  }
-
-  .stack-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 2rem;
-  }
-
-  .stack-pill {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--bg-card);
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    padding: 8px 14px;
-    font-size: 13px;
-    color: var(--ink-mid);
-  }
-
-  .stack-pill-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .connect-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-
-  .connect-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--bg-card);
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-    padding: 1rem 1.25rem;
-    text-decoration: none;
-    color: var(--ink);
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s;
-    min-width: 180px;
-  }
-
-  .connect-card:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .connect-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-
-  footer {
-    border-top: 1px solid var(--rule);
-    padding: 2rem;
-    text-align: center;
-    font-size: 12px;
-    font-family: var(--mono);
-    color: var(--ink-soft);
-    letter-spacing: 0.06em;
-  }
-
-  @media (max-width: 600px) {
-    nav { padding: 0 1rem; }
-    .nav-links { gap: 1rem; }
-    .hero, section { padding-left: 1.25rem; padding-right: 1.25rem; }
-    .stats-bar { padding: 1.5rem 1.25rem; }
-    hr.divider { margin: 0 1.25rem; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .build-card { transition: none; }
-  }
-</style>
-</head>
-<body>
-
-<nav>
-  <a class="nav-logo" href="#">JDB</a>
-  <ul class="nav-links">
-    <li><a href="#builds">Builds</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#connect">Connect</a></li>
-  </ul>
-</nav>
-
-<div class="hero">
-  <p class="hero-eyebrow">Jason Dale Bates &nbsp;·&nbsp; Houston, TX &nbsp;·&nbsp; NMLS #406344</p>
-  <h1>Started as an LOA.<br>Now running national production<br>for 110+ loan originators.<br><em>Learning to build.</em></h1>
-  <p class="hero-sub">
-    15+ years working through every level of the mortgage business — from origination to operations to national team leadership. Now adding AI to the mix: capacity models, full loan lifecycle workflows, and tools that give time back to the people doing the work.
-  </p>
-  <div class="hero-tags">
-    <span class="tag">Operations Management</span>
-    <span class="tag">National Team Leadership</span>
-    <span class="tag">AI & Automation</span>
-    <span class="tag">Mortgage Lifecycle</span>
-    <span class="tag">Consulting</span>
-  </div>
-  <div class="hero-cta">
-    <a class="btn-primary" href="https://dashboard.jdb-builds.com" target="_blank">↗ Live Dashboard</a>
-    <a class="btn-secondary" href="#connect">Get in touch</a>
-  </div>
-  <hr class="hero-rule">
-</div>
-
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat-item">
-      <div class="stat-number">26</div>
-      <div class="stat-label">LOAs managed nationally</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">110+</div>
-      <div class="stat-label">Loan originators supported</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">75%</div>
-      <div class="stat-label">Of company loan production</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">15+</div>
-      <div class="stat-label">Years in mortgage</div>
-    </div>
-  </div>
-</div>
-
-<hr class="divider">
-
-<section id="builds">
-  <p class="section-eyebrow">What I build</p>
-  <h2 class="section-title">Real tools.<br>Running in production.</h2>
-  <p class="section-body">
-    Every project here solves an actual problem — in mortgage operations, team management, or my own daily workflow. Built with Python, AI APIs, and a bias toward shipping fast and iterating.
-  </p>
-
-  <div class="builds-grid">
-
-    <a class="build-card" href="https://dashboard.jdb-builds.com" target="_blank">
-      <div class="build-type">Live · Updates Daily</div>
-      <h3>Morning Intelligence Dashboard</h3>
-      <p>Automated daily briefing pulling live mortgage rates, weather, AI news, disc golf tournaments, and Claude-generated summaries — deployed to the web every morning at 6AM without touching a keyboard.</p>
-      <div class="build-stack">
-        <span class="stack-tag">Python</span>
-        <span class="stack-tag">Claude API</span>
-        <span class="stack-tag">GitHub</span>
-        <span class="stack-tag">Cloudflare Pages</span>
-      </div>
-      <div style="margin-top: 1rem;">
-        <span class="build-link">View live ↗</span>
-      </div>
-    </a>
-
-    <div class="build-card">
-      <div class="build-type">Mortgage Ops</div>
-      <h3>LOA Capacity Planning Model</h3>
-      <p>AI-assisted capacity model for staffing and team gearing across PROC1, LOA2, and HYBRID roles — used to forecast national team needs across 110+ loan originators and inform executive staffing decisions.</p>
-      <div class="build-stack">
-        <span class="stack-tag">Excel</span>
-        <span class="stack-tag">Claude AI</span>
-        <span class="stack-tag">PowerBI</span>
-      </div>
-    </div>
-
-    <div class="build-card coming-soon">
-      <div class="build-type soon">Coming Soon</div>
-      <h3>Next Build</h3>
-      <p>Something in the intersection of AI and mortgage operations. The pipeline is full — watch this space.</p>
-      <div class="build-stack">
-        <span class="stack-tag">TBD</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<hr class="divider">
-
-<section id="about">
-  <p class="section-eyebrow">About</p>
-  <h2 class="section-title">Operator first.<br>Always learning.</h2>
-  <p class="section-body">
-    I've spent 15 years working through every level of the mortgage business — starting as an LOA, learning the craft, and eventually building and leading a national team that now supports the majority of company production. I know what slows teams down because I've lived it at every level.
-  </p>
-  <p class="section-body">
-    Now I'm adding AI to that foundation — not as a buzzword, but as a practical tool. Capacity models, loan lifecycle workflows, automated reporting, daily intelligence. I'm learning to build things that make real work easier, and sharing the process as I go.
-  </p>
-
-  <div class="expertise-grid">
-    <div class="expertise-item">
-      <h4>Mortgage Operations</h4>
-      <p>Full loan lifecycle — TBD through CTC, disclosure management, UW submission, processor handoff, broker pipeline.</p>
-    </div>
-    <div class="expertise-item">
-      <h4>Team Leadership</h4>
-      <p>Built a national LOA team from 2 to 26. Recruiting, onboarding, performance, and specialty role design.</p>
-    </div>
-    <div class="expertise-item">
-      <h4>AI & Automation</h4>
-      <p>Applying AI to capacity modeling, workflow design, document processing, and operational intelligence — and learning more every day.</p>
-    </div>
-    <div class="expertise-item">
-      <h4>Reporting & Analytics</h4>
-      <p>PowerBI, HubSpot reporting, AI-assisted dashboards — translating production data into decisions.</p>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<section id="experience">
-  <p class="section-eyebrow">Experience</p>
-  <h2 class="section-title">Where I've been.</h2>
-
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-date">AUG 2023 – PRESENT</div>
-      <div class="timeline-role">Operations Manager & National LOA Team Manager</div>
-      <div class="timeline-company">Envoy Mortgage / PLACE — Houston, TX (Remote/National)</div>
-      <div class="timeline-desc">Built and scaled the national LOA team from 2 to 26 members across 4 specialty roles. Team supports 70–75% of total company loan production across 110+ loan originators nationwide.</div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-date">MAY 2018 – AUG 2023</div>
-      <div class="timeline-role">Operations & Pipeline Manager</div>
-      <div class="timeline-company">Envoy Mortgage — Houston, TX</div>
-      <div class="timeline-desc">Managed active pipeline for Houston, Kingwood, and The Woodlands branches. Primary operations resource for file restructuring, AUS execution, condition clearing, and cross-departmental escalations.</div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-date">MAY 2016 – MAY 2018</div>
-      <div class="timeline-role">Branch Captain / Loan Officer Assistant</div>
-      <div class="timeline-company">Waterstone Mortgage Corporation — Houston, TX</div>
-      <div class="timeline-desc">Supported Branch Manager's full pipeline from pre-qualification through funding. Primary contact for resolving complex income scenarios, rush requests, and suspended files.</div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-date">OCT 2010 – MAY 2016</div>
-      <div class="timeline-role">LOA / Mortgage Banker & Home Mortgage Consultant</div>
-      <div class="timeline-company">Envoy Mortgage / Wells Fargo — Houston, TX</div>
-      <div class="timeline-desc">Earned NMLS #406344. Top performer at Wells Fargo in first year. Built independent referral relationships while supporting broader production teams at Envoy.</div>
-    </div>
-  </div>
-
-  <p style="font-size: 13px; color: var(--ink-soft); font-family: var(--mono); margin-top: 1rem;">B.B.A. Marketing · B.A. Japanese Language — University of Texas at Austin, 1999</p>
-</section>
-
-<hr class="divider">
-
-<section>
-  <p class="section-eyebrow">Tools & Stack</p>
-  <h2 class="section-title">What I work with.</h2>
-
-  <div class="stack-grid">
-    <div class="stack-pill"><span class="stack-pill-dot" style="background:#d97706"></span>Claude AI / Anthropic API</div>
-    <div class="stack-pill"><span class="stack-pill-dot" style="background:#3b82f6"></span>Python</div>
-    <div class="stack-pill"><span class="stack-pill-dot" style="background:#8b5cf6"></span>Make.com</div>
-    <div class="stack-pill"><span class="stack-pill-dot" style="background:#10b981"></span>GitHub / Cloudflare Pages</div>
-    <div class="stack-pill"><span class="stack-pill-dot" style="background:#f59e0b"></span>Microsoft PowerBI</div>
-    <div class="stack-pill"><span class="stack-pill-dot" style="background:#ef4444"></span>HubSpot CRM</div>
-    <div class="stack-pill"><span class="stack-pill-dot" style="background:#6b7280"></span>Encompass LOS</div>
-    <div class="stack-pill"><span class="stack-pill-dot" style="background:#0ea5e9"></span>AUS (DU / LP)</div>
-    <div class="stack-pill"><span class="stack-pill-dot" style="background:#14b8a6"></span>Ollama / LM Studio</div>
-    <div class="stack-pill"><span class="stack-pill-dot" style="background:#f97316"></span>Microsoft Office Suite</div>
-    <div class="stack-pill"><span class="stack-pill-dot" style="background:#64748b"></span>ChatGPT / Copilot</div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<section id="connect">
-  <p class="section-eyebrow">Connect</p>
-  <h2 class="section-title">Let's talk.</h2>
-  <p class="section-body">
-    Open to conversations about AI in mortgage operations, consulting engagements, and what's possible when you combine deep industry experience with a genuine curiosity for what comes next.
-  </p>
-
-  <div class="connect-row">
-    <a class="connect-card" href="mailto:JDBates@gmail.com">
-      <div class="connect-icon" style="background:#f0f4ff; color:#1a3a5c;">✉</div>
-      <div>
-        <div style="font-size:12px; color:var(--ink-soft); margin-bottom:2px; font-family:var(--mono);">EMAIL</div>
-        JDBates@gmail.com
-      </div>
-    </a>
-    <a class="connect-card" href="https://linkedin.com/in/jasondalebates" target="_blank">
-      <div class="connect-icon" style="background:#e8f0fb; color:#0a66c2;">in</div>
-      <div>
-        <div style="font-size:12px; color:var(--ink-soft); margin-bottom:2px; font-family:var(--mono);">LINKEDIN</div>
-        Jason Dale Bates
-      </div>
-    </a>
-    <a class="connect-card" href="https://github.com/jdbates-gitit" target="_blank">
-      <div class="connect-icon" style="background:#f4f4f4; color:#24292f;">⌥</div>
-      <div>
-        <div style="font-size:12px; color:var(--ink-soft); margin-bottom:2px; font-family:var(--mono);">GITHUB</div>
-        jdbates-gitit
-      </div>
-    </a>
-    <a class="connect-card" href="https://dashboard.jdb-builds.com" target="_blank">
-      <div class="connect-icon" style="background:#fff8f0; color:#c45c2a;">▶</div>
-      <div>
-        <div style="font-size:12px; color:var(--ink-soft); margin-bottom:2px; font-family:var(--mono);">LIVE BUILD</div>
-        dashboard.jdb-builds.com
-      </div>
-    </a>
-  </div>
-</section>
-
-<footer>
-  jdb-builds.com &nbsp;·&nbsp; Jason Dale Bates &nbsp;·&nbsp; Houston, TX &nbsp;·&nbsp; NMLS #406344
-</footer>
-
-</body>
-</html>
+JDB
+Builds
+About
+Experience
+Connect
+Jason Dale Bates  ·  Houston, TX  ·  NMLS #406344
+
+Started as an LOA.
+Now running a national team of LOAs
+for 110+ loan originators.
+Learning to build.
+15+ years working through every level of the mortgage business — from origination to operations to national team leadership. Now adding AI to the mix: capacity models, full loan lifecycle workflows, and tools that give time back to the people doing the work.
+
+Operations Management
+National Team Leadership
+AI & Automation
+Mortgage Lifecycle
+Consulting
+↗ Live Dashboard
+Get in touch
+26
+LOAs managed nationally
+110+
+Loan originators supported
+75%
+Of company loan production
+15+
+Years in mortgage
+What I build
+
+Real tools.
+Running in production.
+Every project here solves an actual problem — in mortgage operations, team management, or my own daily workflow. Built with Python, AI APIs, and a bias toward shipping fast and iterating.
+
+Live · Updates Daily
+Morning Intelligence Dashboard
+Automated daily briefing pulling live mortgage rates, weather, AI news, disc golf tournaments, and Claude-generated summaries — deployed to the web every morning at 6AM without touching a keyboard.
+
+Python
+Claude API
+GitHub
+Cloudflare Pages
+View live ↗
+Mortgage Ops
+LOA Capacity Planning Model
+AI-assisted capacity model for staffing and team gearing across PROC1, LOA2, and HYBRID roles — used to forecast national team needs across 110+ loan originators and inform executive staffing decisions.
+
+Excel
+Claude AI
+PowerBI
+Mortgage Ops
+Full Loan Lifecycle Workflow
+End-to-end workflow design covering lead through funding — one path, one process, used by both sales and operations to establish and maintain alignment across the full loan manufacturing process.
+
+Workflow Design
+Claude AI
+Operations
+Coming Soon
+Next Build
+Something in the intersection of AI and mortgage automation. The pipeline is full — watch this space.
+
+TBD
+About
+
+Operator first.
+Always learning.
+I've spent 15 years working through every level of the mortgage business — starting as an LOA, learning the craft, and eventually building and leading a national team that now supports the majority of company production. I know what slows teams down because I've lived it — and collaborated on solving it — throughout the loan manufacturing process.
+
+Now I'm adding AI to that foundation — not as a buzzword, but as a practical tool. Capacity models, loan lifecycle workflows, automated reporting, daily intelligence. I'm learning to build things that make real work easier, and sharing the process as I go.
+
+Mortgage Operations
+Full loan lifecycle — TBD through CTC, disclosure management, UW submission, processor handoff, broker pipeline.
+
+Team Leadership
+Built a national LOA team from 2 to 26. Recruiting, onboarding, performance, and specialty role design.
+
+AI & Automation
+Applying AI to capacity modeling, workflow design, analysis, and problem solving. Next goal: push into mortgage process automation and operational intelligence.
+
+Reporting & Analytics
+PowerBI, HubSpot reporting, AI-assisted dashboards — translating production data into decisions.
+
+Experience
+
+Where I've been.
+AUG 2023 – PRESENT
+Operations Manager & National LOA Team Manager
+Envoy Mortgage / PLACE — Houston, TX (Remote/National)
+Built and scaled the national LOA team from 2 to 26 members across 4 specialty roles. Team supports 70–75% of total company loan production across 110+ loan originators nationwide.
+MAY 2018 – AUG 2023
+Operations & Pipeline Manager
+Envoy Mortgage — Houston, TX
+Managed active pipeline for Houston, Kingwood, and The Woodlands branches. Primary operations resource for file restructuring, AUS execution, condition clearing, and cross-departmental escalations.
+MAY 2016 – MAY 2018
+Branch Captain / Loan Officer Assistant
+Waterstone Mortgage Corporation — Houston, TX
+Supported Branch Manager's full pipeline from pre-qualification through funding. Primary contact for resolving complex income scenarios, rush requests, and suspended files.
+OCT 2010 – MAY 2016
+LOA / Mortgage Banker & Home Mortgage Consultant
+Envoy Mortgage / Wells Fargo — Houston, TX
+Earned NMLS #406344. Top performer at Wells Fargo in first year. Built independent referral relationships while supporting broader production teams at Envoy.
+B.B.A. Marketing · B.A. Japanese Language — University of Texas at Austin, 1999
+
+↓ Download Resume
+Tools & Stack
+
+What I work with.
+AI is opening doors I didn't know how to walk through. These are the tools I'm exploring.
+
+Claude AI / Anthropic API
+Python
+Make.com
+GitHub / Cloudflare Pages
+Microsoft PowerBI
+HubSpot CRM
+Encompass LOS
+AUS (DU / LP)
+Ollama / LM Studio
+Microsoft Office Suite
+ChatGPT / Copilot
+Connect
+
+Let's talk.
+Open to conversations about AI in mortgage operations, consulting engagements, and what's possible when you combine deep industry experience with a genuine curiosity for what comes next.
+
+✉
+EMAIL
+JDBates@gmail.com
+in
+LINKEDIN
+Jason Dale Bates
+⌥
+GITHUB
+jdbates-gitit
+▶
+LIVE BUILD
+dashboard.jdb-builds.com
+jdb-builds.com  ·  Jason Dale Bates  ·  Houston, TX  ·  NMLS #406344
