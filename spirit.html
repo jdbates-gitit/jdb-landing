@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spirit — Jason Dale Bates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..400;1,9..144,200..400&family=IM+Fell+English:ital@0;1&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --void: #0e0c14;
+    --void-2: #161320;
+    --void-3: #1e1a2e;
+    --mist: #c8c0d8;
+    --mist-dim: #7a7290;
+    --ember: #c4956a;
+    --ember-dim: #8a6040;
+    --sage: #7a9e8a;
+    --glow: rgba(196,149,106,0.08);
+    --display: 'Fraunces', Georgia, serif;
+    --body: 'IM Fell English', Georgia, serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--mist);
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--ember); color: var(--void); }
+
+  /* subtle texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(14,12,20,0.7);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .nav-home {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--mist-dim);
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-home:hover { color: var(--ember); }
+  .nav-home span { color: var(--ember); }
+
+  .nav-word {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 200;
+    font-size: 15px;
+    color: var(--mist-dim);
+    letter-spacing: 0.12em;
+  }
+
+  /* INTRO */
+  .intro {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .intro-glyph {
+    font-size: 32px;
+    margin-bottom: 48px;
+    opacity: 0.4;
+    letter-spacing: 0.3em;
+  }
+
+  .intro h1 {
+    font-family: var(--display);
+    font-weight: 200;
+    font-style: italic;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--mist);
+    margin-bottom: 32px;
+    max-width: 14ch;
+  }
+
+  .intro h1 em {
+    font-style: normal;
+    color: var(--ember);
+  }
+
+  .intro-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--ember-dim), transparent);
+    margin: 0 auto 36px;
+  }
+
+  .intro p {
+    font-size: 1.05rem;
+    color: var(--mist-dim);
+    max-width: 46ch;
+    line-height: 1.85;
+    font-style: italic;
+  }
+
+  .intro-scroll {
+    margin-top: 64px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mist-dim);
+    opacity: 0.5;
+  }
+
+  /* DIVIDER */
+  .breath {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--ember-dim), transparent);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* PRACTICE SECTION */
+  .practice-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .practice {
+    padding: 80px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .practice:first-child {
+    border-top: none;
+  }
+
+  .practice-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ember);
+    opacity: 0.6;
+    padding-top: 8px;
+    text-align: right;
+  }
+
+  .practice-body {}
+
+  .practice-title {
+    font-family: var(--display);
+    font-weight: 280;
+    font-style: italic;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    line-height: 1.1;
+    color: var(--mist);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .practice-subtitle {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ember);
+    opacity: 0.7;
+    margin-bottom: 28px;
+  }
+
+  .practice-desc {
+    font-size: 1rem;
+    color: var(--mist-dim);
+    line-height: 1.9;
+    font-style: italic;
+    max-width: 52ch;
+  }
+
+  .practice-anchor {
+    margin-top: 24px;
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage);
+    opacity: 0.65;
+    border-bottom: 1px solid rgba(122,158,138,0.2);
+    padding-bottom: 2px;
+  }
+
+  /* CLOSING */
+  .closing {
+    text-align: center;
+    padding: 100px 40px 120px;
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .closing-glyph {
+    font-size: 24px;
+    opacity: 0.2;
+    margin-bottom: 36px;
+    letter-spacing: 0.4em;
+  }
+
+  .closing p {
+    font-family: var(--display);
+    font-weight: 200;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    color: var(--mist-dim);
+    line-height: 1.6;
+    max-width: 38ch;
+    margin: 0 auto 48px;
+  }
+
+  .closing p em {
+    color: var(--ember);
+    font-style: normal;
+  }
+
+  .back-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mist-dim);
+    opacity: 0.5;
+    transition: opacity 0.2s;
+  }
+  .back-link:hover { opacity: 1; color: var(--ember); }
+
+  /* AMBIENT GLOW */
+  .glow-orb {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,149,106,0.04) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 16px 20px; }
+    .intro { padding: 100px 24px 60px; }
+    .practice-wrap { padding: 0 20px; }
+    .practice { grid-template-columns: 32px 1fr; gap: 20px; }
+    .closing { padding: 80px 24px 100px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="glow-orb"></div>
+
+<nav>
+  <a class="nav-home" href="/"><span>JDB</span> · Home</a>
+  <span class="nav-word">Spirit</span>
+</nav>
+
+<!-- INTRO -->
+<div class="intro">
+  <div class="intro-glyph">☽ · ✦ · ☾</div>
+  <h1>A different<br>kind of <em>practice.</em></h1>
+  <div class="intro-line"></div>
+  <p>This is not a performance. It is not a philosophy to be debated or a belief system to be defended. It is simply the practice of sitting — breathing — and expanding the heart toward what is true.</p>
+  <div class="intro-scroll">Sit with it ↓</div>
+</div>
+
+<div class="breath"></div>
+
+<!-- PRACTICES -->
+<div class="practice-wrap">
+
+  <div class="practice">
+    <div class="practice-num">I</div>
+    <div class="practice-body">
+      <div class="practice-title">Loving Kindness</div>
+      <div class="practice-subtitle">Metta · The open hand</div>
+      <p class="practice-desc">Sit. Breathe. Begin with yourself — wish yourself well without condition. Then let it move outward: to those you love, to those you know, to those you've never met. Arrive at the image of every living person moving through their day from a place of kindness toward one another. Hold that. Let it be more than a wish — let it be a practice of seeing what is possible.</p>
+      <span class="practice-anchor">sit · breathe · extend</span>
+    </div>
+  </div>
+
+  <div class="practice">
+    <div class="practice-num">II</div>
+    <div class="practice-body">
+      <div class="practice-title">Unconditional Love</div>
+      <div class="practice-subtitle">The Universe · God · The unnamed</div>
+      <p class="practice-desc">Sit. Breathe. Open to something larger than yourself — whatever name you give it, or no name at all. Imagine being held by a love that has no conditions, no edges, no end. Not earned. Not owed. Simply present, the way light is simply present. Rest inside that. Let the boundary between self and source become soft.</p>
+      <span class="practice-anchor">sit · breathe · receive</span>
+    </div>
+  </div>
+
+  <div class="practice">
+    <div class="practice-num">III</div>
+    <div class="practice-body">
+      <div class="practice-title">Bearing Witness</div>
+      <div class="practice-subtitle">Compassion · Sitting with the weight of others</div>
+      <p class="practice-desc">Sit. Breathe. Allow yourself to feel the fear that someone else is carrying right now — the mother who doesn't know how to pay the rent, the man who has lost his sense of purpose, the child who doesn't feel safe. Do not fix it. Do not turn away. Sit with their pain as if it were your own, because in the deepest sense it is. This is how the heart grows its capacity.</p>
+      <span class="practice-anchor">sit · breathe · be with</span>
+    </div>
+  </div>
+
+  <div class="practice">
+    <div class="practice-num">IV</div>
+    <div class="practice-body">
+      <div class="practice-title">Surrender</div>
+      <div class="practice-subtitle">Trust · Faith · Letting go of the outcome</div>
+      <p class="practice-desc">Sit. Breathe. Release the grip. Not because things are fine, but because the practice of holding on has never made them more so. Move through each layer of what you are carrying — the plans, the fears, the need to know — and practice setting them down. What remains when you stop insisting? That remainder is worth knowing. That is where trust lives.</p>
+      <span class="practice-anchor">sit · breathe · release</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="breath"></div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <div class="closing-glyph">· · ·</div>
+  <p>The practice is not about arriving anywhere. It is about learning to be <em>here</em> — fully, openly, without resistance — one breath at a time.</p>
+  <a class="back-link" href="/">← return home</a>
+</div>
+
+</body>
+</html>
