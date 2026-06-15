@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOA Capacity Model — JDB Builds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..500;1,9..144,200..500&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --paper: #F2EDE1;
+    --paper-2: #EAE3D3;
+    --line: #D8CFBA;
+    --line-2: #C9BFA6;
+    --ink: #1E1B14;
+    --ink-dim: #6B6453;
+    --ink-soft: #9A9080;
+    --brass: #9A6B16;
+    --brass-bg: #FDF6E8;
+    --green: #2E6B3E;
+    --green-bg: #EDF5EF;
+    --red: #8B2020;
+    --red-bg: #FAEAEA;
+    --blue: #1E3F6B;
+    --blue-bg: #EBF0F7;
+    --amber: #7A5010;
+    --amber-bg: #FEF3DC;
+    --display: 'Fraunces', Georgia, serif;
+    --body: 'Inter Tight', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(242,237,225,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line-2);
+    padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-home { font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; color: var(--ink-dim); text-transform: uppercase; }
+  .nav-home span { color: var(--brass); }
+  .nav-home:hover { color: var(--brass); }
+  .nav-word { font-family: var(--display); font-style: italic; font-weight: 200; font-size: 14px; color: var(--ink-dim); }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+  /* HERO */
+  .hero { padding: 56px 0 40px; border-bottom: 1px solid var(--line-2); }
+  .hero-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 16px; }
+  .hero h1 { font-family: var(--display); font-weight: 280; font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1.08; letter-spacing: -0.015em; margin-bottom: 12px; }
+  .hero h1 em { font-style: italic; color: var(--brass); }
+  .hero p { color: var(--ink-dim); max-width: 70ch; font-size: 14px; line-height: 1.7; }
+
+  /* LAYOUT */
+  .model-layout { display: grid; grid-template-columns: 340px 1fr; gap: 28px; padding: 32px 0 64px; align-items: start; }
+
+  /* INPUT PANEL */
+  .input-panel { background: white; border: 1px solid var(--line-2); border-radius: 6px; overflow: hidden; position: sticky; top: 72px; }
+  .panel-header { background: var(--ink); color: var(--paper); padding: 16px 20px; }
+  .panel-header h2 { font-family: var(--display); font-weight: 300; font-size: 1.1rem; margin-bottom: 2px; }
+  .panel-header p { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: rgba(242,237,225,0.5); text-transform: uppercase; }
+
+  .input-section { padding: 16px 20px; border-bottom: 1px solid var(--line); }
+  .input-section:last-child { border-bottom: none; }
+  .input-section-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--brass); margin-bottom: 12px; }
+
+  .input-row { margin-bottom: 12px; }
+  .input-row label { display: block; font-size: 12px; color: var(--ink-dim); margin-bottom: 4px; font-weight: 500; }
+  .input-row input[type="number"] {
+    width: 100%; padding: 8px 10px;
+    border: 1px solid var(--line-2); border-radius: 3px;
+    background: var(--brass-bg); color: var(--ink);
+    font-family: var(--mono); font-size: 13px; font-weight: 500;
+    transition: border-color 0.2s;
+  }
+  .input-row input[type="number"]:focus { outline: none; border-color: var(--brass); }
+
+  .input-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+  .input-row-2 label { display: block; font-size: 11px; color: var(--ink-dim); margin-bottom: 4px; font-weight: 500; }
+  .input-row-2 input[type="number"] {
+    width: 100%; padding: 7px 8px;
+    border: 1px solid var(--line-2); border-radius: 3px;
+    background: var(--brass-bg); color: var(--ink);
+    font-family: var(--mono); font-size: 12px;
+  }
+  .input-row-2 input:focus { outline: none; border-color: var(--brass); }
+
+  .settings-toggle { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .settings-toggle label { font-size: 12px; color: var(--ink-dim); font-weight: 500; }
+  .toggle-switch { position: relative; width: 36px; height: 20px; }
+  .toggle-switch input { opacity: 0; width: 0; height: 0; }
+  .slider { position: absolute; cursor: pointer; inset: 0; background: var(--line-2); border-radius: 20px; transition: .3s; }
+  .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: .3s; }
+  input:checked + .slider { background: var(--brass); }
+  input:checked + .slider:before { transform: translateX(16px); }
+
+  .calc-btn {
+    width: 100%; padding: 13px;
+    background: var(--brass); color: var(--paper);
+    border: none; border-radius: 3px;
+    font-family: var(--mono); font-size: 12px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; font-weight: 600; transition: background 0.2s;
+    margin: 16px 20px; width: calc(100% - 40px);
+  }
+  .calc-btn:hover { background: #7A5010; }
+
+  /* OUTPUT PANEL */
+  .output-panel { display: flex; flex-direction: column; gap: 20px; }
+
+  /* KPI CARDS */
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .kpi-card { background: white; border: 1px solid var(--line-2); border-radius: 6px; padding: 16px 18px; }
+  .kpi-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; }
+  .kpi-value { font-family: var(--display); font-weight: 340; font-size: 2rem; line-height: 1; margin-bottom: 4px; }
+  .kpi-sub { font-size: 11px; color: var(--ink-soft); }
+  .kpi-card.gap-needed { border-color: #E8A0A0; background: var(--red-bg); }
+  .kpi-card.gap-needed .kpi-value { color: var(--red); }
+  .kpi-card.gap-ok { border-color: #9ACAAA; background: var(--green-bg); }
+  .kpi-card.gap-ok .kpi-value { color: var(--green); }
+  .kpi-card.neutral { border-color: var(--line-2); }
+  .kpi-card.neutral .kpi-value { color: var(--ink); }
+
+  /* ROLE CARDS */
+  .role-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .role-card { background: white; border: 1px solid var(--line-2); border-radius: 6px; overflow: hidden; }
+  .role-card-header { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; }
+  .role-name { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; }
+  .role-badge { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 2px; }
+  .role-card-body { padding: 12px 16px; }
+  .role-stat { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .role-stat:last-child { border-bottom: none; }
+  .role-stat-label { font-size: 12px; color: var(--ink-dim); }
+  .role-stat-value { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--ink); }
+
+  /* PROC1 */
+  .role-card.proc1 .role-card-header { background: var(--blue-bg); }
+  .role-card.proc1 .role-name { color: var(--blue); }
+  .role-card.proc1 .role-badge { background: var(--blue); color: white; }
+
+  /* LOA2 */
+  .role-card.loa2 .role-card-header { background: var(--green-bg); }
+  .role-card.loa2 .role-name { color: var(--green); }
+  .role-card.loa2 .role-badge { background: var(--green); color: white; }
+
+  /* HYBRID */
+  .role-card.hybrid .role-card-header { background: var(--amber-bg); }
+  .role-card.hybrid .role-name { color: var(--amber); }
+  .role-card.hybrid .role-badge { background: var(--amber); color: white; }
+
+  /* RECOMMENDATION */
+  .recommendation { border-radius: 6px; padding: 20px 24px; border: 1px solid; }
+  .recommendation.gap { background: var(--red-bg); border-color: #E8A0A0; }
+  .recommendation.ok { background: var(--green-bg); border-color: #9ACAAA; }
+  .recommendation.warning { background: var(--amber-bg); border-color: #E8C870; }
+  .rec-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .rec-icon { font-size: 18px; }
+  .rec-title { font-family: var(--display); font-weight: 380; font-size: 1.1rem; }
+  .rec-body { font-size: 13px; color: var(--ink-dim); line-height: 1.7; }
+  .rec-body strong { color: var(--ink); }
+
+  /* SCENARIOS */
+  .scenarios-block { background: white; border: 1px solid var(--line-2); border-radius: 6px; overflow: hidden; }
+  .scenarios-header { padding: 14px 20px; border-bottom: 1px solid var(--line-2); }
+  .scenarios-header h3 { font-family: var(--display); font-weight: 340; font-size: 1rem; }
+  .scenarios-header p { font-size: 12px; color: var(--ink-dim); margin-top: 2px; }
+  .scenarios-table { width: 100%; border-collapse: collapse; }
+  .scenarios-table th { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); padding: 10px 16px; text-align: right; border-bottom: 1px solid var(--line); }
+  .scenarios-table th:first-child { text-align: left; }
+  .scenarios-table td { padding: 10px 16px; font-size: 13px; text-align: right; border-bottom: 1px solid var(--line); }
+  .scenarios-table td:first-child { text-align: left; color: var(--ink-dim); font-size: 12px; }
+  .scenarios-table tr:last-child td { border-bottom: none; }
+  .signal { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 2px; font-weight: 600; }
+  .signal-plan { background: var(--amber-bg); color: var(--amber); }
+  .signal-hire { background: var(--red-bg); color: var(--red); }
+  .signal-ok { background: var(--green-bg); color: var(--green); }
+
+  /* UTILIZATION BARS */
+  .util-block { background: white; border: 1px solid var(--line-2); border-radius: 6px; padding: 20px; }
+  .util-block h3 { font-family: var(--display); font-weight: 340; font-size: 1rem; margin-bottom: 16px; }
+  .util-row { margin-bottom: 14px; }
+  .util-label { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .util-name { font-size: 12px; color: var(--ink-dim); font-weight: 500; }
+  .util-pct { font-family: var(--mono); font-size: 12px; font-weight: 600; }
+  .util-track { height: 8px; background: var(--paper-2); border-radius: 4px; overflow: hidden; }
+  .util-bar { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+
+  /* FOOTNOTE */
+  .footnote { font-family: var(--mono); font-size: 10px; color: var(--ink-soft); letter-spacing: 0.06em; padding: 20px 0; border-top: 1px solid var(--line); }
+
+  @media (max-width: 900px) {
+    .model-layout { grid-template-columns: 1fr; }
+    .input-panel { position: static; }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .role-cards { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 580px) {
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-home" href="/"><span>JDB</span> · Home</a>
+  <span class="nav-word">LOA Capacity Model</span>
+</nav>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-eyebrow">PFG · Time-Study Calibrated · Feb 2026</div>
+    <h1>LOA Capacity Model — <em>Role Gearing Engine</em></h1>
+    <p>Enter your monthly volume and current staffing below. The model calculates PROC1, LOA2, and HYBRID needs using time-study-derived throughput (75 min/TBD · 139 min/Contract), HYBRID absorption logic, and CEILING rounding. Blue cells are editable inputs.</p>
+  </div>
+
+  <div class="model-layout">
+
+    <!-- INPUT PANEL -->
+    <div class="input-panel">
+      <div class="panel-header">
+        <h2>Inputs</h2>
+        <p>Blue cells · editable</p>
+      </div>
+
+      <div class="input-section">
+        <div class="input-section-label">Workload This Month</div>
+        <div class="input-row">
+          <label>TBD Pre-Approval Reviews</label>
+          <input type="number" id="tbd" value="1158" min="0">
+        </div>
+        <div class="input-row">
+          <label>1st &amp; 2nd Fundings (Contracts)</label>
+          <input type="number" id="contracts" value="521" min="0">
+        </div>
+      </div>
+
+      <div class="input-section">
+        <div class="input-section-label">Current Staff</div>
+        <div class="input-row-2">
+          <div>
+            <label>PROC1 Ramped</label>
+            <input type="number" id="proc1_ramped" value="5" min="0">
+          </div>
+          <div>
+            <label>PROC1 Ramping</label>
+            <input type="number" id="proc1_ramp" value="0" min="0">
+          </div>
+        </div>
+        <div class="input-row-2">
+          <div>
+            <label>LOA2 Ramped</label>
+            <input type="number" id="loa2_ramped" value="10" min="0">
+          </div>
+          <div>
+            <label>LOA2 Ramping</label>
+            <input type="number" id="loa2_ramp" value="0" min="0">
+          </div>
+        </div>
+        <div class="input-row-2">
+          <div>
+            <label>HYBRID Ramped</label>
+            <input type="number" id="hybrid_ramped" value="7" min="0">
+          </div>
+          <div>
+            <label>HYBRID Ramping</label>
+            <input type="number" id="hybrid_ramp" value="0" min="0">
+          </div>
+        </div>
+      </div>
+
+      <div class="input-section">
+        <div class="input-section-label">Settings</div>
+        <div class="input-row">
+          <label>New-Hire Ramp Factor (%)</label>
+          <input type="number" id="ramp_factor" value="60" min="1" max="100">
+        </div>
+        <div class="input-row">
+          <label>HYBRID Time on TBDs (%)</label>
+          <input type="number" id="hybrid_tbd_pct" value="61" min="1" max="99">
+        </div>
+        <div class="settings-toggle">
+          <label>Use Time-Study Throughput</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="use_timestudy" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div id="override_inputs" style="display:none;">
+          <div class="input-row-2">
+            <div>
+              <label>Override TBDs/Person</label>
+              <input type="number" id="override_tbd" value="100" min="1">
+            </div>
+            <div>
+              <label>Override Fundings/Person</label>
+              <input type="number" id="override_contract" value="47" min="1">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="calc-btn" onclick="calculate()">↻ Calculate Capacity</button>
+    </div>
+
+    <!-- OUTPUT PANEL -->
+    <div class="output-panel" id="output">
+
+      <!-- KPIs -->
+      <div class="kpi-row">
+        <div class="kpi-card neutral" id="kpi_proc1_need">
+          <div class="kpi-label">PROC1 Needed</div>
+          <div class="kpi-value" id="v_proc1_need">—</div>
+          <div class="kpi-sub">Fundings role</div>
+        </div>
+        <div class="kpi-card neutral" id="kpi_loa2_need">
+          <div class="kpi-label">LOA2 Needed</div>
+          <div class="kpi-value" id="v_loa2_need">—</div>
+          <div class="kpi-sub">TBD role</div>
+        </div>
+        <div class="kpi-card neutral" id="kpi_hybrid">
+          <div class="kpi-label">HYBRID Effective</div>
+          <div class="kpi-value" id="v_hybrid">—</div>
+          <div class="kpi-sub">Both pools</div>
+        </div>
+        <div class="kpi-card neutral" id="kpi_gap">
+          <div class="kpi-label">Total Staff Gap</div>
+          <div class="kpi-value" id="v_gap">—</div>
+          <div class="kpi-sub" id="v_gap_sub">Need vs Have</div>
+        </div>
+      </div>
+
+      <!-- ROLE CARDS -->
+      <div class="role-cards">
+        <div class="role-card proc1">
+          <div class="role-card-header">
+            <span class="role-name">PROC1</span>
+            <span class="role-badge" id="proc1_status">—</span>
+          </div>
+          <div class="role-card-body">
+            <div class="role-stat"><span class="role-stat-label">Work Type</span><span class="role-stat-value">1st &amp; 2nd Fundings</span></div>
+            <div class="role-stat"><span class="role-stat-label">Assigned Volume</span><span class="role-stat-value" id="proc1_vol">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">Cap / Person</span><span class="role-stat-value" id="proc1_cap">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">Staff Needed</span><span class="role-stat-value" id="proc1_need">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">Effective Staff</span><span class="role-stat-value" id="proc1_have">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">Team Capacity</span><span class="role-stat-value" id="proc1_teamcap">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">Utilization</span><span class="role-stat-value" id="proc1_util">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">Gap</span><span class="role-stat-value" id="proc1_gap">—</span></div>
+          </div>
+        </div>
+
+        <div class="role-card loa2">
+          <div class="role-card-header">
+            <span class="role-name">LOA2</span>
+            <span class="role-badge" id="loa2_status">—</span>
+          </div>
+          <div class="role-card-body">
+            <div class="role-stat"><span class="role-stat-label">Work Type</span><span class="role-stat-value">TBD Pre-Approvals</span></div>
+            <div class="role-stat"><span class="role-stat-label">Assigned Volume</span><span class="role-stat-value" id="loa2_vol">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">Cap / Person</span><span class="role-stat-value" id="loa2_cap">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">Staff Needed</span><span class="role-stat-value" id="loa2_need">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">Effective Staff</span><span class="role-stat-value" id="loa2_have">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">Team Capacity</span><span class="role-stat-value" id="loa2_teamcap">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">Utilization</span><span class="role-stat-value" id="loa2_util">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">Gap</span><span class="role-stat-value" id="loa2_gap">—</span></div>
+          </div>
+        </div>
+
+        <div class="role-card hybrid">
+          <div class="role-card-header">
+            <span class="role-name">HYBRID</span>
+            <span class="role-badge" id="hybrid_status">Contributing</span>
+          </div>
+          <div class="role-card-body">
+            <div class="role-stat"><span class="role-stat-label">Work Type</span><span class="role-stat-value">TBDs + Fundings</span></div>
+            <div class="role-stat"><span class="role-stat-label">Effective Staff</span><span class="role-stat-value" id="hybrid_eff">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">TBD Cap / Person</span><span class="role-stat-value" id="hybrid_tbd_cap">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">Funding Cap / Person</span><span class="role-stat-value" id="hybrid_fund_cap">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">TBDs Absorbed</span><span class="role-stat-value" id="hybrid_tbd_abs">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">Fundings Absorbed</span><span class="role-stat-value" id="hybrid_fund_abs">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">TBD Pool Relief</span><span class="role-stat-value" id="hybrid_tbd_relief">—</span></div>
+            <div class="role-stat"><span class="role-stat-label">Funding Pool Relief</span><span class="role-stat-value" id="hybrid_fund_relief">—</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UTILIZATION BARS -->
+      <div class="util-block">
+        <h3>Role Utilization</h3>
+        <div class="util-row">
+          <div class="util-label">
+            <span class="util-name">PROC1 — Fundings</span>
+            <span class="util-pct" id="util_proc1_pct" style="color: var(--blue)">—</span>
+          </div>
+          <div class="util-track"><div class="util-bar" id="util_proc1_bar" style="background: var(--blue); width: 0%"></div></div>
+        </div>
+        <div class="util-row">
+          <div class="util-label">
+            <span class="util-name">LOA2 — TBD Pre-Approvals</span>
+            <span class="util-pct" id="util_loa2_pct" style="color: var(--green)">—</span>
+          </div>
+          <div class="util-track"><div class="util-bar" id="util_loa2_bar" style="background: var(--green); width: 0%"></div></div>
+        </div>
+      </div>
+
+      <!-- RECOMMENDATION -->
+      <div class="recommendation" id="recommendation">
+        <div class="rec-header">
+          <span class="rec-icon" id="rec_icon">⟳</span>
+          <span class="rec-title" id="rec_title">Run the model to see your staffing recommendation</span>
+        </div>
+        <div class="rec-body" id="rec_body">Enter your volume and staff counts above, then click Calculate.</div>
+      </div>
+
+      <!-- SCENARIOS -->
+      <div class="scenarios-block">
+        <div class="scenarios-header">
+          <h3>Scenario Modeling</h3>
+          <p>Conservative / Base / Aggressive volume projections from current inputs</p>
+        </div>
+        <table class="scenarios-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Conservative <span style="color:var(--green);font-size:9px">−10% / −10%</span></th>
+              <th>Base <span style="color:var(--amber);font-size:9px">+5% / +10%</span></th>
+              <th>Aggressive <span style="color:var(--red);font-size:9px">+20% / +25%</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Projected TBDs</td><td id="s_tbd_c">—</td><td id="s_tbd_b">—</td><td id="s_tbd_a">—</td></tr>
+            <tr><td>Projected Fundings</td><td id="s_fund_c">—</td><td id="s_fund_b">—</td><td id="s_fund_a">—</td></tr>
+            <tr><td>LOA2 Needed</td><td id="s_loa2_c">—</td><td id="s_loa2_b">—</td><td id="s_loa2_a">—</td></tr>
+            <tr><td>PROC1 Needed</td><td id="s_proc1_c">—</td><td id="s_proc1_b">—</td><td id="s_proc1_a">—</td></tr>
+            <tr><td>LOA2 Gap</td><td id="s_loa2_gap_c">—</td><td id="s_loa2_gap_b">—</td><td id="s_loa2_gap_a">—</td></tr>
+            <tr><td>PROC1 Gap</td><td id="s_proc1_gap_c">—</td><td id="s_proc1_gap_b">—</td><td id="s_proc1_gap_a">—</td></tr>
+            <tr>
+              <td>Hiring Signal</td>
+              <td><span class="signal" id="s_sig_c">—</span></td>
+              <td><span class="signal" id="s_sig_b">—</span></td>
+              <td><span class="signal" id="s_sig_a">—</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="footnote">
+        Time-study derived throughput: 75 min/TBD · 139 min/Contract · 8 hrs × 21 days/mo · 20% overhead · 85% target utilization = 6,854 productive min/mo · ~91 TBDs/person · ~49 Fundings/person · Source: PFG Feb 2026 Time Study
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // Toggle override inputs
+  document.getElementById('use_timestudy').addEventListener('change', function() {
+    document.getElementById('override_inputs').style.display = this.checked ? 'none' : 'block';
+  });
+
+  // Auto-calculate on any input change
+  document.querySelectorAll('input').forEach(el => {
+    el.addEventListener('input', calculate);
+  });
+
+  function ceil(n) { return Math.ceil(n); }
+  function pct(n) { return (n * 100).toFixed(1) + '%'; }
+  function fmt(n) { return Math.round(n).toLocaleString(); }
+  function fmtD(n) { return n.toFixed(1); }
+
+  function gapStatus(gap) {
+    if (gap > 0) return { text: '+' + gap + ' Needed', cls: 'gap-needed' };
+    if (gap < 0) return { text: Math.abs(gap) + ' Over', cls: 'gap-ok' };
+    return { text: '✓ Exact', cls: 'gap-ok' };
+  }
+
+  function signal(totalGap) {
+    if (totalGap <= 0) return { text: '✓ OK', cls: 'signal-ok' };
+    if (totalGap <= 2) return { text: 'PLAN HIRES', cls: 'signal-plan' };
+    return { text: 'HIRE NOW', cls: 'signal-hire' };
+  }
+
+  function runModel(tbd, contracts, p_ramped, p_ramp, l_ramped, l_ramp, h_ramped, h_ramp, ramp, hybridTBDpct, tbdCap, fundCap) {
+    const rampF = ramp / 100;
+    const hybridF = hybridTBDpct / 100;
+
+    // Effective staff
+    const proc1Eff = p_ramped + p_ramp * rampF;
+    const loa2Eff = l_ramped + l_ramp * rampF;
+    const hybridEff = h_ramped + h_ramp * rampF;
+
+    // HYBRID caps
+    const hybridTBDcap = Math.round(tbdCap * hybridF);
+    const hybridFundCap = Math.round(fundCap * (1 - hybridF));
+
+    // HYBRID absorption
+    const hybridTBDabs = Math.round(hybridEff * hybridTBDcap);
+    const hybridFundAbs = Math.round(hybridEff * hybridFundCap);
+
+    // Remaining for dedicated roles
+    const remainTBD = Math.max(0, tbd - hybridTBDabs);
+    const remainFund = Math.max(0, contracts - hybridFundAbs);
+
+    // Role needs
+    const loa2Need = ceil(remainTBD / tbdCap);
+    const proc1Need = ceil(remainFund / fundCap);
+
+    // Capacities
+    const loa2TeamCap = loa2Eff * tbdCap;
+    const proc1TeamCap = proc1Eff * fundCap;
+
+    // Utilization
+    const loa2Util = loa2TeamCap > 0 ? remainTBD / loa2TeamCap : 0;
+    const proc1Util = proc1TeamCap > 0 ? remainFund / proc1TeamCap : 0;
+
+    // Gaps
+    const proc1Gap = proc1Need - proc1Eff;
+    const loa2Gap = loa2Need - loa2Eff;
+    const totalGap = Math.round(proc1Gap + loa2Gap);
+
+    return {
+      proc1Eff, loa2Eff, hybridEff,
+      hybridTBDcap, hybridFundCap,
+      hybridTBDabs, hybridFundAbs,
+      hybridTBDrelief: tbd > 0 ? hybridTBDabs / tbd : 0,
+      hybridFundRelief: contracts > 0 ? hybridFundAbs / contracts : 0,
+      remainTBD, remainFund,
+      loa2Need, proc1Need,
+      loa2TeamCap, proc1TeamCap,
+      loa2Util, proc1Util,
+      proc1Gap, loa2Gap, totalGap,
+      tbdCap, fundCap
+    };
+  }
+
+  function calculate() {
+    const tbd = parseFloat(document.getElementById('tbd').value) || 0;
+    const contracts = parseFloat(document.getElementById('contracts').value) || 0;
+    const p_ramped = parseFloat(document.getElementById('proc1_ramped').value) || 0;
+    const p_ramp = parseFloat(document.getElementById('proc1_ramp').value) || 0;
+    const l_ramped = parseFloat(document.getElementById('loa2_ramped').value) || 0;
+    const l_ramp = parseFloat(document.getElementById('loa2_ramp').value) || 0;
+    const h_ramped = parseFloat(document.getElementById('hybrid_ramped').value) || 0;
+    const h_ramp = parseFloat(document.getElementById('hybrid_ramp').value) || 0;
+    const ramp = parseFloat(document.getElementById('ramp_factor').value) || 60;
+    const hybridTBDpct = parseFloat(document.getElementById('hybrid_tbd_pct').value) || 61;
+    const useTS = document.getElementById('use_timestudy').checked;
+
+    // Throughput
+    const PROD_MIN = 6854.4;
+    const tbdCap = useTS ? Math.floor(PROD_MIN / 75) : (parseFloat(document.getElementById('override_tbd').value) || 100);
+    const fundCap = useTS ? Math.floor(PROD_MIN / 139.286) : (parseFloat(document.getElementById('override_contract').value) || 47);
+
+    const r = runModel(tbd, contracts, p_ramped, p_ramp, l_ramped, l_ramp, h_ramped, h_ramp, ramp, hybridTBDpct, tbdCap, fundCap);
+
+    // KPIs
+    document.getElementById('v_proc1_need').textContent = r.proc1Need;
+    document.getElementById('v_loa2_need').textContent = r.loa2Need;
+    document.getElementById('v_hybrid').textContent = fmtD(r.hybridEff);
+    document.getElementById('v_gap').textContent = r.totalGap > 0 ? '+' + r.totalGap : r.totalGap;
+
+    const gapCard = document.getElementById('kpi_gap');
+    gapCard.className = 'kpi-card ' + (r.totalGap > 0 ? 'gap-needed' : 'gap-ok');
+    document.getElementById('v_gap_sub').textContent = r.totalGap > 0 ? 'Additional staff needed' : r.totalGap < 0 ? 'Overstaffed' : 'Fully covered';
+
+    // PROC1 card
+    const p1g = gapStatus(Math.round(r.proc1Gap));
+    document.getElementById('proc1_status').textContent = p1g.text;
+    document.getElementById('proc1_vol').textContent = fmt(r.remainFund);
+    document.getElementById('proc1_cap').textContent = r.fundCap + ' fundings';
+    document.getElementById('proc1_need').textContent = r.proc1Need;
+    document.getElementById('proc1_have').textContent = fmtD(r.proc1Eff);
+    document.getElementById('proc1_teamcap').textContent = fmt(r.proc1TeamCap);
+    document.getElementById('proc1_util').textContent = pct(r.proc1Util);
+    document.getElementById('proc1_gap').textContent = p1g.text;
+
+    // LOA2 card
+    const l2g = gapStatus(Math.round(r.loa2Gap));
+    document.getElementById('loa2_status').textContent = l2g.text;
+    document.getElementById('loa2_vol').textContent = fmt(r.remainTBD);
+    document.getElementById('loa2_cap').textContent = r.tbdCap + ' TBDs';
+    document.getElementById('loa2_need').textContent = r.loa2Need;
+    document.getElementById('loa2_have').textContent = fmtD(r.loa2Eff);
+    document.getElementById('loa2_teamcap').textContent = fmt(r.loa2TeamCap);
+    document.getElementById('loa2_util').textContent = pct(r.loa2Util);
+    document.getElementById('loa2_gap').textContent = l2g.text;
+
+    // HYBRID card
+    document.getElementById('hybrid_eff').textContent = fmtD(r.hybridEff);
+    document.getElementById('hybrid_tbd_cap').textContent = r.hybridTBDcap;
+    document.getElementById('hybrid_fund_cap').textContent = r.hybridFundCap;
+    document.getElementById('hybrid_tbd_abs').textContent = fmt(r.hybridTBDabs);
+    document.getElementById('hybrid_fund_abs').textContent = fmt(r.hybridFundAbs);
+    document.getElementById('hybrid_tbd_relief').textContent = pct(r.hybridTBDrelief);
+    document.getElementById('hybrid_fund_relief').textContent = pct(r.hybridFundRelief);
+
+    // Utilization bars
+    const proc1UtilPct = Math.min(r.proc1Util * 100, 150);
+    const loa2UtilPct = Math.min(r.loa2Util * 100, 150);
+    document.getElementById('util_proc1_pct').textContent = pct(r.proc1Util);
+    document.getElementById('util_loa2_pct').textContent = pct(r.loa2Util);
+    document.getElementById('util_proc1_bar').style.width = Math.min(proc1UtilPct, 100) + '%';
+    document.getElementById('util_proc1_bar').style.background = r.proc1Util > 1.1 ? 'var(--red)' : r.proc1Util > 0.9 ? 'var(--amber)' : 'var(--blue)';
+    document.getElementById('util_loa2_bar').style.width = Math.min(loa2UtilPct, 100) + '%';
+    document.getElementById('util_loa2_bar').style.background = r.loa2Util > 1.1 ? 'var(--red)' : r.loa2Util > 0.9 ? 'var(--amber)' : 'var(--green)';
+
+    // Recommendation
+    const rec = document.getElementById('recommendation');
+    const recIcon = document.getElementById('rec_icon');
+    const recTitle = document.getElementById('rec_title');
+    const recBody = document.getElementById('rec_body');
+
+    if (r.totalGap > 0) {
+      rec.className = 'recommendation gap';
+      recIcon.textContent = '⚠';
+      recTitle.textContent = 'Staffing Gap — ' + r.totalGap + ' additional staff needed';
+      const lines = [];
+      if (Math.round(r.proc1Gap) > 0) lines.push('<strong>' + Math.round(r.proc1Gap) + ' PROC1</strong> (Fundings role) — ' + r.proc1Need + ' needed vs ' + fmtD(r.proc1Eff) + ' effective. PROC1 utilization at ' + pct(r.proc1Util) + ' — team is over capacity.');
+      if (Math.round(r.loa2Gap) > 0) lines.push('<strong>' + Math.round(r.loa2Gap) + ' LOA2</strong> (TBD role) — ' + r.loa2Need + ' needed vs ' + fmtD(r.loa2Eff) + ' effective. LOA2 utilization at ' + pct(r.loa2Util) + '.');
+      lines.push('Consider HYBRID hires to relieve both pools simultaneously — each HYBRID absorbs ~' + r.hybridTBDcap + ' TBDs and ~' + r.hybridFundCap + ' Fundings/month.');
+      recBody.innerHTML = lines.join('<br><br>');
+    } else if (r.totalGap === 0) {
+      rec.className = 'recommendation ok';
+      recIcon.textContent = '✓';
+      recTitle.textContent = 'Fully staffed — team capacity matches current volume';
+      recBody.innerHTML = 'PROC1 at ' + pct(r.proc1Util) + ' utilization · LOA2 at ' + pct(r.loa2Util) + ' utilization. Monitor volume trends and run the Aggressive scenario to plan ahead.';
+    } else {
+      rec.className = 'recommendation warning';
+      recIcon.textContent = '↓';
+      recTitle.textContent = 'Overstaffed by ' + Math.abs(r.totalGap) + ' — capacity exceeds current volume';
+      const over = [];
+      if (Math.round(r.proc1Gap) < 0) over.push('PROC1 has ' + Math.abs(Math.round(r.proc1Gap)) + ' excess staff at ' + pct(r.proc1Util) + ' utilization');
+      if (Math.round(r.loa2Gap) < 0) over.push('LOA2 has ' + Math.abs(Math.round(r.loa2Gap)) + ' excess staff at ' + pct(r.loa2Util) + ' utilization');
+      recBody.innerHTML = over.join(' · ') + '. Consider volume growth scenarios before reducing headcount.';
+    }
+
+    // Scenarios
+    const scenarios = [
+      { tbd_m: -0.1, fund_m: -0.1, label: 'c' },
+      { tbd_m: 0.05, fund_m: 0.1, label: 'b' },
+      { tbd_m: 0.2, fund_m: 0.25, label: 'a' }
+    ];
+
+    scenarios.forEach(s => {
+      const sTBD = Math.round(tbd * (1 + s.tbd_m));
+      const sFund = Math.round(contracts * (1 + s.fund_m));
+      const sr = runModel(sTBD, sFund, p_ramped, p_ramp, l_ramped, l_ramp, h_ramped, h_ramp, ramp, hybridTBDpct, tbdCap, fundCap);
+      const totalGap = Math.round(sr.proc1Gap + sr.loa2Gap);
+      const sig = signal(totalGap);
+      document.getElementById('s_tbd_' + s.label).textContent = fmt(sTBD);
+      document.getElementById('s_fund_' + s.label).textContent = fmt(sFund);
+      document.getElementById('s_loa2_' + s.label).textContent = sr.loa2Need;
+      document.getElementById('s_proc1_' + s.label).textContent = sr.proc1Need;
+      document.getElementById('s_loa2_gap_' + s.label).textContent = Math.round(sr.loa2Gap) > 0 ? '+' + Math.round(sr.loa2Gap) : Math.round(sr.loa2Gap);
+      document.getElementById('s_proc1_gap_' + s.label).textContent = Math.round(sr.proc1Gap) > 0 ? '+' + Math.round(sr.proc1Gap) : Math.round(sr.proc1Gap);
+      const sigEl = document.getElementById('s_sig_' + s.label);
+      sigEl.textContent = sig.text;
+      sigEl.className = 'signal ' + sig.cls;
+    });
+  }
+
+  // Run on load
+  calculate();
+</script>
+
+</body>
+</html>
