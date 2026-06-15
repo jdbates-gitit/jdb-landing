@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expand — Jason Dale Bates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..500;1,9..144,200..500&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --paper: #F2EDE1;
+    --paper-2: #EAE3D3;
+    --line: #D8CFBA;
+    --line-2: #C9BFA6;
+    --ink: #1E1B14;
+    --ink-dim: #6B6453;
+    --ink-soft: #9A9080;
+    --brass: #9A6B16;
+    --brass-bright: #B5841F;
+    --forest: #3D5E3A;
+    --forest-light: #EEF3ED;
+    --sky: #2E4A6B;
+    --sky-light: #EBF0F5;
+    --ember: #8B3A1E;
+    --ember-light: #F5EDE9;
+    --display: 'Fraunces', Georgia, serif;
+    --body: 'Inter Tight', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--brass); color: var(--paper); }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(242,237,225,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line-2);
+    padding: 16px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-home {
+    font-family: var(--mono); font-size: 12px;
+    letter-spacing: 0.18em; color: var(--ink-dim);
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-home:hover { color: var(--brass); }
+  .nav-home span { color: var(--brass); }
+  .nav-word {
+    font-family: var(--display); font-style: italic;
+    font-weight: 200; font-size: 15px; color: var(--ink-dim);
+    letter-spacing: 0.1em;
+  }
+
+  /* HERO */
+  .hero {
+    max-width: 900px; margin: 0 auto;
+    padding: 96px 40px 64px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--brass); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .hero-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--line-2); }
+  .hero h1 {
+    font-family: var(--display); font-weight: 280;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.06; letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  .hero h1 em { font-style: italic; color: var(--brass); }
+  .hero p {
+    font-size: 1.05rem; color: var(--ink-dim);
+    max-width: 58ch; line-height: 1.75;
+  }
+
+  /* FILTERS */
+  .filter-bar {
+    max-width: 900px; margin: 0 auto;
+    padding: 28px 40px;
+    display: flex; flex-wrap: wrap; gap: 10px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .filter-btn {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 7px 14px; border-radius: 2px;
+    border: 1px solid var(--line-2);
+    background: transparent; color: var(--ink-dim);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--brass); color: var(--paper);
+    border-color: var(--brass);
+  }
+
+  /* BOOK LIST */
+  .book-list {
+    max-width: 900px; margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  .book-item {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 28px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+    transition: background 0.2s;
+  }
+
+  .book-item:hover {
+    background: linear-gradient(90deg, var(--paper-2), transparent 60%);
+    margin: 0 -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .book-num {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--brass); opacity: 0.5;
+    padding-top: 5px; text-align: right;
+    letter-spacing: 0.08em;
+  }
+
+  .book-body {}
+
+  .book-cat {
+    display: inline-flex; align-items: center;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 2px;
+    margin-bottom: 10px;
+  }
+
+  .cat-consciousness { background: var(--sky-light); color: var(--sky); }
+  .cat-philosophy { background: var(--forest-light); color: var(--forest); }
+  .cat-spirituality { background: #F5F0E8; color: #7A5C1E; }
+  .cat-mindset { background: #F0EDF8; color: #4A3580; }
+  .cat-fiction { background: #EDF4F0; color: #2A5E4A; }
+  .cat-taoism { background: #F5EDE9; color: var(--ember); }
+  .cat-mysticism { background: #1E1B14; color: #C4956A; }
+
+  .book-title {
+    font-family: var(--display); font-weight: 360;
+    font-size: 1.35rem; line-height: 1.15;
+    letter-spacing: -0.01em; margin-bottom: 4px;
+  }
+
+  .book-author {
+    font-family: var(--mono); font-size: 11.5px;
+    color: var(--ink-dim); margin-bottom: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .book-note {
+    font-size: 14px; color: var(--ink-soft);
+    line-height: 1.65; max-width: 56ch;
+    font-style: italic;
+  }
+
+  .book-year {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--ink-soft); white-space: nowrap;
+    padding-top: 5px; text-align: right;
+  }
+
+  /* CLOSING */
+  .closing {
+    max-width: 900px; margin: 0 auto;
+    padding: 64px 40px 96px;
+    border-top: 1px solid var(--line-2);
+    text-align: center;
+  }
+  .closing p {
+    font-family: var(--display); font-style: italic;
+    font-weight: 260; font-size: 1.4rem;
+    color: var(--ink-dim); max-width: 42ch;
+    margin: 0 auto 36px; line-height: 1.5;
+  }
+  .closing p em { color: var(--brass); font-style: normal; }
+  .back-link {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-soft); transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--brass); }
+
+  @media (max-width: 640px) {
+    nav { padding: 14px 20px; }
+    .hero, .filter-bar, .book-list, .closing { padding-left: 20px; padding-right: 20px; }
+    .book-item { grid-template-columns: 36px 1fr; gap: 16px; }
+    .book-year { display: none; }
+    .book-item:hover { margin: 0; padding-left: 0; padding-right: 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-home" href="/"><span>JDB</span> · Home</a>
+  <span class="nav-word">Expand</span>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Reading List</div>
+  <h1>The books that <em>moved the needle.</em></h1>
+  <p>Not everything that changes you announces itself as important. Some of these opened doors. Some knocked walls down. All of them left a mark — on how I see the world, how I move through it, and who I'm still becoming.</p>
+</div>
+
+<div class="filter-bar" id="filters">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="consciousness">Consciousness</button>
+  <button class="filter-btn" data-filter="spirituality">Spirituality</button>
+  <button class="filter-btn" data-filter="philosophy">Philosophy</button>
+  <button class="filter-btn" data-filter="mindset">Mindset</button>
+  <button class="filter-btn" data-filter="fiction">Fiction</button>
+  <button class="filter-btn" data-filter="taoism">Taoism</button>
+  <button class="filter-btn" data-filter="mysticism">Mysticism</button>
+</div>
+
+<div class="book-list" id="bookList">
+
+  <div class="book-item" data-cat="consciousness">
+    <div class="book-num">01</div>
+    <div class="book-body">
+      <span class="book-cat cat-consciousness">Consciousness</span>
+      <div class="book-title">The Holographic Universe</div>
+      <div class="book-author">Michael Talbot</div>
+      <div class="book-note">The book that made me question everything I thought I knew about reality. Talbot proposes that the universe itself is a hologram — and suddenly mysticism and physics started speaking the same language.</div>
+    </div>
+    <div class="book-year">1991</div>
+  </div>
+
+  <div class="book-item" data-cat="philosophy">
+    <div class="book-num">02</div>
+    <div class="book-body">
+      <span class="book-cat cat-philosophy">Philosophy</span>
+      <div class="book-title">Ishmael</div>
+      <div class="book-author">Daniel Quinn</div>
+      <div class="book-note">A telepathic gorilla teaches a man — and through him, the reader — about humanity's place in the world. One of the most quietly devastating books I've read. It changes what you see when you look at civilization.</div>
+    </div>
+    <div class="book-year">1992</div>
+  </div>
+
+  <div class="book-item" data-cat="spirituality">
+    <div class="book-num">03</div>
+    <div class="book-body">
+      <span class="book-cat cat-spirituality">Spirituality</span>
+      <div class="book-title">Siddhartha</div>
+      <div class="book-author">Hermann Hesse</div>
+      <div class="book-note">The story of one man's search for meaning that somehow becomes the story of every man's search for meaning. Short, timeless, and worth returning to at every new chapter of life.</div>
+    </div>
+    <div class="book-year">1922</div>
+  </div>
+
+  <div class="book-item" data-cat="mindset">
+    <div class="book-num">04</div>
+    <div class="book-body">
+      <span class="book-cat cat-mindset">Mindset</span>
+      <div class="book-title">Think and Grow Rich</div>
+      <div class="book-author">Napoleon Hill</div>
+      <div class="book-note">The classic. Whatever you think of it, it rewired how I think about intention, persistence, and the relationship between belief and outcome. Some books age. This one compounds.</div>
+    </div>
+    <div class="book-year">1937</div>
+  </div>
+
+  <div class="book-item" data-cat="spirituality">
+    <div class="book-num">05</div>
+    <div class="book-body">
+      <span class="book-cat cat-spirituality">Spirituality</span>
+      <div class="book-title">The Celestine Prophecy</div>
+      <div class="book-author">James Redfield</div>
+      <div class="book-note">An adventure novel wrapped around nine spiritual insights. It sounds simple and it is — which is exactly why it works. This one reached people who weren't looking for spirituality and gave it to them anyway.</div>
+    </div>
+    <div class="book-year">1993</div>
+  </div>
+
+  <div class="book-item" data-cat="mindset">
+    <div class="book-num">06</div>
+    <div class="book-body">
+      <span class="book-cat cat-mindset">Mindset</span>
+      <div class="book-title">Greenlights</div>
+      <div class="book-author">Matthew McConaughey</div>
+      <div class="book-note">Part memoir, part journal, part philosophy. McConaughey writes the way he lives — full tilt, without apology. About learning to catch the green lights life gives you, and turning the red ones green.</div>
+    </div>
+    <div class="book-year">2020</div>
+  </div>
+
+  <div class="book-item" data-cat="mindset">
+    <div class="book-num">07</div>
+    <div class="book-body">
+      <span class="book-cat cat-mindset">Mindset</span>
+      <div class="book-title">The Subtle Art of Not Giving a F*ck</div>
+      <div class="book-author">Mark Manson</div>
+      <div class="book-note">A counterintuitive approach to living well. The title earns the concept: it's not about not caring — it's about caring about the right things. Cuts through noise in a way very few self-help books manage.</div>
+    </div>
+    <div class="book-year">2016</div>
+  </div>
+
+  <div class="book-item" data-cat="fiction">
+    <div class="book-num">08</div>
+    <div class="book-body">
+      <span class="book-cat cat-fiction">Fiction</span>
+      <div class="book-title">Ready Player One</div>
+      <div class="book-author">Ernest Cline</div>
+      <div class="book-note">Pure joy. A love letter to gaming, pop culture, and the idea that virtual worlds can have real stakes. The one on this list that I read just because I wanted to — and couldn't put down.</div>
+    </div>
+    <div class="book-year">2011</div>
+  </div>
+
+  <div class="book-item" data-cat="mindset">
+    <div class="book-num">09</div>
+    <div class="book-body">
+      <span class="book-cat cat-mindset">Mindset</span>
+      <div class="book-title">The Secret</div>
+      <div class="book-author">Rhonda Byrne</div>
+      <div class="book-note">The law of attraction, distilled. Love it or doubt it — the idea that what you focus on expands is hard to argue with once you've watched it play out in your own life. This planted that seed for me.</div>
+    </div>
+    <div class="book-year">2006</div>
+  </div>
+
+  <div class="book-item" data-cat="taoism">
+    <div class="book-num">10</div>
+    <div class="book-body">
+      <span class="book-cat cat-taoism">Taoism</span>
+      <div class="book-title">Tao Te Ching: Backward Down the Path</div>
+      <div class="book-author">Lao Tzu · translated by Jerry O. Dalton</div>
+      <div class="book-note">My daily companion. Dalton's translation of the Tao Te Ching is the one that finally made it click for me — accessible, grounded, and deep. I've been returning to it every morning for years. It never runs out.</div>
+    </div>
+    <div class="book-year">1994</div>
+  </div>
+
+  <div class="book-item" data-cat="fiction">
+    <div class="book-num">11</div>
+    <div class="book-body">
+      <span class="book-cat cat-fiction">Fiction</span>
+      <div class="book-title">Cloud Atlas</div>
+      <div class="book-author">David Mitchell</div>
+      <div class="book-note">Six nested stories across centuries, all connected by something larger than plot. Mitchell asks what carries forward across lifetimes — cruelty, courage, love. The structure itself is the argument. Astonishing book.</div>
+    </div>
+    <div class="book-year">2004</div>
+  </div>
+
+  <div class="book-item" data-cat="mysticism">
+    <div class="book-num">12</div>
+    <div class="book-body">
+      <span class="book-cat cat-mysticism">Mysticism</span>
+      <div class="book-title">The Art of Dreaming</div>
+      <div class="book-author">Carlos Castaneda</div>
+      <div class="book-note">Castaneda documents don Juan's teachings on dreaming as a doorway to other realms of perception. Whether you take it literally or metaphorically, it expands what you think the mind is capable of.</div>
+    </div>
+    <div class="book-year">1993</div>
+  </div>
+
+  <div class="book-item" data-cat="taoism">
+    <div class="book-num">13</div>
+    <div class="book-body">
+      <span class="book-cat cat-taoism">Taoism</span>
+      <div class="book-title">The Tao of Inner Peace</div>
+      <div class="book-author">Diane Dreher</div>
+      <div class="book-note">A practical guide to living the Tao — not as abstraction but as daily practice. Dreher brings the ancient principles into modern life in a way that's grounded and immediately usable.</div>
+    </div>
+    <div class="book-year">1990</div>
+  </div>
+
+  <div class="book-item" data-cat="philosophy">
+    <div class="book-num">14</div>
+    <div class="book-body">
+      <span class="book-cat cat-philosophy">Philosophy</span>
+      <div class="book-title">Think on These Things</div>
+      <div class="book-author">Jiddu Krishnamurti</div>
+      <div class="book-note">A collection of talks to young people that somehow speaks to everyone. Krishnamurti doesn't give answers — he dissolves the questions we've been asking wrong. Slow, quiet, and completely disarming.</div>
+    </div>
+    <div class="book-year">1964</div>
+  </div>
+
+  <div class="book-item" data-cat="spirituality">
+    <div class="book-num">15</div>
+    <div class="book-body">
+      <span class="book-cat cat-spirituality">Spirituality</span>
+      <div class="book-title">The Tears of Things</div>
+      <div class="book-author">Richard Rohr</div>
+      <div class="book-note">Rohr's most personal book. Drawing on the Hebrew prophets, he traces a path from rage to grief to compassion — and makes a case that the tears we weep for the world are exactly what the world needs from us.</div>
+    </div>
+    <div class="book-year">2025</div>
+  </div>
+
+</div>
+
+<div class="closing">
+  <p>A reading list is a <em>map of the mind</em> — where it's been, what changed it, where it wants to go next.</p>
+  <a class="back-link" href="/">← return home</a>
+</div>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const items = document.querySelectorAll('.book-item');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      items.forEach((item, i) => {
+        const show = filter === 'all' || item.dataset.cat === filter;
+        item.style.display = show ? 'grid' : 'none';
+        if (show) {
+          let count = 0;
+          items.forEach(it => { if (it.style.display !== 'none') count++; });
+        }
+      });
+      // Re-number visible items
+      let n = 1;
+      items.forEach(item => {
+        if (item.style.display !== 'none') {
+          item.querySelector('.book-num').textContent = String(n).padStart(2, '0');
+          n++;
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
