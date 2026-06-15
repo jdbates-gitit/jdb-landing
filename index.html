@@ -19,6 +19,9 @@
     --ink-dim:#6B6453;
     --brass:#9A6B16;
     --brass-bright:#B5841F;
+    --brass-bg:#FDF6E8;
+    --blue:#1E3F6B;
+    --blue-bg:#EBF0F7;
     --display:"Fraunces",Georgia,serif;
     --body:"Inter Tight",system-ui,sans-serif;
     --mono:"JetBrains Mono",ui-monospace,monospace;
@@ -268,23 +271,26 @@
         <div class="body">
           <span class="tag">Daily Automation</span>
           <h3>Morning Intelligence Dashboard</h3>
-          <p>Automated daily briefing pulling live mortgage rates, weather, AI news, disc golf tournaments, and Claude-generated summaries — deployed to the web every morning at 6 AM without touching a keyboard.</p>
+          <p>Automated daily briefing pulling live mortgage rates, weather, AI news, disc golf tournaments, and Claude-generated summaries — auto-deployed at 6AM and 12PM Central without touching a keyboard.</p>
           <div class="stack"><span>Python</span><span>Claude API</span><span>GitHub</span><span>Cloudflare Pages</span></div>
         </div>
         <div class="right">
-          <div class="live-badge"><span class="live-dot"></span>Live · Updates Daily</div>
+          <div class="live-badge" style="background:var(--brass-bg);border:1px solid var(--brass);color:var(--brass);padding:5px 10px;border-radius:3px;font-size:10px;font-family:var(--mono);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:7px;white-space:nowrap;"><span class="live-dot"></span>Live · 6AM &amp; 12PM CT</div>
           <div class="arrow">View live ↗</div>
         </div>
       </a>
       <a class="build" href="/capacity.html" target="_blank">
         <div class="idx">02</div>
         <div class="body">
-          <span class="tag">Mortgage Ops · Live Tool</span>
+          <span class="tag">Mortgage Ops</span>
           <h3>LOA Capacity Planning Model</h3>
           <p>Interactive, time-study-calibrated staffing calculator for PROC1, LOA2, and HYBRID roles. Enter monthly TBD and contract volume, current headcount, and ramp factors — outputs staffing gaps, utilization, role-by-role breakdown, and Conservative / Base / Aggressive scenario projections.</p>
           <div class="stack"><span>Time-Study Data</span><span>Claude AI</span><span>JavaScript</span><span>Feb 2026</span></div>
         </div>
-        <div class="right"><div class="arrow">Try it ↗</div></div>
+        <div class="right">
+          <div class="live-badge" style="background:var(--blue-bg);border:1px solid #9AB5D8;color:var(--blue);padding:5px 10px;border-radius:3px;font-size:10px;font-family:var(--mono);letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap;">⚡ Live Tool</div>
+          <div class="arrow">Try it ↗</div>
+        </div>
       </a>
       <div class="build">
         <div class="idx">03</div>
