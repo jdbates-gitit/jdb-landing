@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bag Tag — A Disc Golf Dossier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Spline+Sans+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --field:#0d1410;        /* deep fairway night */
+  --field2:#121d16;
+  --panel:#16241b;
+  --line:#27392c;
+  --chalk:#e8efe6;        /* chalk white */
+  --moss:#8aa899;
+  --flight:#ff6b35;       /* disc flight orange */
+  --flight2:#ffa05c;
+  --basket:#f2c14e;       /* basket chains gold */
+  --fairway:#5ccf7a;      /* birdie green */
+  --water:#4a90d9;
+  --mute:#5d7567;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--field);
+  color:var(--chalk);
+  font-family:'Archivo',sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  background-image:radial-gradient(circle at 20% 0%, rgba(92,207,122,0.05), transparent 45%),radial-gradient(circle at 90% 30%, rgba(255,107,53,0.04), transparent 40%);
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== HERO ===== */
+.hero{padding:90px 0 60px;position:relative}
+.eyebrow{font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:0.32em;text-transform:uppercase;color:var(--flight);margin-bottom:28px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--flight)}
+.hero h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(38px,7vw,76px);line-height:0.98;letter-spacing:-0.02em;margin-bottom:18px}
+.hero h1 em{font-style:italic;color:var(--fairway)}
+.hero .sub{font-size:18px;color:var(--moss);max-width:540px;line-height:1.55}
+.hero .sub b{color:var(--chalk);font-weight:600}
+
+.bigstat{display:flex;align-items:flex-end;gap:8px;margin-top:48px;flex-wrap:wrap}
+.bigstat .num{font-family:'Fraunces',serif;font-size:clamp(80px,17vw,168px);line-height:0.8;font-weight:600;background:linear-gradient(160deg,var(--basket),var(--flight));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.03em}
+.bigstat .cap{font-family:'Spline Sans Mono',monospace;font-size:13px;color:var(--moss);letter-spacing:0.06em;text-transform:uppercase;line-height:1.5;padding-bottom:18px;max-width:200px}
+.bigstat .cap b{color:var(--basket);font-weight:600}
+
+/* ===== STAT STRIP ===== */
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:56px 0 0}
+.strip .cell{background:var(--field2);padding:24px 22px}
+.strip .cell .v{font-family:'Fraunces',serif;font-size:34px;font-weight:600;letter-spacing:-0.01em}
+.strip .cell .l{font-family:'Spline Sans Mono',monospace;font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:0.1em;margin-top:6px}
+@media(max-width:680px){.strip{grid-template-columns:repeat(2,1fr)}}
+
+/* ===== SECTION ===== */
+.sec{padding:80px 0 0}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
+.sec-num{font-family:'Spline Sans Mono',monospace;font-size:13px;color:var(--flight);font-weight:500}
+.sec h2{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(26px,4vw,38px);letter-spacing:-0.01em}
+.sec .lede{color:var(--moss);font-size:16px;max-width:620px;line-height:1.6;margin:14px 0 36px}
+.sec .lede b{color:var(--chalk);font-weight:600}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px}
+.chartbox{position:relative;height:340px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:820px){.grid2{grid-template-columns:1fr}}
+
+/* ===== SCORECARD STRIP ===== */
+.scorecard{display:grid;grid-template-columns:repeat(18,1fr);gap:3px;margin-top:10px}
+.sc-hole{background:var(--field2);border-radius:6px;padding:10px 4px;text-align:center;position:relative;cursor:default;transition:transform .15s,background .15s}
+.sc-hole:hover{transform:translateY(-3px);background:var(--panel)}
+.sc-hole .h{font-family:'Spline Sans Mono',monospace;font-size:10px;color:var(--mute)}
+.sc-hole .bar{height:46px;display:flex;align-items:flex-end;justify-content:center;margin:6px 0 4px}
+.sc-hole .fill{width:60%;border-radius:3px 3px 0 0;background:var(--fairway)}
+.sc-hole .bd{font-family:'Spline Sans Mono',monospace;font-size:11px;font-weight:600}
+@media(max-width:760px){.scorecard{grid-template-columns:repeat(9,1fr)}}
+.legend{display:flex;gap:20px;margin-top:20px;flex-wrap:wrap;font-family:'Spline Sans Mono',monospace;font-size:12px;color:var(--moss)}
+.legend span{display:flex;align-items:center;gap:7px}
+.dot{width:10px;height:10px;border-radius:2px;display:inline-block}
+
+/* targets list */
+.targets{display:grid;gap:12px;margin-top:8px}
+.target{display:flex;align-items:center;gap:18px;background:var(--field2);border:1px solid var(--line);border-left:3px solid var(--flight);border-radius:10px;padding:18px 22px}
+.target .hn{font-family:'Fraunces',serif;font-size:30px;font-weight:600;color:var(--flight);min-width:54px}
+.target .tx{flex:1}
+.target .tx .t{font-weight:600;font-size:15px;margin-bottom:3px}
+.target .tx .d{color:var(--moss);font-size:13.5px;line-height:1.45}
+.target .pct{font-family:'Spline Sans Mono',monospace;font-size:13px;color:var(--basket);text-align:right;min-width:90px}
+
+/* insight cards */
+.insights{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+@media(max-width:820px){.insights{grid-template-columns:1fr}}
+.ins{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+.ins .tag{font-family:'Spline Sans Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--flight);margin-bottom:12px}
+.ins h3{font-family:'Fraunces',serif;font-size:20px;font-weight:600;margin-bottom:10px;line-height:1.2}
+.ins p{color:var(--moss);font-size:14px;line-height:1.6}
+.ins p b{color:var(--chalk)}
+
+.courses{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.crow{display:grid;grid-template-columns:1fr auto auto;gap:20px;align-items:center;background:var(--field2);padding:16px 24px}
+.crow .cn{font-weight:600;font-size:15px}
+.crow .cr{font-family:'Spline Sans Mono',monospace;font-size:13px;color:var(--moss)}
+.crow .cbar{width:120px;height:6px;background:var(--field);border-radius:3px;overflow:hidden}
+.crow .cbar i{display:block;height:100%;background:linear-gradient(90deg,var(--fairway),var(--basket))}
+@media(max-width:680px){.crow .cbar{display:none}}
+
+footer{padding:80px 0 60px;margin-top:80px;border-top:1px solid var(--line);color:var(--mute);font-family:'Spline Sans Mono',monospace;font-size:12px;text-align:center;letter-spacing:0.05em}
+footer b{color:var(--moss)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<header class="hero wrap">
+  <div class="eyebrow reveal">PDGA #186874 &nbsp;//&nbsp; Willow Fork &amp; Beyond</div>
+  <h1 class="reveal">The <em>Bag Tag</em><br>Dossier.</h1>
+  <p class="sub reveal">Five seasons of UDisc scorecards, read closely. <b>What''s working, what''s leaking strokes, and where the next rating points are hiding.</b></p>
+  <div class="bigstat reveal">
+    <div class="num">235</div>
+    <div class="cap">Career-best round rating, posted <b>Jul 2024</b> at Willow Fork on a 12-under card.</div>
+  </div>
+  <div class="strip reveal">
+    <div class="cell"><div class="v">472</div><div class="l">Rounds logged</div></div>
+    <div class="cell"><div class="v">180</div><div class="l">Avg round rating</div></div>
+    <div class="cell"><div class="v">23</div><div class="l">Courses played</div></div>
+    <div class="cell"><div class="v">-12</div><div class="l">Best vs par</div></div>
+  </div>
+</header>
+
+<section class="sec wrap">
+  <div class="sec-head reveal"><span class="sec-num">01</span><h2>The form curve</h2></div>
+  <p class="lede reveal">Round rating, month by month. The <b>2024 peak (186 avg, a 235 ceiling)</b> is real — and so is the slide since. The recent trend is the headline of this whole report.</p>
+  <div class="card reveal"><div class="chartbox"><canvas id="trendChart"></canvas></div></div>
+</section>
+
+<section class="sec wrap">
+  <div class="sec-head reveal"><span class="sec-num">02</span><h2>Volume vs. scoring</h2></div>
+  <p class="lede reveal">Rounds played each year against average score to par. <b>2024 was your fewest reps but your lowest scores</b> — a clue worth sitting with.</p>
+  <div class="card reveal"><div class="chartbox"><canvas id="yearChart"></canvas></div></div>
+</section>
+
+<section class="sec wrap">
+  <div class="sec-head reveal"><span class="sec-num">03</span><h2>Willow Fork, hole by hole</h2></div>
+  <p class="lede reveal">Your home course, <b>REPL_WFROUNDS main-18 rounds</b>. Bar height = how often you birdie. The short bars are where the strokes live.</p>
+  <div class="card reveal">
+    <div class="scorecard" id="scorecard"></div>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--fairway)"></i> Birdie rate (taller = better)</span>
+      <span><i class="dot" style="background:var(--flight)"></i> Bogey-prone</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap">
+  <div class="sec-head reveal"><span class="sec-num">04</span><h2>The training targets</h2></div>
+  <p class="lede reveal">Five holes at Willow Fork you par or worse far too often for their length. Convert these and your home rating moves first.</p>
+  <div class="targets" id="targets"></div>
+</section>
+
+<section class="sec wrap">
+  <div class="sec-head reveal"><span class="sec-num">05</span><h2>Read between the rounds</h2></div>
+  <p class="lede reveal">Patterns the scorecard won''t tell you to your face.</p>
+  <div class="insights" id="insights"></div>
+</section>
+
+<section class="sec wrap">
+  <div class="sec-head reveal"><span class="sec-num">06</span><h2>The tour so far</h2></div>
+  <p class="lede reveal">Where the rounds happened. Bar = round volume; number = avg rating at that course.</p>
+  <div class="courses reveal" id="courses"></div>
+</section>
+
+<footer class="wrap">
+  Built from <b>472 UDisc scorecards</b>, 2021–2026 &nbsp;//&nbsp; Jason &nbsp;//&nbsp; PDGA #186874<br>
+  <span style="color:var(--mute)">Self-scouting report — update it after every tournament block.</span>
+</footer>
+
+<script>
+const DATA = {"yearly": [{"year": 2021, "rounds": 45, "avg_to_par": 2.56, "avg_rating": null}, {"year": 2022, "rounds": 162, "avg_to_par": -1.17, "avg_rating": null}, {"year": 2023, "rounds": 118, "avg_to_par": -2.89, "avg_rating": 185.0}, {"year": 2024, "rounds": 61, "avg_to_par": -4.05, "avg_rating": 186.0}, {"year": 2025, "rounds": 47, "avg_to_par": -3.19, "avg_rating": 176.0}, {"year": 2026, "rounds": 39, "avg_to_par": -2.41, "avg_rating": 173.0}], "headline": {"total_rounds": 472, "courses": 23, "years": "2021\u20132026", "avg_rating": 180, "best_rating": 235, "best_to_par": -12, "avg_to_par": -1.9}, "holes": [{"hole": 1, "par": 3, "avg": 2.87, "to_par": -0.13, "birdie": 20.1, "bogey": 8.6}, {"hole": 2, "par": 3, "avg": 2.76, "to_par": -0.24, "birdie": 29.5, "bogey": 6.3}, {"hole": 3, "par": 3, "avg": 2.91, "to_par": -0.09, "birdie": 17.2, "bogey": 8.6}, {"hole": 4, "par": 3, "avg": 2.49, "to_par": -0.51, "birdie": 50.7, "bogey": 1.7}, {"hole": 5, "par": 3, "avg": 2.75, "to_par": -0.25, "birdie": 27.5, "bogey": 4.6}, {"hole": 6, "par": 3, "avg": 2.91, "to_par": -0.09, "birdie": 17.2, "bogey": 9.2}, {"hole": 7, "par": 3, "avg": 2.83, "to_par": -0.17, "birdie": 22.1, "bogey": 8.0}, {"hole": 8, "par": 3, "avg": 2.62, "to_par": -0.38, "birdie": 36.1, "bogey": 2.3}, {"hole": 9, "par": 3, "avg": 2.91, "to_par": -0.09, "birdie": 14.9, "bogey": 8.0}, {"hole": 10, "par": 3, "avg": 2.61, "to_par": -0.39, "birdie": 38.7, "bogey": 4.3}, {"hole": 11, "par": 3, "avg": 2.73, "to_par": -0.27, "birdie": 27.5, "bogey": 4.9}, {"hole": 12, "par": 3, "avg": 2.66, "to_par": -0.34, "birdie": 34.4, "bogey": 5.4}, {"hole": 13, "par": 3, "avg": 2.5, "to_par": -0.5, "birdie": 45.8, "bogey": 1.1}, {"hole": 14, "par": 3, "avg": 2.87, "to_par": -0.13, "birdie": 20.6, "bogey": 11.7}, {"hole": 15, "par": 3, "avg": 2.68, "to_par": -0.32, "birdie": 32.4, "bogey": 6.9}, {"hole": 16, "par": 3, "avg": 2.81, "to_par": -0.19, "birdie": 21.2, "bogey": 6.9}, {"hole": 17, "par": 3, "avg": 2.71, "to_par": -0.29, "birdie": 31.8, "bogey": 8.3}, {"hole": 18, "par": 4, "avg": 3.23, "to_par": -0.77, "birdie": 67.6, "bogey": 3.2}], "wf_rounds": 349, "courses_list": [{"name": "Willow Fork Park", "rounds": 276, "avg_rating": 185}, {"name": "Willow Fork DGC", "rounds": 74, "avg_rating": 174}, {"name": "Agnes Moffitt Park", "rounds": 27, "avg_rating": null}, {"name": "T.C. Jester Park", "rounds": 24, "avg_rating": 188}, {"name": "Zube Park DGC", "rounds": 19, "avg_rating": null}, {"name": "Stonebridge Church", "rounds": 11, "avg_rating": null}, {"name": "Jones Creek Ranch Park", "rounds": 9, "avg_rating": 164}, {"name": "Texas Army Trail (Bud\u00a0Hadfield\u00a0Park)", "rounds": 9, "avg_rating": null}], "tod": [{"period": "Morning", "rating": 175}, {"period": "Midday", "rating": 185}, {"period": "Evening", "rating": 178}], "dow": [{"day": "Mon", "rating": 190}, {"day": "Tue", "rating": 173}, {"day": "Wed", "rating": 171}, {"day": "Thu", "rating": 178}, {"day": "Fri", "rating": 172}, {"day": "Sat", "rating": 184}, {"day": "Sun", "rating": 180}], "rating_trend": [{"month": "2023-10", "rating": 179.0}, {"month": "2023-11", "rating": 190.0}, {"month": "2023-12", "rating": 182.0}, {"month": "2024-01", "rating": 192.0}, {"month": "2024-02", "rating": 183.0}, {"month": "2024-03", "rating": 183.0}, {"month": "2024-04", "rating": 187.0}, {"month": "2024-05", "rating": 183.0}, {"month": "2024-06", "rating": 191.0}, {"month": "2024-07", "rating": 194.0}, {"month": "2024-08", "rating": 194.0}, {"month": "2024-09", "rating": 182.0}, {"month": "2024-10", "rating": 173.0}, {"month": "2024-11", "rating": 180.0}, {"month": "2024-12", "rating": 173.0}, {"month": "2025-03", "rating": 184.0}, {"month": "2025-04", "rating": 169.0}, {"month": "2025-09", "rating": 181.0}, {"month": "2025-10", "rating": 185.0}, {"month": "2025-11", "rating": 171.0}, {"month": "2025-12", "rating": 175.0}, {"month": "2026-01", "rating": 178.0}, {"month": "2026-02", "rating": 199.0}, {"month": "2026-03", "rating": 173.0}, {"month": "2026-04", "rating": 166.0}, {"month": "2026-05", "rating": 172.0}], "nines": {"front_to_par": -1.95, "back_to_par": -3.19}};
+</script>
+<script>
+// fill headline
+const H=DATA.headline;
+document.querySelector('.strip').innerHTML=`
+ <div class="cell"><div class="v">${H.total_rounds}</div><div class="l">Rounds logged</div></div>
+ <div class="cell"><div class="v">${H.avg_rating}</div><div class="l">Avg round rating</div></div>
+ <div class="cell"><div class="v">${H.courses}</div><div class="l">Courses played</div></div>
+ <div class="cell"><div class="v">${H.best_to_par}</div><div class="l">Best vs par</div></div>`;
+document.querySelectorAll('.lede').forEach(e=>{e.innerHTML=e.innerHTML.replace('REPL_WFROUNDS',DATA.wf_rounds)});
+
+// reveal observer
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
+
+const FONT="Spline Sans Mono", CHALK="#e8efe6", MOSS="#8aa899", LINE="#27392c";
+Chart.defaults.font.family=FONT; Chart.defaults.color=MOSS;
+
+// trend chart
+const tr=DATA.rating_trend.filter(p=>p.rating);
+new Chart(document.getElementById('trendChart'),{
+ type:'line',
+ data:{labels:tr.map(p=>p.month),datasets:[{
+   data:tr.map(p=>p.rating),borderColor:'#ff6b35',borderWidth:2.5,
+   tension:0.35,pointRadius:3,pointBackgroundColor:'#ffa05c',pointBorderColor:'#0d1410',
+   fill:true,backgroundColor:(c)=>{const g=c.chart.ctx.createLinearGradient(0,0,0,340);g.addColorStop(0,'rgba(255,107,53,0.22)');g.addColorStop(1,'rgba(255,107,53,0)');return g;}
+ }]},
+ options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{display:false},tooltip:{callbacks:{title:c=>c[0].label,label:c=>'Rating '+c.parsed.y}}},
+  scales:{x:{grid:{color:LINE},ticks:{maxTicksLimit:8,font:{size:10}}},
+   y:{grid:{color:LINE},ticks:{font:{size:11}},suggestedMin:150,suggestedMax:200}}}
+});
+
+// year chart - rounds bars + rating line
+const Y=DATA.yearly;
+new Chart(document.getElementById('yearChart'),{
+ data:{labels:Y.map(y=>y.year),datasets:[
+  {type:'bar',label:'Rounds',data:Y.map(y=>y.rounds),backgroundColor:'rgba(92,207,122,0.35)',borderColor:'#5ccf7a',borderWidth:1,borderRadius:6,yAxisID:'y'},
+  {type:'line',label:'Avg rating',data:Y.map(y=>y.avg_rating),borderColor:'#f2c14e',borderWidth:2.5,tension:0.3,pointBackgroundColor:'#f2c14e',pointRadius:4,yAxisID:'y1',spanGaps:true}
+ ]},
+ options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{labels:{color:MOSS,boxWidth:12,font:{size:12}}}},
+  scales:{x:{grid:{color:LINE}},
+   y:{position:'left',grid:{color:LINE},title:{display:true,text:'Rounds',color:MOSS}},
+   y1:{position:'right',grid:{display:false},suggestedMin:160,suggestedMax:195,title:{display:true,text:'Rating',color:'#f2c14e'}}}}
+});
+
+// scorecard
+const sc=document.getElementById('scorecard');
+const maxB=Math.max(...DATA.holes.map(h=>h.birdie));
+DATA.holes.forEach(h=>{
+ const prone=h.bogey>7;
+ const col=prone?'#ff6b35':'#5ccf7a';
+ const ht=Math.max(6,(h.birdie/maxB)*46);
+ sc.innerHTML+=`<div class="sc-hole" title="Hole ${h.hole} · par ${h.par} · birdie ${h.birdie}% · bogey+ ${h.bogey}%">
+   <div class="h">${h.hole}</div>
+   <div class="bar"><div class="fill" style="height:${ht}px;background:${col}"></div></div>
+   <div class="bd" style="color:${col}">${h.birdie}%</div></div>`;
+});
+
+// targets: lowest birdie rate, par 3s
+const t=[...DATA.holes].sort((a,b)=>a.birdie-b.birdie).slice(0,5);
+const notes={
+ 9:"Long, tight par 3 — your most-parred hole on the course. A reliable upshot or a controlled drive that holds the line turns these into looks.",
+ 3:"Birdie under 18%. The drive isn''t getting you to a Circle 1 look often enough — chart the landing zone and commit a disc to it.",
+ 6:"High par rate with a bogey tail. Scrambles are costing you here; tighten the approach to stop the leaks.",
+ 1:"Opening hole — you start flat. A pre-round warmup routine and a go-to opening disc could swing this one.",
+ 14:"Highest bogey-plus rate on the card (11.7%). This is a blow-up hole, not a birdie hole — play it for a clean 3 first."
+};
+document.getElementById('targets').innerHTML=t.map(h=>`
+ <div class="target"><div class="hn">${h.hole}</div>
+ <div class="tx"><div class="t">Hole ${h.hole} · par ${h.par} · birdie just ${h.birdie}%</div>
+ <div class="d">${notes[h.hole]||"Low birdie conversion for its length — a target worth a focused practice block."}</div></div>
+ <div class="pct">${h.bogey}% bogey+</div></div>`).join('');
+
+// insights
+const ins=[
+ {tag:"Recent form",h:"The slide is real — and reversible",p:"Your 12-month average has eased from <b>186 (2024)</b> toward the <b>low 170s</b>. Fewer reps, more rust. The data says volume — not technique — is the lever right now."},
+ {tag:"Back nine",h:"You finish stronger than you start",p:"At Willow Fork your back nine runs <b>"+DATA.nines.back_to_par+" to par</b> versus <b>"+DATA.nines.front_to_par+"</b> on the front. You warm into rounds — so build a real warmup and steal those front-nine strokes."},
+ {tag:"Best window",h:"Midday is your scoring window",p:"Rated rounds played midday average <b>"+(DATA.tod.find(x=>x.period==='Midday')||{}).rating+"</b>, clearly ahead of evening rounds. When a tournament tee time is yours to pick, you know the window."},
+ {tag:"Signature hole",h:"Hole 18 is your closer",p:"You birdie the par-4 18th <b>~68% of the time</b> — your single best hole. That''s a finisher you can lean on when a round is on the line."}
+];
+document.getElementById('insights').innerHTML=ins.map(i=>`<div class="ins"><div class="tag">${i.tag}</div><h3>${i.h}</h3><p>${i.p}</p></div>`).join('');
+
+// courses
+const maxR=Math.max(...DATA.courses_list.map(c=>c.rounds));
+document.getElementById('courses').innerHTML=DATA.courses_list.map(c=>`
+ <div class="crow"><div class="cn">${c.name}</div>
+ <div class="cr">${c.avg_rating?c.avg_rating+' avg':'—'} · ${c.rounds} rounds</div>
+ <div class="cbar"><i style="width:${(c.rounds/maxR)*100}%"></i></div></div>`).join('');
+</script>
+</body>
+</html>
