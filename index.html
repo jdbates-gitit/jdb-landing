@@ -69,7 +69,17 @@
   .nav-links{display:flex;gap:30px;font-size:13px;font-family:var(--mono);letter-spacing:.04em}
   .nav-links a{color:var(--ink-dim);transition:color .2s}
   .nav-links a:hover{color:var(--ink)}
-  @media(max-width:680px){.nav-links{display:none}}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--ink-dim);border-radius:2px;transition:all 0.3s;}
+  .mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;background:rgba(242,237,225,0.98);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-2);padding:16px 28px;z-index:49;flex-direction:column;gap:0;}
+  .mobile-menu a{display:block;font-family:var(--mono);font-size:13px;letter-spacing:0.06em;color:var(--ink-dim);padding:14px 0;border-bottom:1px solid var(--line);transition:color 0.2s;}
+  .mobile-menu a:last-child{border-bottom:none;}
+  .mobile-menu a:hover{color:var(--brass);}
+  .mobile-menu.open{display:flex;}
+  @media(max-width:680px){
+    .nav-links{display:none}
+    .hamburger{display:flex}
+  }
 
   /* HERO */
   .hero{padding:130px 0 108px;position:relative}
@@ -224,8 +234,21 @@
       <a href="/expand.html">Expand</a>
       <a href="#connect">Connect</a>
     </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#builds" onclick="closeMenu()">Builds</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#experience" onclick="closeMenu()">Experience</a>
+  <a href="#stack" onclick="closeMenu()">Stack</a>
+  <a href="#fun" onclick="closeMenu()">Fun</a>
+  <a href="/spirit.html">Spirit</a>
+  <a href="/expand.html">Expand</a>
+  <a href="#connect" onclick="closeMenu()">Connect</a>
+</div>
 
 <div class="wrap">
   <div class="hero">
@@ -451,5 +474,21 @@
   </div>
 </footer>
 
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMenu() {
+    mobileMenu.classList.remove('open');
+  }
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+      mobileMenu.classList.remove('open');
+    }
+  });
+</script>
 </body>
 </html>
