@@ -309,7 +309,7 @@
             </div>
             <div>
               <label>Override Fundings/Person</label>
-              <input type="number" id="override_contract" value="47" min="1">
+              <input type="number" id="override_contract" value="55" min="1">
             </div>
           </div>
         </div>
@@ -460,7 +460,7 @@
       </div>
 
       <div class="footnote">
-        Time-study derived throughput: 75 min/TBD · 139 min/Contract · 8 hrs × 21 days/mo · 20% overhead · 85% target utilization = 6,854 productive min/mo · ~91 TBDs/person · ~49 Fundings/person · Source: PFG Feb 2026 Time Study
+        Time-study derived throughput: 75 min/TBD · 122.5 min/Contract · 8 hrs × 21 days/mo · 20% overhead · 85% target utilization = 6,854 productive min/mo · ~91 TBDs/person · ~55 Fundings/person · Source: PFG Updated Time Study
       </div>
 
     </div>
@@ -564,7 +564,7 @@
     // Throughput
     const PROD_MIN = 6854.4;
     const tbdCap = useTS ? Math.floor(PROD_MIN / 75) : (parseFloat(document.getElementById('override_tbd').value) || 100);
-    const fundCap = useTS ? Math.floor(PROD_MIN / 139.286) : (parseFloat(document.getElementById('override_contract').value) || 47);
+    const fundCap = useTS ? Math.floor(PROD_MIN / 122.5) : (parseFloat(document.getElementById('override_contract').value) || 55);
 
     const r = runModel(tbd, contracts, p_ramped, p_ramp, l_ramped, l_ramp, h_ramped, h_ramp, ramp, hybridTBDpct, tbdCap, fundCap);
 
