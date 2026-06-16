@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Belief Cycle — Jason Dale Bates</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a2e;
+    --deep: #16213e;
+    --mid: #0f3460;
+    --gold: #c9a84c;
+    --gold-light: #e8c97e;
+    --mist: #f0ede8;
+    --mist-dim: #c8c4bc;
+    --white: #fdfcfa;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--mist);
+  }
+
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--gold); color: var(--ink); }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(26,26,46,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+    padding: 16px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-home {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; letter-spacing: 0.18em;
+    color: rgba(240,237,232,0.5); text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-home span { color: var(--gold); }
+  .nav-home:hover { color: var(--gold); }
+  .nav-word {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-weight: 300;
+    font-size: 15px; color: rgba(240,237,232,0.4);
+    letter-spacing: 0.1em;
+  }
+
+  /* HERO / STORY */
+  .story {
+    max-width: 680px; margin: 0 auto;
+    padding: 80px 32px 48px;
+    text-align: center;
+  }
+
+  .story-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 20px; opacity: 0.85;
+  }
+
+  .story h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300; font-style: italic;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    line-height: 1.1; letter-spacing: 0.02em;
+    color: var(--white); margin-bottom: 32px;
+  }
+
+  .story h1 em {
+    font-style: normal; color: var(--gold);
+  }
+
+  .story-divider {
+    width: 40px; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 0 auto 32px;
+  }
+
+  .story-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+    font-weight: 300; line-height: 1.85;
+    color: var(--mist-dim);
+    text-align: left;
+  }
+
+  .story-text p { margin-bottom: 1.4rem; }
+  .story-text p:last-child { margin-bottom: 0; }
+
+  .story-text em {
+    font-style: italic; color: var(--gold-light);
+  }
+
+  .story-text strong {
+    font-weight: 600; color: var(--mist);
+  }
+
+  /* WHEEL SECTION */
+  .wheel-section {
+    padding: 64px 20px 48px;
+    display: flex; flex-direction: column;
+    align-items: center;
+  }
+
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 12px; opacity: 0.7;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300; font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--white); margin-bottom: 48px;
+    text-align: center; letter-spacing: 0.04em;
+  }
+
+  .wheel-wrapper {
+    position: relative;
+    width: min(520px, 92vw);
+    height: min(520px, 92vw);
+    margin: 0 auto;
+    animation: fadeIn 0.9s ease both;
+  }
+
+  .wheel-svg { width: 100%; height: 100%; overflow: visible; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.94); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .node-outer {
+    fill: var(--deep);
+    stroke: var(--gold);
+    stroke-width: 1.5;
+    transition: stroke 0.2s, stroke-width 0.2s;
+  }
+  .node-inner { fill: var(--gold); }
+  .node-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px; font-weight: 600;
+    fill: var(--ink);
+    text-anchor: middle; dominant-baseline: middle;
+  }
+  .node-label-word {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(15px, 3vw, 19px); font-weight: 600;
+    fill: var(--white); text-anchor: middle;
+  }
+  .node-label-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(9px, 1.8vw, 11px); font-weight: 300;
+    fill: var(--gold-light); text-anchor: middle;
+    opacity: 0.85; letter-spacing: 0.05em;
+  }
+  .center-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-weight: 300;
+    fill: var(--gold-light);
+    letter-spacing: 0.12em;
+    text-anchor: middle; dominant-baseline: middle;
+  }
+  .node-group { cursor: default; }
+  .node-group:hover .node-outer { stroke: var(--gold-light); stroke-width: 2; }
+  .node-group:hover .node-label-word { fill: var(--gold-light); }
+
+  /* QUOTE */
+  .quote-block {
+    max-width: 540px; margin: 56px auto 0;
+    text-align: center;
+    padding: 28px 32px;
+    border-top: 1px solid rgba(201,168,76,0.2);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-style: italic; font-weight: 300;
+    color: var(--mist); line-height: 1.75;
+    margin-bottom: 12px;
+  }
+  .quote-attr {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem; font-weight: 300;
+    color: var(--gold); letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* CARDS */
+  .cards-section {
+    max-width: 620px; margin: 0 auto;
+    padding: 56px 24px 80px;
+  }
+  .cards-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300; font-size: 1.5rem;
+    color: var(--white); text-align: center;
+    margin-bottom: 32px; letter-spacing: 0.04em;
+  }
+  .cards {
+    display: flex; flex-wrap: wrap;
+    gap: 14px; justify-content: center;
+  }
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 4px; padding: 20px 22px;
+    flex: 1 1 240px; min-width: 220px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .card:hover {
+    background: rgba(201,168,76,0.05);
+    border-color: rgba(201,168,76,0.35);
+  }
+  .card-step {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem; font-weight: 500;
+    color: var(--gold); letter-spacing: 0.2em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .card-word {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 600;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .card-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem; font-weight: 300;
+    color: rgba(240,237,232,0.72); line-height: 1.65;
+  }
+
+  /* CLOSING */
+  .closing {
+    text-align: center;
+    padding: 0 32px 96px;
+    max-width: 560px; margin: 0 auto;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    padding-top: 56px;
+  }
+  .closing p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-weight: 300;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: var(--mist-dim); line-height: 1.65;
+    max-width: 42ch; margin: 0 auto 36px;
+  }
+  .closing p em { color: var(--gold-light); font-style: normal; }
+  .back-link {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(240,237,232,0.4);
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--gold); }
+
+  @media (max-width: 600px) {
+    nav { padding: 14px 20px; }
+    .story { padding: 60px 20px 40px; }
+    .cards-section { padding: 40px 16px 64px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-home" href="/"><span>JDB</span> · Home</a>
+  <span class="nav-word">The Belief Cycle</span>
+</nav>
+
+<!-- STORY -->
+<div class="story">
+  <div class="story-eyebrow">A Framework That Changed Everything</div>
+  <h1>The world doesn't happen<br><em>to</em> you. It happens <em>for</em> you.</h1>
+  <div class="story-divider"></div>
+  <div class="story-text">
+    <p>During COVID, when the world went home and the walls started closing in, I was managing the pipeline for a high-producing residential mortgage branch. The stress followed me everywhere — into the evenings, into my weekends, into my sleep. I couldn't separate from it.</p>
+    <p>My branch manager — my boss at the time — <em>voluntold</em> me to work with a life and professional coach named Steve from Southwestern Consulting. I didn't ask for it. I didn't know I needed it. <strong>The universe did.</strong></p>
+    <p>Steve introduced me to the Belief Cycle — something I had always known about on some level, but had never truly sat with. When he walked me through it, something shifted in my foundations. I began to see, for the first time with real clarity, that <em>my beliefs and attitudes were dictating the world I was living in.</em></p>
+    <p>The world wasn't happening to me. It was happening <strong>for</strong> me — every second of every day. My difficulties and my gifts, my setbacks and my breakthroughs — all of it was part of the experience. All of it was enriching me. The moment I could reframe what I believed about any situation — in a way that was honest, healthy, and good — I had direct control over my results.</p>
+    <p>I still feel fear every day. I still sit in moments where I wonder if I belong on a call with the president of a company, whether I've earned my seat at the table. The Belief Cycle taught me to <em>stop inside that fear</em> and recognize two things: first, that I'm feeling it because I'm growing — and growth is supposed to feel like this. Second, that I am meant to be there. I have earned it. It is not an accident.</p>
+    <p>Today it lives in my toolbox. When I notice the results I'm producing aren't what I want, I trace them back — through my actions, my emotions, my thoughts — all the way to the belief underneath. <strong>Change the belief, and you change the trajectory.</strong> I've watched it happen in my own life more times than I can count.</p>
+  </div>
+</div>
+
+<!-- WHEEL -->
+<div class="wheel-section">
+  <div class="section-label">The Framework</div>
+  <div class="section-title">Five steps. One cycle. Everything connected.</div>
+
+  <div class="wheel-wrapper">
+    <svg class="wheel-svg" viewBox="-260 -260 520 520" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#e8c97e" stop-opacity="0.5"/>
+        </linearGradient>
+        <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#c9a84c" opacity="0.8"/>
+        </marker>
+        <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <circle cx="0" cy="0" r="220" fill="none" stroke="rgba(201,168,76,0.06)" stroke-width="1"/>
+      <circle cx="0" cy="0" r="200" fill="none" stroke="rgba(201,168,76,0.04)" stroke-width="0.5"/>
+
+      <!-- Arcs -->
+      <path d="M 0,-148 A 155,155 0 0,1 140.5,-45.6" fill="none" stroke="url(#arcGrad)" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow)" opacity="0.7"/>
+      <path d="M 144,-40 A 155,155 0 0,1 87,119.6" fill="none" stroke="url(#arcGrad)" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow)" opacity="0.7"/>
+      <path d="M 81,128 A 155,155 0 0,1 -81,128" fill="none" stroke="url(#arcGrad)" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow)" opacity="0.7"/>
+      <path d="M -87,119.6 A 155,155 0 0,1 -144,-40" fill="none" stroke="url(#arcGrad)" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow)" opacity="0.7"/>
+      <path d="M -140.5,-45.6 A 155,155 0 0,1 0,-148" fill="none" stroke="url(#arcGrad)" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow)" opacity="0.7"/>
+
+      <!-- Center -->
+      <circle cx="0" cy="0" r="82" fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.15"/>
+      <circle cx="0" cy="0" r="70" fill="rgba(15,52,96,0.4)" stroke="#c9a84c" stroke-width="1" opacity="0.2"/>
+      <text x="0" y="-10" class="center-label" font-size="11" letter-spacing="0.15em" opacity="0.6">WHAT YOU</text>
+      <text x="0" y="8" class="center-label" font-size="16" font-weight="600" fill="#c9a84c" opacity="0.9">BELIEVE</text>
+      <text x="0" y="24" class="center-label" font-size="11" letter-spacing="0.15em" opacity="0.6">YOU BECOME</text>
+
+      <!-- Node 1: Beliefs — top -->
+      <g class="node-group">
+        <circle cx="0" cy="-155" r="36" class="node-outer" filter="url(#glow)"/>
+        <circle cx="0" cy="-155" r="10" class="node-inner"/>
+        <text x="0" y="-156" class="node-number">1</text>
+        <text x="0" y="-210" class="node-label-word">Beliefs</text>
+        <text x="0" y="-196" class="node-label-sub">What you accept as true</text>
+      </g>
+
+      <!-- Node 2: Thoughts — upper right -->
+      <g class="node-group">
+        <circle cx="147.4" cy="-47.9" r="36" class="node-outer" filter="url(#glow)"/>
+        <circle cx="147.4" cy="-47.9" r="10" class="node-inner"/>
+        <text x="147.4" y="-48.9" class="node-number">2</text>
+        <text x="240" y="-62" class="node-label-word">Thoughts</text>
+        <text x="240" y="-46" class="node-label-sub">What you dwell on</text>
+      </g>
+
+      <!-- Node 3: Emotions — lower right -->
+      <g class="node-group">
+        <circle cx="91.1" cy="125.4" r="36" class="node-outer" filter="url(#glow)"/>
+        <circle cx="91.1" cy="125.4" r="10" class="node-inner"/>
+        <text x="91.1" y="124.4" class="node-number">3</text>
+        <text x="175" y="115" class="node-label-word">Emotions</text>
+        <text x="175" y="131" class="node-label-sub">What you feel</text>
+      </g>
+
+      <!-- Node 4: Actions — lower left -->
+      <g class="node-group">
+        <circle cx="-91.1" cy="125.4" r="36" class="node-outer" filter="url(#glow)"/>
+        <circle cx="-91.1" cy="125.4" r="10" class="node-inner"/>
+        <text x="-91.1" y="124.4" class="node-number">4</text>
+        <text x="-175" y="115" class="node-label-word" text-anchor="middle">Actions</text>
+        <text x="-175" y="131" class="node-label-sub" text-anchor="middle">What you do</text>
+      </g>
+
+      <!-- Node 5: Results — upper left -->
+      <g class="node-group">
+        <circle cx="-147.4" cy="-47.9" r="36" class="node-outer" filter="url(#glow)"/>
+        <circle cx="-147.4" cy="-47.9" r="10" class="node-inner"/>
+        <text x="-147.4" y="-48.9" class="node-number">5</text>
+        <text x="-240" y="-62" class="node-label-word" text-anchor="middle">Results</text>
+        <text x="-240" y="-46" class="node-label-sub" text-anchor="middle">What you produce</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Quote -->
+  <div class="quote-block">
+    <p class="quote-text">"Change what you believe, and you change everything that follows — your thoughts, your feelings, your actions, and ultimately your life."</p>
+    <p class="quote-attr">A paraphrase of The Belief Cycle · Southwestern Consulting</p>
+  </div>
+</div>
+
+<!-- CARDS -->
+<div class="cards-section">
+  <div class="cards-title">The Five Steps</div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-step">Step 01</div>
+      <div class="card-word">Beliefs</div>
+      <div class="card-desc">The root of everything. What you accept as true about yourself, others, and the world shapes every thought you'll have today. This is where the work starts — and where the most powerful changes happen.</div>
+    </div>
+    <div class="card">
+      <div class="card-step">Step 02</div>
+      <div class="card-word">Thoughts</div>
+      <div class="card-desc">Beliefs generate a constant internal dialogue. Your mind looks for evidence of what it already believes — and finds it everywhere. What you dwell on expands. You get to choose what you dwell on.</div>
+    </div>
+    <div class="card">
+      <div class="card-step">Step 03</div>
+      <div class="card-word">Emotions</div>
+      <div class="card-desc">Thoughts activate feelings. Fear, confidence, doubt, energy — these aren't random. They're the emotional signature of what you're thinking right now. Trace the feeling back far enough and you'll find a belief.</div>
+    </div>
+    <div class="card">
+      <div class="card-step">Step 04</div>
+      <div class="card-word">Actions</div>
+      <div class="card-desc">How you feel determines what you do, what you avoid, and what you endure. Emotions create momentum or friction. The action is downstream of the belief — which means changing the belief changes the behavior.</div>
+    </div>
+    <div class="card">
+      <div class="card-step">Step 05</div>
+      <div class="card-word">Results</div>
+      <div class="card-desc">Your results are the visible, external evidence of what you believe on the inside. When something isn't working, trace it back. The answer is almost never in the result itself — it's upstream, in the belief that started the cycle.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <p>The world doesn't happen <em>to</em> you. Every difficulty, every gift, every moment of fear and every breakthrough — it's all happening <em>for</em> you. That's not wishful thinking. That's a decision about what to believe.</p>
+  <a class="back-link" href="/">← return home</a>
+</div>
+
+</body>
+</html>
