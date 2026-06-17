@@ -274,6 +274,79 @@
     .story { padding: 60px 20px 40px; }
     .cards-section { padding: 40px 16px 64px; }
   }
+
+  /* STEVE INLINE LINK */
+  .steve-inline {
+    color: var(--gold-light);
+    border-bottom: 1px solid rgba(201,168,76,0.4);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .steve-inline:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* TRIBUTE CARD */
+  .tribute {
+    max-width: 620px; margin: 8px auto 0;
+    padding: 0 24px;
+  }
+  .tribute-card {
+    background: rgba(201,168,76,0.04);
+    border: 1px solid rgba(201,168,76,0.22);
+    border-radius: 6px;
+    padding: 32px 34px;
+    text-align: center;
+  }
+  .tribute-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--gold);
+    opacity: 0.8; margin-bottom: 16px;
+  }
+  .tribute-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600; font-size: 1.6rem;
+    color: var(--white); margin-bottom: 4px;
+    letter-spacing: 0.02em;
+  }
+  .tribute-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem; font-weight: 400;
+    color: var(--gold-light); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+  .tribute-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; font-weight: 300;
+    line-height: 1.8; color: var(--mist-dim);
+    max-width: 46ch; margin: 0 auto 24px;
+  }
+  .tribute-body em { font-style: italic; color: var(--gold-light); }
+  .tribute-links {
+    display: flex; gap: 14px; justify-content: center;
+    flex-wrap: wrap;
+  }
+  .tribute-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 11px 22px;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 4px;
+    color: var(--gold-light);
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .tribute-btn:hover {
+    background: var(--gold); color: var(--ink);
+    border-color: var(--gold);
+  }
+  .tribute-btn-secondary {
+    border-color: rgba(201,168,76,0.2);
+    color: rgba(240,237,232,0.55);
+  }
+  .tribute-btn-secondary:hover {
+    background: rgba(201,168,76,0.12);
+    color: var(--gold-light);
+    border-color: rgba(201,168,76,0.4);
+  }
 </style>
 </head>
 <body>
@@ -290,11 +363,27 @@
   <div class="story-divider"></div>
   <div class="story-text">
     <p>During COVID, when the world went home and the walls started closing in, I was managing the pipeline for a high-producing residential mortgage branch. The stress followed me everywhere — into the evenings, into my weekends, into my sleep. I couldn't separate from it.</p>
-    <p>My branch manager — my boss at the time — <em>voluntold</em> me to work with a life and professional coach named Steve from Southwestern Consulting. I didn't ask for it. I didn't know I needed it. <strong>The universe did.</strong></p>
+    <p>My branch manager — my boss at the time — <em>voluntold</em> me to work with a life and professional coach named <a href="https://southwesternconsulting.com/coaches/steve-reiner/" target="_blank" rel="noopener" class="steve-inline">Steve Reiner</a> from Southwestern Consulting. I didn't ask for it. I didn't know I needed it. <strong>The universe did.</strong></p>
     <p>Steve introduced me to the Belief Cycle — something I had always known about on some level, but had never truly sat with. When he walked me through it, something shifted in my foundations. I began to see, for the first time with real clarity, that <em>my beliefs and attitudes were dictating the world I was living in.</em></p>
     <p>The world wasn't happening to me. It was happening <strong>for</strong> me — every second of every day. My difficulties and my gifts, my setbacks and my breakthroughs — all of it was part of the experience. All of it was enriching me. The moment I could reframe what I believed about any situation — in a way that was honest, healthy, and good — I had direct control over my results.</p>
     <p>I still feel fear every day. I still sit in moments where I wonder if I belong on a call with the president of a company, whether I've earned my seat at the table. The Belief Cycle taught me to <em>stop inside that fear</em> and recognize two things: first, that I'm feeling it because I'm growing — and growth is supposed to feel like this. Second, that I am meant to be there. I have earned it. It is not an accident.</p>
     <p>Today it lives in my toolbox. When I notice the results I'm producing aren't what I want, I trace them back — through my actions, my emotions, my thoughts — all the way to the belief underneath. <strong>Change the belief, and you change the trajectory.</strong> I've watched it happen in my own life more times than I can count.</p>
+  </div>
+</div>
+
+<!-- TRIBUTE TO STEVE -->
+<div class="tribute">
+  <div class="tribute-card">
+    <div class="tribute-eyebrow">With Gratitude</div>
+    <div class="tribute-name">Steve Reiner</div>
+    <div class="tribute-title">Professional Sales &amp; Leadership Coach &middot; Southwestern Consulting</div>
+    <div class="tribute-body">
+      Steve walked me through the Belief Cycle during one of the hardest stretches I'd known, and the shift in my foundations has never left me. With more than 30 years of coaching and over 9,000 sessions, his life's work is helping people meet their fear and move through it &mdash; to become, in his word, <em>fearless</em>. I'm one of the many who are better for having sat across from him.
+    </div>
+    <div class="tribute-links">
+      <a class="tribute-btn" href="https://southwesternconsulting.com/coaches/steve-reiner/" target="_blank" rel="noopener">Read Steve's Bio &rarr;</a>
+      <a class="tribute-btn tribute-btn-secondary" href="https://www.linkedin.com/in/steve-reiner-4565132a/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
   </div>
 </div>
 
