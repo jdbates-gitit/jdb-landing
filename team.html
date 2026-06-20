@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Team — Jason Dale Bates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    --paper:#F2EDE1;--paper-2:#EAE3D3;--line:#D8CFBA;--line-2:#C9BFA6;
+    --ink:#1E1B14;--ink-dim:#6B6453;--brass:#9A6B16;--brass-bright:#B5841F;
+    --brass-bg:#FDF6E8;--blue:#1E3F6B;--blue-bg:#EBF0F7;
+    --display:"Fraunces",Georgia,serif;--body:"Inter Tight",system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;--maxw:1080px;
+    background:var(--paper);color:var(--ink);font-family:var(--body);
+    font-weight:400;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--brass);color:var(--paper)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--brass);display:flex;align-items:center;gap:12px;margin-bottom:26px}
+  .eyebrow::after{content:"";height:1px;flex:1;background:var(--line-2)}
+  h2.section-title{font-family:var(--display);font-weight:340;
+    font-size:clamp(30px,4.2vw,46px);line-height:1.08;letter-spacing:-.01em;margin-bottom:18px}
+  h2.section-title em{font-style:italic;color:var(--brass)}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(242,237,225,.82);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line-2)}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:var(--mono);font-weight:600;letter-spacing:.18em;font-size:14px}
+  .brand b{color:var(--brass)}
+  .nav-links{display:flex;gap:30px;font-size:13px;font-family:var(--mono);letter-spacing:.04em}
+  .nav-links a{color:var(--ink-dim);transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--ink-dim);border-radius:2px;transition:all 0.3s}
+  .mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;background:rgba(242,237,225,0.98);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line-2);padding:16px 28px;z-index:49;flex-direction:column;gap:0}
+  .mobile-menu a{display:block;font-family:var(--mono);font-size:13px;letter-spacing:0.06em;color:var(--ink-dim);
+    padding:14px 0;border-bottom:1px solid var(--line);transition:color 0.2s}
+  .mobile-menu a:last-child{border-bottom:none}
+  .mobile-menu a:hover{color:var(--brass)}
+  .mobile-menu.open{display:flex}
+  @media(max-width:680px){.nav-links{display:none}.hamburger{display:flex}}
+
+  .page-hero{padding:96px 0 24px}
+  .page-hero .meta{font-family:var(--mono);font-size:12px;letter-spacing:.16em;
+    color:var(--ink-dim);text-transform:uppercase;margin-bottom:30px}
+  .page-hero h1{font-family:var(--display);font-weight:330;font-size:clamp(34px,5.4vw,62px);
+    line-height:1.04;letter-spacing:-.02em;max-width:18ch}
+  .page-hero h1 em{font-style:italic;font-weight:380;color:var(--brass)}
+  .page-hero p.sub{margin:30px 0 0;max-width:60ch;font-size:clamp(15px,1.5vw,18px);color:var(--ink-dim);line-height:1.62}
+
+  .tstats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);margin:56px 0}
+  .tstat{padding:38px 24px;border-right:1px solid var(--line-2)}
+  .tstat:last-child{border-right:none}
+  .tstat .num{font-family:var(--display);font-weight:330;font-size:clamp(34px,4.4vw,50px);line-height:1;color:var(--ink)}
+  .tstat .num span{color:var(--brass)}
+  .tstat .arw{color:var(--brass);font-size:.62em;padding:0 4px}
+  .tstat .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-dim);margin-top:14px;line-height:1.45}
+  @media(max-width:680px){.tstats{grid-template-columns:1fr}
+    .tstat{border-right:none;border-bottom:1px solid var(--line-2)}
+    .tstat:last-child{border-bottom:none}}
+
+  .chart-block{margin:0 0 60px}
+  .chart-wrap{position:relative;width:100%;height:300px;margin-bottom:16px}
+  .legend{display:flex;flex-wrap:wrap;gap:14px 22px;font-family:var(--mono);font-size:11px;color:var(--ink-dim)}
+  .legend span{display:flex;align-items:center;gap:7px}
+  .legend .sw-bar{width:13px;height:11px;background:var(--brass);border-radius:2px}
+  .legend .sw-line{width:16px;border-top:2px dashed var(--blue)}
+
+  .roles-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-dim);margin-bottom:22px}
+  .roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:13px}
+  .role-card{border:1px solid var(--line-2);border-radius:4px;padding:20px 20px;transition:.22s}
+  .role-card:hover{border-color:var(--brass);background:var(--paper-2);transform:translateY(-2px)}
+  .role-card .rn{font-family:var(--display);font-weight:340;font-size:32px;color:var(--ink)}
+  .role-card .rl{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:7px;letter-spacing:.04em}
+  .roles-note{font-family:var(--mono);font-size:10.5px;color:var(--ink-dim);margin-top:20px;line-height:1.6;letter-spacing:.02em}
+
+  .closing{border-top:1px solid var(--line-2);margin-top:64px;padding:56px 0 40px;text-align:center}
+  .closing p{font-family:var(--display);font-style:italic;font-weight:300;
+    font-size:clamp(18px,2.4vw,26px);color:var(--ink-dim);line-height:1.5;max-width:44ch;margin:0 auto 32px}
+  .closing p em{font-style:normal;color:var(--brass)}
+  .back-link{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-dim);transition:color .2s}
+  .back-link:hover{color:var(--brass)}
+
+  footer{border-top:1px solid var(--line-2);padding:34px 0;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-dim)}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand">JDB<b>.</b></a>
+    <nav class="nav-links">
+      <a href="/#builds">Builds</a>
+      <a href="/#about">About</a>
+      <a href="/team.html">Team</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#stack">Stack</a>
+      <a href="/#fun">Fun</a>
+      <a href="/spirit.html">Spirit</a>
+      <a href="/expand.html">Expand</a>
+      <a href="/belief.html">Belief</a>
+      <a href="/#connect">Connect</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/#builds">Builds</a>
+  <a href="/#about">About</a>
+  <a href="/team.html">Team</a>
+  <a href="/#experience">Experience</a>
+  <a href="/#stack">Stack</a>
+  <a href="/#fun">Fun</a>
+  <a href="/spirit.html">Spirit</a>
+  <a href="/expand.html">Expand</a>
+  <a href="/belief.html">Belief</a>
+  <a href="/#connect">Connect</a>
+</div>
+
+<div class="wrap">
+  <div class="page-hero">
+    <div class="meta">The National LOA Team · Aug 2023 — Present</div>
+    <h1>Two to thirty. <em>Built to scale.</em></h1>
+    <p class="sub">When Envoy joined the PLACE platform in 2023, I started with two. As the company grew, the team grew to meet it — and the share of production it supports has doubled. Today the team supports the originators behind 75% of company production.</p>
+  </div>
+
+  <div class="tstats">
+    <div class="tstat">
+      <div class="num">2<span class="arw">→</span>30</div>
+      <div class="lbl">Team members<br>Aug 2023 → today</div>
+    </div>
+    <div class="tstat">
+      <div class="num">37<span>%</span><span class="arw">→</span>75<span>%</span></div>
+      <div class="lbl">Of company production<br>supported</div>
+    </div>
+    <div class="tstat">
+      <div class="num">110<span>+</span></div>
+      <div class="lbl">Loan originators<br>supported nationwide</div>
+    </div>
+  </div>
+
+  <div class="chart-block">
+    <div class="eyebrow">The trajectory</div>
+    <div class="chart-wrap">
+      <canvas id="growth" role="img" aria-label="Chart showing team headcount growing from 2 in August 2023 to 30 in 2026, alongside the share of company production supported rising from 37 to 75 percent.">Team grew from 2 to 30 members between Aug 2023 and 2026; production share supported rose from 37% to 75%.</canvas>
+    </div>
+    <div class="legend">
+      <span><span class="sw-bar"></span>Team headcount</span>
+      <span><span class="sw-line"></span>% of company production supported</span>
+    </div>
+  </div>
+
+  <div class="eyebrow">The team today — 30 across the org</div>
+  <div class="roles">
+    <div class="role-card"><div class="rn">5</div><div class="rl">PROC1</div></div>
+    <div class="role-card"><div class="rn">9</div><div class="rl">HYBRID</div></div>
+    <div class="role-card"><div class="rn">8</div><div class="rl">LOA2</div></div>
+    <div class="role-card"><div class="rn">3</div><div class="rl">Specialty</div></div>
+    <div class="role-card"><div class="rn">3</div><div class="rl">In training</div></div>
+    <div class="role-card"><div class="rn">2</div><div class="rl">Recently joined</div></div>
+  </div>
+  <p class="roles-note">Specialty teams: broker, renovation/construction, onboarding &nbsp;·&nbsp; 31 with next week’s start · growing to keep pace with Envoy’s expansion on the PLACE platform.</p>
+
+  <div class="closing">
+    <p>A team isn’t built in a hire. It’s built in the <em>workflows, training, and trust</em> that let thirty people move like one.</p>
+    <a class="back-link" href="/">← return home</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>jdb-builds.com · Jason Dale Bates</span>
+    <span>Houston, TX · NMLS #406344</span>
+  </div>
+</footer>
+
+<script>
+  const hamburger=document.getElementById('hamburger');
+  const mobileMenu=document.getElementById('mobileMenu');
+  hamburger.addEventListener('click',()=>{mobileMenu.classList.toggle('open')});
+  document.addEventListener('click',(e)=>{
+    if(!hamburger.contains(e.target)&&!mobileMenu.contains(e.target)){mobileMenu.classList.remove('open')}
+  });
+  new Chart(document.getElementById('growth'),{
+    data:{
+      labels:['Aug 2023','2024','2025','May 2026'],
+      datasets:[
+        {type:'line',label:'Team headcount',yAxisID:'y',data:[2,7,18,30],
+         borderColor:'#9A6B16',backgroundColor:'rgba(154,107,22,0.10)',borderWidth:2.5,fill:true,tension:0.35,
+         pointBackgroundColor:'#B5841F',pointBorderColor:'#9A6B16',pointRadius:5,pointHoverRadius:7},
+        {type:'line',label:'% of company production supported',yAxisID:'y1',data:[37,50,63,75],
+         borderColor:'#1E3F6B',borderDash:[6,5],borderWidth:2,fill:false,tension:0.35,
+         pointBackgroundColor:'#1E3F6B',pointBorderColor:'#1E3F6B',pointRadius:4,pointHoverRadius:6}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{
+        x:{grid:{color:'rgba(201,191,166,0.4)'},ticks:{color:'#6B6453',font:{size:11,family:'JetBrains Mono'}}},
+        y:{position:'left',beginAtZero:true,max:32,grid:{color:'rgba(201,191,166,0.4)'},
+           ticks:{color:'#9A6B16',font:{size:11,family:'JetBrains Mono'}},
+           title:{display:true,text:'Headcount',color:'#9A6B16',font:{size:10,family:'JetBrains Mono'}}},
+        y1:{position:'right',beginAtZero:true,max:100,grid:{drawOnChartArea:false},
+           ticks:{color:'#1E3F6B',font:{size:11,family:'JetBrains Mono'},callback:function(v){return v+'%'}},
+           title:{display:true,text:'Production',color:'#1E3F6B',font:{size:10,family:'JetBrains Mono'}}}
+      }
+    }
+  });
+</script>
+</body>
+</html>
