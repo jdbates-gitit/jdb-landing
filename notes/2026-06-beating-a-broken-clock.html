@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beating a Broken Clock — Notes — Jason Dale Bates</title>
+<meta name="description" content="What automating my morning briefing taught me about building systems that don't trust their dependencies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    --paper:#F2EDE1;--paper-2:#EAE3D3;--line:#D8CFBA;--line-2:#C9BFA6;
+    --ink:#1E1B14;--ink-dim:#6B6453;--brass:#9A6B16;--brass-bright:#B5841F;
+    --display:"Fraunces",Georgia,serif;--body:"Inter Tight",system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;--maxw:1080px;
+    background:var(--paper);color:var(--ink);font-family:var(--body);
+    font-weight:400;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--brass);color:var(--paper)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(242,237,225,.82);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line-2)}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:var(--mono);font-weight:600;letter-spacing:.18em;font-size:14px}
+  .brand b{color:var(--brass)}
+  .nav-links{display:flex;gap:30px;font-size:13px;font-family:var(--mono);letter-spacing:.04em}
+  .nav-links a{color:var(--ink-dim);transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--ink-dim);border-radius:2px;transition:all 0.3s}
+  .mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;background:rgba(242,237,225,0.98);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line-2);padding:16px 28px;z-index:49;flex-direction:column}
+  .mobile-menu a{display:block;font-family:var(--mono);font-size:13px;letter-spacing:0.06em;color:var(--ink-dim);
+    padding:14px 0;border-bottom:1px solid var(--line);transition:color 0.2s}
+  .mobile-menu a:last-child{border-bottom:none}
+  .mobile-menu a:hover{color:var(--brass)}
+  .mobile-menu.open{display:flex}
+  @media(max-width:680px){.nav-links{display:none}.hamburger{display:flex}}
+
+  article{max-width:680px;margin:0 auto;padding:72px 28px 40px}
+  .post-meta{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--brass);margin-bottom:22px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .post-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--line-2)}
+  h1.post-title{font-family:var(--display);font-weight:340;font-size:clamp(30px,4.4vw,46px);
+    line-height:1.1;letter-spacing:-.015em;margin-bottom:18px}
+  .post-standfirst{font-family:var(--display);font-style:italic;font-weight:300;
+    font-size:clamp(17px,2vw,21px);color:var(--ink-dim);line-height:1.5;
+    margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--line-2)}
+  .post-body p{font-size:17px;line-height:1.72;color:var(--ink);margin-bottom:1.5rem;max-width:64ch}
+  .post-body p:first-of-type::first-letter{
+    font-family:var(--display);font-size:3.4em;line-height:.8;float:left;
+    padding:6px 10px 0 0;color:var(--brass);font-weight:400}
+  .post-body h2{font-family:var(--display);font-weight:400;font-size:25px;letter-spacing:-.01em;
+    margin:42px 0 16px;color:var(--ink)}
+  .post-body strong{font-weight:600;color:var(--ink)}
+  .post-body em{font-style:italic}
+  .post-body code{font-family:var(--mono);font-size:.86em;background:var(--paper-2);
+    border:1px solid var(--line-2);border-radius:3px;padding:1px 6px;color:var(--brass-bright)}
+  .pullquote{font-family:var(--display);font-style:italic;font-weight:300;
+    font-size:clamp(20px,2.6vw,26px);line-height:1.4;color:var(--brass);
+    margin:36px 0;padding:8px 0 8px 28px;border-left:2px solid var(--brass);max-width:60ch}
+  .post-foot{max-width:680px;margin:0 auto;padding:32px 28px 80px;border-top:1px solid var(--line-2)}
+  .post-foot .back{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-dim);transition:color .2s}
+  .post-foot .back:hover{color:var(--brass)}
+  .sig{font-family:var(--display);font-style:italic;font-size:18px;color:var(--ink-dim);margin-top:6px}
+
+  footer{border-top:1px solid var(--line-2);padding:34px 0;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-dim)}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand">JDB<b>.</b></a>
+    <nav class="nav-links">
+      <a href="/#builds">Builds</a>
+      <a href="/#about">About</a>
+      <a href="/team.html">Team</a>
+      <a href="/notes.html">Notes</a>
+      <a href="/#experience">Experience</a>
+      <a href="/spirit.html">Spirit</a>
+      <a href="/expand.html">Expand</a>
+      <a href="/belief.html">Belief</a>
+      <a href="/#connect">Connect</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/#builds">Builds</a>
+  <a href="/#about">About</a>
+  <a href="/team.html">Team</a>
+  <a href="/notes.html">Notes</a>
+  <a href="/#experience">Experience</a>
+  <a href="/spirit.html">Spirit</a>
+  <a href="/expand.html">Expand</a>
+  <a href="/belief.html">Belief</a>
+  <a href="/#connect">Connect</a>
+</div>
+
+<article>
+  <div class="post-meta">
+    <span>Notes</span><span class="dot"></span><span>June 20, 2026</span><span class="dot"></span><span>Building</span>
+  </div>
+  <h1 class="post-title">Beating a Broken Clock</h1>
+  <div class="post-standfirst">I built a little dashboard that greets me every morning with rates, news, and the day’s disc golf. Then it quietly stopped showing up on time — and fixing it changed how I think about anything that depends on something I don’t control.</div>
+
+  <div class="post-body">
+    <p>For a while now I’ve had a morning dashboard that pulls together mortgage rates, a little weather, some AI and mortgage news, and whatever disc golf is happening that day. A Python script does the gathering, Claude writes the summaries, and the whole thing rebuilds and publishes itself twice a day. I never touch it. That was the point.</p>
+
+    <p>It worked beautifully — right up until I noticed the briefing wasn’t there when I sat down with my coffee. Some mornings it showed up late. Some mornings not at all. The strange part was that everything <em>looked</em> healthy. Every scheduled run showed a green checkmark. Nothing was throwing an error. The machine was telling me it was fine, and the machine was wrong.</p>
+
+    <p>The culprit turned out to be the scheduler itself. I had assumed “run at 6 AM” meant it would run at 6 AM. It doesn’t. The scheduler I was leaning on fires whenever it gets around to it — sometimes an hour or two late — and it keeps time in a zone that isn’t mine, so it drifts with daylight saving on top of that. The assumption I’d quietly built everything on was broken from the very first day. I just hadn’t looked closely enough to see it.</p>
+
+    <p>My first fix made things worse, which is the part I keep coming back to. I told the script to only do its work if the clock said exactly six or exactly twelve. Clean, logical, and completely wrong — because now the late runs showed up at six-forty or nine-fifteen, looked at the clock, decided it wasn’t their time, and politely did nothing. Green checkmarks all day long. A dashboard that reported perfect health while never actually running. I’d taken a timing problem and taught it to hide.</p>
+
+    <p class="pullquote">I’d taken a timing problem and taught it to hide.</p>
+
+    <p>What finally worked was giving up on the idea that the scheduler would behave. Instead of demanding an exact moment, I opened a window — anytime in the morning, anytime around midday — and let the first run that arrived in each window do the job. A small note-to-self file keeps track of what’s already run that day, so the late stragglers that wander in afterward just see the work is done and quietly step aside. One briefing in the morning, one at midday, no matter when the scheduler actually decides to wake up.</p>
+
+    <p>It runs on its own now. This morning it was waiting for me, on time, exactly the way I’d wanted it to all along.</p>
+
+    <h2>What I took from it</h2>
+
+    <p>The thing that stuck with me wasn’t really about clocks or code. It was that my system broke the moment it trusted something it couldn’t control to behave the way I wanted. The fix wasn’t to force the scheduler to be punctual — I can’t. The fix was to build something that stayed correct <em>whether or not</em> it was.</p>
+
+    <p>I spend my working life in mortgage operations, and once I saw it I couldn’t un-see it. So much of what we do depends on a handoff happening when it should, a system updating when it’s supposed to, a piece of the pipeline firing on time. And those things are late, or doubled, or missing, all the time. The work that holds up isn’t the work that assumes everyone’s punctual. It’s the work that expects the mess and stays standing in the middle of it.</p>
+
+    <p>I’m still learning to build. But this one felt less like learning a tool and more like learning a posture — stop trusting the clock, and build for the day it’s wrong.</p>
+  </div>
+</article>
+
+<div class="post-foot">
+  <a class="back" href="/notes.html">← all notes</a>
+  <div class="sig">— Jason</div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>jdb-builds.com · Jason Dale Bates</span>
+    <span>Houston, TX · NMLS #406344</span>
+  </div>
+</footer>
+
+<script>
+  const hamburger=document.getElementById('hamburger');
+  const mobileMenu=document.getElementById('mobileMenu');
+  hamburger.addEventListener('click',()=>{mobileMenu.classList.toggle('open')});
+  document.addEventListener('click',(e)=>{
+    if(!hamburger.contains(e.target)&&!mobileMenu.contains(e.target)){mobileMenu.classList.remove('open')}
+  });
+</script>
+</body>
+</html>
