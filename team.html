@@ -99,6 +99,9 @@
     font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-dim)}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+
+  .nav-divider{width:1px;height:16px;background:var(--line-2);margin:0 2px;flex:none}
+  .mobile-divider{height:1px;background:var(--line-2);margin:8px 0}
 </style>
 </head>
 <body>
@@ -109,14 +112,16 @@
     <nav class="nav-links">
       <a href="/#builds">Builds</a>
       <a href="/#about">About</a>
-      <a href="/team.html">Team</a>
-      <a href="/#experience">Experience</a>
       <a href="/#stack">Stack</a>
+      <a href="/#experience">Experience</a>
       <a href="/#fun">Fun</a>
+      <a href="/#connect">Connect</a>
+      <span class="nav-divider"></span>
+      <a href="/team.html">Team</a>
+      <a href="/notes.html">Notes</a>
       <a href="/spirit.html">Spirit</a>
       <a href="/expand.html">Expand</a>
       <a href="/belief.html">Belief</a>
-      <a href="/#connect">Connect</a>
     </nav>
     <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
@@ -124,14 +129,16 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="/#builds">Builds</a>
   <a href="/#about">About</a>
-  <a href="/team.html">Team</a>
-  <a href="/#experience">Experience</a>
   <a href="/#stack">Stack</a>
+  <a href="/#experience">Experience</a>
   <a href="/#fun">Fun</a>
+  <a href="/#connect">Connect</a>
+  <div class="mobile-divider"></div>
+  <a href="/team.html">Team</a>
+  <a href="/notes.html">Notes</a>
   <a href="/spirit.html">Spirit</a>
   <a href="/expand.html">Expand</a>
   <a href="/belief.html">Belief</a>
-  <a href="/#connect">Connect</a>
 </div>
 
 <div class="wrap">
