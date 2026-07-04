@@ -83,9 +83,10 @@
   .stage-title-wrap{flex:1;min-width:0}
   .stage-title{font-family:var(--display);font-weight:400;font-size:20px;letter-spacing:-.01em;color:var(--ink)}
   .stage-arc{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim);margin-top:4px}
-  .stage-count{text-align:right;white-space:nowrap}
-  .stage-count .cnum{font-family:var(--display);font-weight:340;font-size:24px;color:var(--ink)}
-  .stage-count .clabel{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);margin-left:5px}
+  .stage-chevron{font-family:var(--display);font-weight:300;font-size:26px;color:var(--brass);
+    min-width:24px;text-align:center;transition:transform .3s}
+  .stage.focus .stage-chevron{color:var(--blue)}
+  .stage[aria-expanded="true"] .stage-chevron{transform:rotate(45deg)}
   .stage-detail{max-height:0;opacity:0;transition:max-height .3s ease,opacity .25s ease,padding .3s ease;padding:0 26px}
   .stage[aria-expanded="true"] .stage-detail{max-height:340px;opacity:1;padding:0 26px 24px}
   .focus-tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
@@ -94,7 +95,7 @@
   .detail-row .dk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);padding-top:2px}
   .detail-row .dv{color:var(--ink);line-height:1.5}
   @media(max-width:680px){.detail-row{grid-template-columns:1fr;gap:4px}
-    .stage-head{gap:14px;padding:18px}.stage-count .clabel{display:none}}
+    .stage-head{gap:14px;padding:18px}}
 
   .connector{display:flex;justify-content:center;color:var(--line-2);font-size:14px;margin:-4px 0}
 
@@ -154,12 +155,12 @@
 
   <div class="topstats">
     <div class="topstat"><div class="n">9</div><div class="l">Lifecycle<br>stages</div></div>
-    <div class="topstat"><div class="n">414</div><div class="l">Documented<br>steps</div></div>
-    <div class="topstat"><div class="n">20<span>+</span></div><div class="l">Roles &amp;<br>owners mapped</div></div>
+    <div class="topstat"><div class="n">400<span>+</span></div><div class="l">Documented<br>steps</div></div>
+    <div class="topstat"><div class="n">10<span>+</span></div><div class="l">Roles &amp;<br>owners mapped</div></div>
     <div class="topstat"><div class="n">8</div><div class="l">Handoff gates<br>with definitions of done</div></div>
   </div>
 
-  <div class="note-line"><span class="swatch"></span> Highlighted stages are where my team operates — the front-half manufacturing run we own by design, from application through underwriting submission. Tap any stage to expand.</div>
+  <div class="note-line"><span class="swatch"></span> Highlighted stages are where my team operates — the front-half manufacturing run we own by design, from application through underwriting decision and suspense, before the handoff to conditional-approval processing. Tap any stage to expand.</div>
 
   <div class="flow">
       <button class="stage" aria-expanded="false" onclick="toggleStage(this)">
@@ -169,7 +170,7 @@
             <div class="stage-title">Lead → App Created</div>
             <div class="stage-arc">Intake & first contact</div>
           </div>
-          <div class="stage-count"><span class="cnum">14</span><span class="clabel">steps</span></div>
+          <div class="stage-chevron">+</div>
         </div>
         <div class="stage-detail">
           
@@ -185,7 +186,7 @@
             <div class="stage-title">App → AUS Pre-Approval</div>
             <div class="stage-arc">File build & pre-approval</div>
           </div>
-          <div class="stage-count"><span class="cnum">79</span><span class="clabel">steps</span></div>
+          <div class="stage-chevron">+</div>
         </div>
         <div class="stage-detail">
           <span class="focus-tag">Team focus window</span>
@@ -201,7 +202,7 @@
             <div class="stage-title">Pre-Approval → Optional Early UW</div>
             <div class="stage-arc">LOA2 preps & submits UW pre-approval</div>
           </div>
-          <div class="stage-count"><span class="cnum">12</span><span class="clabel">steps</span></div>
+          <div class="stage-chevron">+</div>
         </div>
         <div class="stage-detail">
           <span class="focus-tag">Team focus window</span>
@@ -217,7 +218,7 @@
             <div class="stage-title">Contract / TRID → UW Submission</div>
             <div class="stage-arc">Setup, disclosure & submission</div>
           </div>
-          <div class="stage-count"><span class="cnum">56</span><span class="clabel">steps</span></div>
+          <div class="stage-chevron">+</div>
         </div>
         <div class="stage-detail">
           <span class="focus-tag">Team focus window</span>
@@ -226,20 +227,20 @@
           <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">File disclosed, packaged, and submitted to underwriting</span></div>
         </div>
       </button>
-      <button class="stage" aria-expanded="false" onclick="toggleStage(this)">
+      <button class="stage focus" aria-expanded="false" onclick="toggleStage(this)">
         <div class="stage-head">
           <div class="stage-num">05</div>
           <div class="stage-title-wrap">
             <div class="stage-title">UW Decision / Suspense</div>
-            <div class="stage-arc">Underwriting decision</div>
+            <div class="stage-arc">Decision & suspense clearing</div>
           </div>
-          <div class="stage-count"><span class="cnum">10</span><span class="clabel">steps</span></div>
+          <div class="stage-chevron">+</div>
         </div>
         <div class="stage-detail">
-          
-          <div class="detail-row"><span class="dk">Primary owners</span><span class="dv">UW · Processing</span></div>
+          <span class="focus-tag">Team focus window</span>
+          <div class="detail-row"><span class="dk">Primary owners</span><span class="dv">UW · PROC1 (suspense)</span></div>
           <div class="detail-row"><span class="dk">Systems of record</span><span class="dv">Encompass · Teams</span></div>
-          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">Decision rendered — approval, suspense, or action taken</span></div>
+          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">Decision rendered by UW; suspense items returned to PROC1 and cleared</span></div>
         </div>
       </button>
       <button class="stage" aria-expanded="false" onclick="toggleStage(this)">
@@ -249,7 +250,7 @@
             <div class="stage-title">Conditional Approval → CTC</div>
             <div class="stage-arc">Condition collection & clearing</div>
           </div>
-          <div class="stage-count"><span class="cnum">85</span><span class="clabel">steps</span></div>
+          <div class="stage-chevron">+</div>
         </div>
         <div class="stage-detail">
           
@@ -265,7 +266,7 @@
             <div class="stage-title">Final Approval → Docs Out</div>
             <div class="stage-arc">Closing disclosure & doc prep</div>
           </div>
-          <div class="stage-count"><span class="cnum">143</span><span class="clabel">steps</span></div>
+          <div class="stage-chevron">+</div>
         </div>
         <div class="stage-detail">
           
@@ -281,7 +282,7 @@
             <div class="stage-title">Funding</div>
             <div class="stage-arc">Wire & funding</div>
           </div>
-          <div class="stage-count"><span class="cnum">7</span><span class="clabel">steps</span></div>
+          <div class="stage-chevron">+</div>
         </div>
         <div class="stage-detail">
           
@@ -297,7 +298,7 @@
             <div class="stage-title">Post-Closing</div>
             <div class="stage-arc">Trailing docs & nurture</div>
           </div>
-          <div class="stage-count"><span class="cnum">8</span><span class="clabel">steps</span></div>
+          <div class="stage-chevron">+</div>
         </div>
         <div class="stage-detail">
           
