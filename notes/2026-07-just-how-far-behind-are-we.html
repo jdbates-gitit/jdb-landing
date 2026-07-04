@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just How Far Behind Are We? — Notes — Jason Dale Bates</title>
+<meta name="description" content="I could always feel when my team was underwater. Building a capacity model taught me the difference between feeling it and being able to prove it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    --paper:#F2EDE1;--paper-2:#EAE3D3;--line:#D8CFBA;--line-2:#C9BFA6;
+    --ink:#1E1B14;--ink-dim:#6B6453;--brass:#9A6B16;--brass-bright:#B5841F;
+    --display:"Fraunces",Georgia,serif;--body:"Inter Tight",system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;--maxw:1080px;
+    background:var(--paper);color:var(--ink);font-family:var(--body);
+    font-weight:400;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--brass);color:var(--paper)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(242,237,225,.82);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line-2)}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:var(--mono);font-weight:600;letter-spacing:.18em;font-size:14px}
+  .brand b{color:var(--brass)}
+  .nav-links{display:flex;gap:30px;font-size:13px;font-family:var(--mono);letter-spacing:.04em}
+  .nav-links a{color:var(--ink-dim);transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--ink-dim);border-radius:2px;transition:all 0.3s}
+  .mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;background:rgba(242,237,225,0.98);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line-2);padding:16px 28px;z-index:49;flex-direction:column}
+  .mobile-menu a{display:block;font-family:var(--mono);font-size:13px;letter-spacing:0.06em;color:var(--ink-dim);
+    padding:14px 0;border-bottom:1px solid var(--line);transition:color 0.2s}
+  .mobile-menu a:last-child{border-bottom:none}
+  .mobile-menu a:hover{color:var(--brass)}
+  .mobile-menu.open{display:flex}
+  @media(max-width:680px){.nav-links{display:none}.hamburger{display:flex}}
+
+  article{max-width:680px;margin:0 auto;padding:72px 28px 40px}
+  .post-meta{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--brass);margin-bottom:22px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .post-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--line-2)}
+  h1.post-title{font-family:var(--display);font-weight:340;font-size:clamp(30px,4.4vw,46px);
+    line-height:1.1;letter-spacing:-.015em;margin-bottom:18px}
+  .post-standfirst{font-family:var(--display);font-style:italic;font-weight:300;
+    font-size:clamp(17px,2vw,21px);color:var(--ink-dim);line-height:1.5;
+    margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--line-2)}
+  .post-body p{font-size:17px;line-height:1.72;color:var(--ink);margin-bottom:1.5rem;max-width:64ch}
+  .post-body p:first-of-type::first-letter{
+    font-family:var(--display);font-size:3.4em;line-height:.8;float:left;
+    padding:6px 10px 0 0;color:var(--brass);font-weight:400}
+  .post-body h2{font-family:var(--display);font-weight:400;font-size:25px;letter-spacing:-.01em;
+    margin:42px 0 16px;color:var(--ink)}
+  .post-body strong{font-weight:600;color:var(--ink)}
+  .post-body em{font-style:italic}
+  .pullquote{font-family:var(--display);font-style:italic;font-weight:300;
+    font-size:clamp(20px,2.6vw,26px);line-height:1.4;color:var(--brass);
+    margin:36px 0;padding:8px 0 8px 28px;border-left:2px solid var(--brass);max-width:60ch}
+  .inline-link{color:var(--brass-bright);border-bottom:1px solid rgba(154,107,22,.35);transition:.2s}
+  .inline-link:hover{border-color:var(--brass)}
+  .post-foot{max-width:680px;margin:0 auto;padding:32px 28px 80px;border-top:1px solid var(--line-2)}
+  .post-foot .back{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-dim);transition:color .2s}
+  .post-foot .back:hover{color:var(--brass)}
+  .sig{font-family:var(--display);font-style:italic;font-size:18px;color:var(--ink-dim);margin-top:6px}
+
+  footer{border-top:1px solid var(--line-2);padding:34px 0;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-dim)}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand">JDB<b>.</b></a>
+    <nav class="nav-links">
+      <a href="/#builds">Builds</a>
+      <a href="/#about">About</a>
+      <a href="/#stack">Stack</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#fun">Fun</a>
+      <a href="/#connect">Connect</a>
+      <span style="width:1px;height:16px;background:var(--line-2);display:inline-block"></span>
+      <a href="/team.html">Team</a>
+      <a href="/notes.html">Notes</a>
+      <a href="https://discipline.jdb-builds.com">Discipline</a>
+      <a href="/spirit.html">Spirit</a>
+      <a href="/expand.html">Expand</a>
+      <a href="/belief.html">Belief</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/#builds">Builds</a>
+  <a href="/#about">About</a>
+  <a href="/team.html">Team</a>
+  <a href="/notes.html">Notes</a>
+  <a href="https://discipline.jdb-builds.com">Discipline</a>
+  <a href="/spirit.html">Spirit</a>
+  <a href="/expand.html">Expand</a>
+  <a href="/belief.html">Belief</a>
+</div>
+
+<article>
+  <div class="post-meta">
+    <span>Notes</span><span class="dot"></span><span>July 3, 2026</span><span class="dot"></span><span>Operations</span>
+  </div>
+  <h1 class="post-title">Just How Far Behind Are We?</h1>
+  <div class="post-standfirst">I could always feel when my team was underwater. Building a capacity model — through more versions than I’d like to admit — taught me the difference between feeling it and being able to prove it.</div>
+
+  <div class="post-body">
+    <p>For years I ran my team’s staffing on instinct, and my instinct was pretty good. I could tell when we were getting behind by the shape of my own day — more escalation calls, more coaching, more “let me just fix that one for you” moments that quietly eat an afternoon. When the volume of those went up, I knew we were hurting. What I couldn’t do was put a number on it. And a feeling, however accurate, is a hard thing to walk into a leadership conversation and ask people to fund.</p>
+
+    <p>So I built a capacity model. The first version was almost embarrassingly simple — it looked at fundings only, with rough guesses for how long a file takes and how many touches it needs. It was barely more than a napkin. But building even that crude version made me realize how little I actually understood about where my team’s time went.</p>
+
+    <p>So I did a time study. Sat with the work, measured it. And the first thing it taught me was that I’d been looking at the wrong half of the process. My team’s real load isn’t just fundings — it’s the front end too: the TBD scrub through pre-approval, and then contract through submission and hand-off to processing. Two distinct milestones, each with its own cluster of steps, each with its own rhythm. Once I split the model along those two milestones and measured the actual minutes each one took, the picture finally started matching reality.</p>
+
+    <p>The honest truth about manufacturing a mortgage is that it takes a few hundred small steps to move a lead from application to funded loan. Most of them are the same steps at every shop — the difference is just where each team grabs the file and where they hand it off. My team lives in two focused windows, and by design we stay in them. At the volume we run, a single custom workflow or a one-off “can you just handle this differently” can hijack an assistant’s entire day. Multiply that across a growing sales force where every originator works a little differently, and focus stops being a preference — it becomes survival.</p>
+
+    <h2>What the model actually changed</h2>
+
+    <p>Here’s the thing the model gave me that instinct never could: a defensible answer to “how far behind are we, and what should we do about it.”</p>
+
+    <p class="pullquote">A feeling can’t be funded. A number can.</p>
+
+    <p>When I can see that one role is over-utilized and stretched thin, I’m no longer guessing. I can look at it and decide — do I add another specialist in that exact seat, or do I bring on a more flexible hybrid who can carry that load <em>and</em> flex into the front end when a team gets slammed? That’s not a gut call anymore. It’s a read off the model, and I can show the work behind it. If you want to see the tool itself, it’s <a class="inline-link" href="/capacity.html">live on this site</a> — you can move the inputs around and watch the gaps move with them.</p>
+
+    <p>The version I lean on now came out of a harder lesson, one this team teaches me over and over: we are almost always behind the eight ball on hiring. We grow fast, we take on new originators, and the numbers usually have to prove the need before a new seat gets approved — which means by the time help arrives, we’ve already been running hot for a while. It’s a lot like a startup. You pivot, you accommodate, you roll with it. So I stopped trying to staff perfectly and started trying to staff <em>honestly</em>: what does the work actually require, and how far can we reasonably stretch before it costs us?</p>
+
+    <p>One pattern the model helped me name: a gap of a person or two is manageable — you cover it with overtime and grit, and most weeks nobody outside the team even feels it. But past that, the cost stops being invisible. The overtime climbs, the SLA conversations with sales get sharper, the daily friction goes up. Knowing roughly where that line sits, for my specific team, is worth more than any single number in the whole model.</p>
+
+    <h2>What it isn’t</h2>
+
+    <p>Capacity modeling will never be a perfect science, and I’ve made peace with that. There’s efficiency loss, PTO, emergencies, and the plain fact that people — my team, the originators, the borrowers, the agents — don’t behave like inputs on a spreadsheet. The model doesn’t pretend to control any of that. What it gives me is a <em>base</em>: a grounded sense of where we are this month and where we’re likely headed next, that I can update as the time study or the conditions change.</p>
+
+    <p>Mostly, it changed the conversation. “Just how far behind are we?” used to be a question I could only answer with a feeling and a plea. Now I answer it with a model, a number, and the reasoning behind both. The feeling was never wrong. It just needed something it could stand on.</p>
+  </div>
+</article>
+
+<div class="post-foot">
+  <a class="back" href="/notes.html">← all notes</a>
+  <div class="sig">— Jason</div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>jdb-builds.com · Jason Dale Bates</span>
+    <span>Houston, TX · NMLS #406344</span>
+  </div>
+</footer>
+
+<script>
+  const hamburger=document.getElementById('hamburger');
+  const mobileMenu=document.getElementById('mobileMenu');
+  hamburger.addEventListener('click',()=>{mobileMenu.classList.toggle('open')});
+  document.addEventListener('click',(e)=>{
+    if(!hamburger.contains(e.target)&&!mobileMenu.contains(e.target)){mobileMenu.classList.remove('open')}
+  });
+</script>
+</body>
+</html>
