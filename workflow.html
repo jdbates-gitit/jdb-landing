@@ -160,7 +160,7 @@
     <div class="topstat"><div class="n">8</div><div class="l">Handoff gates<br>with definitions of done</div></div>
   </div>
 
-  <div class="note-line"><span class="swatch"></span> Highlighted stages are where my team operates — the front-half manufacturing run we own by design, from application through underwriting decision and suspense, before the handoff to conditional-approval processing. Tap any stage to expand.</div>
+  <div class="note-line"><span class="swatch"></span> Highlighted stages are where my team operates — the front-half manufacturing run we own by design: from application and pre-approval through contract, submission to underwriting, and the hand-off to processing. Tap any stage to expand.</div>
 
   <div class="flow">
       <button class="stage" aria-expanded="false" onclick="toggleStage(this)">
@@ -224,23 +224,23 @@
           <span class="focus-tag">Team focus window</span>
           <div class="detail-row"><span class="dk">Primary owners</span><span class="dv">PROC1 · LO</span></div>
           <div class="detail-row"><span class="dk">Systems of record</span><span class="dv">Encompass · HubSpot · DDA</span></div>
-          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">File disclosed, packaged, and submitted to underwriting</span></div>
+          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">File disclosed, packaged, submitted to underwriting, and handed off to processing</span></div>
         </div>
       </button>
-      <button class="stage focus" aria-expanded="false" onclick="toggleStage(this)">
+      <button class="stage" aria-expanded="false" onclick="toggleStage(this)">
         <div class="stage-head">
           <div class="stage-num">05</div>
           <div class="stage-title-wrap">
-            <div class="stage-title">UW Decision / Suspense</div>
-            <div class="stage-arc">Decision & suspense clearing</div>
+            <div class="stage-title">UW Decision</div>
+            <div class="stage-arc">Underwriting decision</div>
           </div>
           <div class="stage-chevron">+</div>
         </div>
         <div class="stage-detail">
-          <span class="focus-tag">Team focus window</span>
-          <div class="detail-row"><span class="dk">Primary owners</span><span class="dv">UW · PROC1 (suspense)</span></div>
+          
+          <div class="detail-row"><span class="dk">Primary owners</span><span class="dv">UW</span></div>
           <div class="detail-row"><span class="dk">Systems of record</span><span class="dv">Encompass · Teams</span></div>
-          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">Decision rendered by UW; suspense items returned to PROC1 and cleared</span></div>
+          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">UW renders decision; most files return approved with conditions (suspense is the exception)</span></div>
         </div>
       </button>
       <button class="stage" aria-expanded="false" onclick="toggleStage(this)">
@@ -248,7 +248,7 @@
           <div class="stage-num">06</div>
           <div class="stage-title-wrap">
             <div class="stage-title">Conditional Approval → CTC</div>
-            <div class="stage-arc">Condition collection & clearing</div>
+            <div class="stage-arc">Processing owns condition clearing</div>
           </div>
           <div class="stage-chevron">+</div>
         </div>
@@ -256,7 +256,7 @@
           
           <div class="detail-row"><span class="dk">Primary owners</span><span class="dv">PROC2 · UW</span></div>
           <div class="detail-row"><span class="dk">Systems of record</span><span class="dv">Encompass · DDA · Teams</span></div>
-          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">All conditions cleared, Clear to Close issued</span></div>
+          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">Processing picks up the approved-with-conditions file and clears it to Clear-to-Close</span></div>
         </div>
       </button>
       <button class="stage" aria-expanded="false" onclick="toggleStage(this)">
