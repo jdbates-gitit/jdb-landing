@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Confabulation Problem — Notes — Jason Dale Bates</title>
+<meta name="description" content="There’s a word for confidently stating something false with no intent to deceive. Turns out it applies to more than just people.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    --paper:#F2EDE1;--paper-2:#EAE3D3;--line:#D8CFBA;--line-2:#C9BFA6;
+    --ink:#1E1B14;--ink-dim:#6B6453;--brass:#9A6B16;--brass-bright:#B5841F;
+    --display:"Fraunces",Georgia,serif;--body:"Inter Tight",system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;--maxw:1080px;
+    background:var(--paper);color:var(--ink);font-family:var(--body);
+    font-weight:400;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--brass);color:var(--paper)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(242,237,225,.82);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line-2)}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:var(--mono);font-weight:600;letter-spacing:.18em;font-size:14px}
+  .brand b{color:var(--brass)}
+  .nav-links{display:flex;gap:30px;font-size:13px;font-family:var(--mono);letter-spacing:.04em}
+  .nav-links a{color:var(--ink-dim);transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--ink-dim);border-radius:2px;transition:all 0.3s}
+  .mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;background:rgba(242,237,225,0.98);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line-2);padding:16px 28px;z-index:49;flex-direction:column}
+  .mobile-menu a{display:block;font-family:var(--mono);font-size:13px;letter-spacing:0.06em;color:var(--ink-dim);
+    padding:14px 0;border-bottom:1px solid var(--line);transition:color 0.2s}
+  .mobile-menu a:last-child{border-bottom:none}
+  .mobile-menu a:hover{color:var(--brass)}
+  .mobile-menu.open{display:flex}
+  @media(max-width:680px){.nav-links{display:none}.hamburger{display:flex}}
+
+  article{max-width:680px;margin:0 auto;padding:72px 28px 40px}
+  .post-meta{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--brass);margin-bottom:22px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .post-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--line-2)}
+  h1.post-title{font-family:var(--display);font-weight:340;font-size:clamp(30px,4.4vw,46px);
+    line-height:1.1;letter-spacing:-.015em;margin-bottom:18px}
+  .post-standfirst{font-family:var(--display);font-style:italic;font-weight:300;
+    font-size:clamp(17px,2vw,21px);color:var(--ink-dim);line-height:1.5;
+    margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--line-2)}
+  .post-body p{font-size:17px;line-height:1.72;color:var(--ink);margin-bottom:1.5rem;max-width:64ch}
+  .post-body p:first-of-type::first-letter{
+    font-family:var(--display);font-size:3.4em;line-height:.8;float:left;
+    padding:6px 10px 0 0;color:var(--brass);font-weight:400}
+  .post-body h2{font-family:var(--display);font-weight:400;font-size:25px;letter-spacing:-.01em;
+    margin:42px 0 16px;color:var(--ink)}
+  .post-body strong{font-weight:600;color:var(--ink)}
+  .post-body em{font-style:italic}
+  .pullquote{font-family:var(--display);font-style:italic;font-weight:300;
+    font-size:clamp(20px,2.6vw,26px);line-height:1.4;color:var(--brass);
+    margin:36px 0;padding:8px 0 8px 28px;border-left:2px solid var(--brass);max-width:60ch}
+  .inline-link{color:var(--brass-bright);border-bottom:1px solid rgba(154,107,22,.35);transition:.2s}
+  .inline-link:hover{border-color:var(--brass)}
+  .post-foot{max-width:680px;margin:0 auto;padding:32px 28px 80px;border-top:1px solid var(--line-2)}
+  .post-foot .back{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-dim);transition:color .2s}
+  .post-foot .back:hover{color:var(--brass)}
+  .sig{font-family:var(--display);font-style:italic;font-size:18px;color:var(--ink-dim);margin-top:6px}
+
+  footer{border-top:1px solid var(--line-2);padding:34px 0;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-dim)}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand">JDB<b>.</b></a>
+    <nav class="nav-links">
+      <a href="/#builds">Builds</a>
+      <a href="/#about">About</a>
+      <a href="/#stack">Stack</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#fun">Fun</a>
+      <a href="/#connect">Connect</a>
+      <span style="width:1px;height:16px;background:var(--line-2);display:inline-block"></span>
+      <a href="/team.html">Team</a>
+      <a href="/notes.html">Notes</a>
+      <a href="https://discipline.jdb-builds.com">Discipline</a>
+      <a href="/spirit.html">Spirit</a>
+      <a href="/expand.html">Expand</a>
+      <a href="/belief.html">Belief</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/#builds">Builds</a>
+  <a href="/#about">About</a>
+  <a href="/team.html">Team</a>
+  <a href="/notes.html">Notes</a>
+  <a href="https://discipline.jdb-builds.com">Discipline</a>
+  <a href="/spirit.html">Spirit</a>
+  <a href="/expand.html">Expand</a>
+  <a href="/belief.html">Belief</a>
+</div>
+
+<article>
+  <div class="post-meta">
+    <span>Notes</span><span class="dot"></span><span>July 11, 2026</span><span class="dot"></span><span>AI</span>
+  </div>
+  <h1 class="post-title">The Confabulation Problem</h1>
+  <div class="post-standfirst">There’s a word for confidently stating something false with no intent to deceive. Turns out it applies to more than just people.</div>
+
+  <div class="post-body">
+    <p>Confabulation is a real term, borrowed from psychology and neurology. It describes what happens when someone — often a patient with a memory disorder — fills a gap in their recollection with a fabricated detail, and states it with total sincerity. Not a lie. Lying requires knowing you’re wrong. Confabulation is something else: the part of the brain that would normally flag “I’m not actually sure about this” just doesn’t fire. The person believes it completely, and it shows.</p>
+
+    <p>That’s not a psychology term I picked up reading a journal. That’s what Llama did to me on a Tuesday night.</p>
+
+    <p>I’d started a 14-day plan to get hands-on with local AI — Ollama, Open WebUI, LM Studio, running models on my own machine instead of in the cloud. Day 3 was supposed to be simple: a model accuracy check. I gave the same mortgage question — calculating qualifying overtime income — to three local models and compared the answers.</p>
+
+    <p>Qwen punted. Gave me a vague non-answer instead of real methodology, which is at least honest about its limits.</p>
+
+    <p>Mistral got close. It used a straightforward average, directionally reasonable, though not quite how Fannie Mae actually wants it split.</p>
+
+    <p>Llama was the one that got me. In a fabricated problem it created to show the calculation, it walked through the math step by step, clean and confident, like a worked example in a textbook: base salary $6,000/month, 20 overtime hours a week, times 4 weeks — 80 monthly overtime hours. Then it divided those 80 hours by 12 months and called the result $6,667 a year, roughly $556 a month, in overtime income. Read that again slowly. It divided a number of hours by a number of months and reported the answer in dollars. The units don’t mean anything. But it was formatted so cleanly, and stated so plainly, that you’d have to already know the math to catch that it wasn’t math at all — just numbers arranged to look like math.</p>
+
+    <p>That was the lesson from Day 3: the most fluent-sounding model was the most dangerously wrong one. Confidence and correctness turned out to have nothing to do with each other.</p>
+
+    <p>I should have carried that lesson forward more carefully than I did, because a few days later it came back around in a form that actually mattered.</p>
+
+    <p>I was trying to build a small script to extract data from a W-2 — one of my own, an old one, the kind of document that should never leave my machine regardless of whose it is. I asked a local model to write the extraction code. It handed me something that looked completely legitimate: clean Python, sensible structure, a request to an API endpoint. I went to run it in PowerShell before I’d even loaded a real document, just to see if it would execute.</p>
+
+    <p>It failed immediately — a DNS error, couldn’t resolve the address. Good thing, because when I looked at what it was actually trying to call, the model had invented an external API out of thin air. <em>api.inferencehub.io</em>. Doesn’t exist. The model needed a plausible-looking endpoint to complete the script, so it manufactured one — with the same total confidence it brought to the overtime math. No hedge, no “I’m not sure this service exists.” Just a URL, formatted like fact.</p>
+
+    <p>Nothing was exposed. The script died before it ever sent anything, and I hadn’t fed it a real document yet anyway. But if I’d been one step further along — document loaded, script looking clean, no reason yet to doubt it — that’s sensitive financial data routed to a server nobody owns, built and run by me, on my own machine, because I trusted output that sounded right.</p>
+
+    <p>Two different failure shapes. One invented a number, one invented a destination. Same root cause: a local model will hand you something fluent and complete, and fluent has nothing to do with true. It doesn’t feel uncertain internally, so it doesn’t perform uncertainty externally. It just answers.</p>
+
+    <p class="pullquote">The fix wasn’t “get a smarter model,” though that’s the instinct.</p>
+
+    <p>It was tightening what I asked for. Once I scoped the overtime question to the actual method — Fannie Mae’s B3-3.1 guidance, specifically — results got better across the board. Precision in the ask bought me precision in the answer. It didn’t buy me a model that knows when to doubt itself. That part’s still on me.</p>
+
+    <p>So that’s the boundary I run now, plainly: sensitive documents — W-2s, tax returns, paystubs, bank statements, always my own old ones when I’m testing something new — stay local, and I check the actual output before I trust it, every time. Reasoning, drafting, the stuff where I want a second set of eyes — that goes to Claude. Not because local models are bad. Because they’ll confabulate with a straight face, and so, it turns out, will I, if I don’t stay honest about what “looks right” actually means.</p>
+  </div>
+</article>
+
+<div class="post-foot">
+  <a class="back" href="/notes.html">← all notes</a>
+  <div class="sig">— Jason</div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>jdb-builds.com · Jason Dale Bates</span>
+    <span>Houston, TX · NMLS #406344</span>
+  </div>
+</footer>
+
+<script>
+  const hamburger=document.getElementById('hamburger');
+  const mobileMenu=document.getElementById('mobileMenu');
+  hamburger.addEventListener('click',()=>{mobileMenu.classList.toggle('open')});
+  document.addEventListener('click',(e)=>{
+    if(!hamburger.contains(e.target)&&!mobileMenu.contains(e.target)){mobileMenu.classList.remove('open')}
+  });
+</script>
+</body>
+</html>
