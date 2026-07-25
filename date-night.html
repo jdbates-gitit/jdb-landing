@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Draw — Date Deck</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Space+Grotesk:wght@400;500;600&display=swap');
+  :root{
+    --plum:#1a0f24;--plum-2:#2a1838;--coral:#ff6b5e;--gold:#f4b860;
+    --cream:#f6ede4;--muted:#a992b8;--line:rgba(246,237,228,0.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Space Grotesk',sans-serif;
+    background:
+      radial-gradient(120% 80% at 80% -10%, #3a1f45 0%, transparent 55%),
+      radial-gradient(100% 70% at -10% 110%, #2a2340 0%, transparent 50%),
+      var(--plum);
+    color:var(--cream);min-height:100vh;padding:32px 20px 80px;
+    display:flex;flex-direction:column;align-items:center;
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  header{text-align:center;max-width:640px;margin-bottom:8px}
+  .eyebrow{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:500}
+  h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(44px,9vw,84px);line-height:.95;letter-spacing:-.02em;margin-bottom:16px}
+  h1 em{font-style:italic;color:var(--coral)}
+  .sub{color:var(--muted);font-size:15px;max-width:470px;margin:0 auto;line-height:1.5}
+  .stage{perspective:1400px;width:100%;max-width:460px;min-height:340px;margin:12px auto 24px;display:flex;align-items:center;justify-content:center}
+  .card{width:100%;background:linear-gradient(160deg,var(--plum-2),#20132c);border:1px solid var(--line);border-radius:24px;padding:36px 30px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7), inset 0 1px 0 rgba(246,237,228,.06);position:relative;overflow:hidden;animation:draw .55s cubic-bezier(.2,.8,.2,1)}
+  @keyframes draw{0%{transform:translateY(40px) rotateX(-18deg) scale(.94);opacity:0}100%{transform:none;opacity:1}}
+  .card::before{content:"";position:absolute;inset:0;background:radial-gradient(80% 50% at 50% 0%, rgba(244,184,96,.14), transparent 70%);pointer-events:none}
+  .card-cat{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:500;position:relative}
+  .card-title{font-family:'Fraunces',serif;font-weight:600;font-size:29px;line-height:1.12;margin-bottom:14px;letter-spacing:-.01em;position:relative}
+  .card-body{color:var(--muted);font-size:15px;line-height:1.55;margin-bottom:20px;position:relative}
+  .card-tags{display:flex;flex-wrap:wrap;gap:6px;position:relative}
+  .tag{font-size:11px;padding:4px 10px;border-radius:6px;background:rgba(246,237,228,.06);color:var(--cream);opacity:.8}
+  .card-link{display:inline-flex;align-items:center;gap:7px;margin-top:22px;position:relative;text-decoration:none;font-family:inherit;font-size:13px;font-weight:600;color:var(--plum);background:var(--gold);padding:11px 20px;border-radius:100px;transition:all .18s ease}
+  .card-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px -6px rgba(244,184,96,.5)}
+  .card-link .arrow{transition:transform .18s ease}
+  .card-link:hover .arrow{transform:translateX(3px)}
+  .card-actions{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-top:22px;position:relative}
+  .card-actions .card-link{margin-top:0}
+  .card-share{display:inline-flex;align-items:center;gap:7px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;color:var(--cream);background:transparent;border:1px solid var(--line);padding:11px 18px;border-radius:100px;transition:all .18s ease}
+  .card-share:hover{border-color:var(--coral);color:var(--cream);transform:translateY(-1px)}
+  .card-share.copied{border-color:var(--gold);color:var(--gold)}
+  .share-box{margin-top:14px;position:relative}
+  .share-box-label{font-size:12px;color:var(--muted);margin-bottom:7px}
+  .share-box textarea{width:100%;height:96px;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:12px;color:var(--cream);font-family:inherit;font-size:13px;line-height:1.5;padding:12px;resize:none}
+  .link-note{display:block;margin-top:9px;font-size:11px;color:var(--muted);opacity:.6;position:relative}
+  .live-badge{display:inline-block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;background:linear-gradient(120deg,var(--coral),var(--gold));color:var(--plum);padding:3px 9px;border-radius:5px;font-weight:600;margin-bottom:14px;position:relative}
+  .placeholder{text-align:center;color:var(--muted)}
+  .placeholder .big{font-family:'Fraunces',serif;font-size:52px;color:var(--line);line-height:1;margin-bottom:12px}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .btn{font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;padding:17px 40px;border-radius:100px;border:none;transition:all .18s ease;display:inline-flex;align-items:center;gap:9px}
+  .btn-ai{background:linear-gradient(120deg,var(--coral),var(--gold));color:var(--plum)}
+  .btn-ai:hover{transform:translateY(-2px);box-shadow:0 12px 32px -8px rgba(255,107,94,.55)}
+  .btn:disabled{opacity:.5;cursor:wait;transform:none}
+  .spinner{width:15px;height:15px;border:2px solid rgba(26,15,36,.3);border-top-color:var(--plum);border-radius:50%;animation:spin .7s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  footer{margin-top:40px;font-size:12px;color:var(--muted);opacity:.5;text-align:center;letter-spacing:.05em;max-width:440px;line-height:1.5}
+</style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Houston &amp; Katy · for two</div>
+    <h1>The <em>Draw</em></h1>
+    <p class="sub">One button. One random date idea — the mood, the activity, all of it left to chance. Pull from a curated deck of 58, or, when the stars align, something actually happening around town soon.</p>
+  </header>
+  <div class="stage">
+    <div class="card" id="card">
+      <div class="placeholder"><div class="big">✦</div><div>Your surprise appears here.<br>Hit the button below.</div></div>
+    </div>
+  </div>
+  <div class="actions">
+    <button class="btn btn-ai" id="aiBtn">✦ Surprise us</button>
+  </div>
+  <footer>Most draws come from the curated deck. Sometimes Surprise us searches the live web for a real event happening soon — dates drift, so confirm before you go. · A jdb-builds thing.</footer>
+<script>
+const DECK = [{"cat": "Live & Loud", "title": "A show at the Alley Theatre", "body": "Downtown's resident theatre company — plays year-round in a building that looks like a fortress. Grab dinner at Xochi or Potente after.", "tags": ["plays", "evening", "indoor", "$$"], "mood": ["romantic", "cultured"], "energy": "low", "env": "indoor"}, {"cat": "Live & Loud", "title": "Musical at the Hobby Center", "body": "Broadway touring productions land here constantly. Check what's running — then walk the tunnels or grab a drink in the theater district.", "tags": ["musicals", "evening", "indoor", "$$$"], "mood": ["romantic", "cultured"], "energy": "low", "env": "indoor"}, {"cat": "Live & Loud", "title": "Stand-up at the Improv or Secret Group", "body": "Houston has a real comedy scene. The Secret Group in EaDo runs indie shows most nights; the Improv books bigger names.", "tags": ["comedy", "evening", "indoor", "$$"], "mood": ["fun", "playful"], "energy": "med", "env": "indoor"}, {"cat": "Live & Loud", "title": "Live music at White Oak Music Hall", "body": "Indoor and outdoor stages, plus a lawn. Whatever's playing, the vibe on the deck at sunset is the real draw.", "tags": ["music", "evening", "outdoor", "$$"], "mood": ["fun", "romantic"], "energy": "med", "env": "outdoor"}, {"cat": "Out in It", "title": "Sunset paddle at Buffalo Bayou", "body": "Rent kayaks near Sabine Street and paddle the bayou as the skyline lights up. Bat colony under Waugh Bridge at dusk is a bonus.", "tags": ["nature", "adventure", "outdoor", "$"], "mood": ["adventurous", "romantic"], "energy": "high", "env": "outdoor"}, {"cat": "Out in It", "title": "Hike the trails at Brazos Bend", "body": "Alligators, Spanish moss, an observatory. About an hour out, but it feels like another planet. Go early, bring water.", "tags": ["hiking", "nature", "adventure", "outdoor", "$"], "mood": ["adventurous"], "energy": "high", "env": "outdoor"}, {"cat": "Out in It", "title": "Walk the Japanese Garden at Hermann Park", "body": "Quiet, deliberate, beautiful. Pair it with the Miller Outdoor Theatre if there's a free show on the lawn that night.", "tags": ["nature", "art", "outdoor", "free"], "mood": ["romantic", "calm"], "energy": "low", "env": "outdoor"}, {"cat": "Out in It", "title": "Kite + picnic at Katy's Mary Jo Peckham Park", "body": "Close to home. Fishing pond, walking paths, open sky. Low-effort, high-reward afternoon when you don't want to drive into the city.", "tags": ["nature", "katy", "outdoor", "free"], "mood": ["calm", "playful"], "energy": "low", "env": "outdoor"}, {"cat": "Eyes & Minds", "title": "Museum of Fine Arts, Houston", "body": "World-class, and the Cullen tunnel between buildings is a light installation worth the ticket alone. Thursdays are free.", "tags": ["museums", "art", "indoor", "$"], "mood": ["cultured", "calm"], "energy": "low", "env": "indoor"}, {"cat": "Eyes & Minds", "title": "Houston Museum of Natural Science", "body": "Dinosaurs, gems, a planetarium. Lean into the science-nerd date — do the paleo hall, then the butterfly center.", "tags": ["museums", "science", "indoor", "$$"], "mood": ["cultured", "playful"], "energy": "low", "env": "indoor"}, {"cat": "Eyes & Minds", "title": "A talk or lecture at Rice or the library", "body": "Rice's public lecture series and the Progressive Forum bring in serious speakers. Learning date, then argue about it over dinner.", "tags": ["talks", "science", "learning", "indoor", "$"], "mood": ["cultured"], "energy": "low", "env": "indoor"}, {"cat": "Eyes & Minds", "title": "The Menil Collection + Rothko Chapel", "body": "Free, hushed, unforgettable. The Rothko Chapel is basically a meditation you didn't plan. Bring nothing, leave quiet.", "tags": ["art", "museums", "meditation", "free"], "mood": ["calm", "romantic"], "energy": "low", "env": "indoor"}, {"cat": "Move & Make", "title": "A dance class, just the two of you", "body": "Salsa at Sabor, two-step somewhere with a dance floor, or a drop-in class. She loves to dance — lean all the way in.", "tags": ["dancing", "learning", "indoor", "$$"], "mood": ["fun", "romantic"], "energy": "high", "env": "indoor"}, {"cat": "Move & Make", "title": "Pottery or a craft workshop", "body": "Places like Clay Cup or a paint-and-sip run couples' sessions. She crafts; you make something slightly lopsided together and keep it forever.", "tags": ["crafting", "learning", "indoor", "$$"], "mood": ["playful", "romantic"], "energy": "med", "env": "indoor"}, {"cat": "Move & Make", "title": "Guided meditation or sound bath", "body": "Houston has sound-bath sessions and guided meditations most weekends. Unusual, restorative, and something you'd both actually talk about after.", "tags": ["meditation", "learning", "indoor", "$$"], "mood": ["calm"], "energy": "low", "env": "indoor"}, {"cat": "Slow & Good", "title": "Dinner crawl through Montrose", "body": "Skip one restaurant — do three. Small plate here, a drink there, dessert somewhere else. Montrose is dense enough to walk it.", "tags": ["restaurants", "evening", "$$$"], "mood": ["romantic", "fun"], "energy": "med", "env": "indoor"}, {"cat": "Slow & Good", "title": "Ethiopian at Lucy or hot pot in Chinatown", "body": "Eat with your hands, or cook at the table. Houston's food scene rewards adventure — pick something neither of you has tried.", "tags": ["restaurants", "adventure", "$$"], "mood": ["adventurous", "fun"], "energy": "low", "env": "indoor"}, {"cat": "Slow & Good", "title": "Coffee + bookstore wander at Kaboom or Brazos", "body": "Low-stakes Sunday energy. Coffee, then split up in the stacks and buy each other one book on instinct.", "tags": ["restaurants", "calm", "$"], "mood": ["calm", "romantic"], "energy": "low", "env": "indoor"}, {"cat": "Live & Loud", "title": "A play at Main Street Theater", "body": "Intimate professional theater in Rice Village — you're close enough to see the actors breathe. Pair it with dinner at Ostia or a wander through the Village shops beforehand.", "tags": ["plays", "evening", "indoor", "$$"], "mood": ["cultured", "romantic"], "energy": "low", "env": "indoor"}, {"cat": "Live & Loud", "title": "Improv night at Station Theater", "body": "Long-form improv in the Heights, cheap tickets, and no two shows the same. The kind of place where you'll be quoting a bit to each other for a week.", "tags": ["comedy", "evening", "indoor", "$"], "mood": ["fun", "playful"], "energy": "med", "env": "indoor"}, {"cat": "Live & Loud", "title": "Live jazz at the Cezanne or Continental Club", "body": "Cezanne is a tiny upstairs jazz room above La Strada; the Continental Club on Main runs great local acts. Order a cocktail, sit close, let the set carry the night.", "tags": ["music", "evening", "indoor", "$$"], "mood": ["romantic", "calm"], "energy": "low", "env": "indoor"}, {"cat": "Live & Loud", "title": "Miller Outdoor Theatre, free lawn seats", "body": "Free professional performances — ballet, symphony, musicals, world music — under the sky in Hermann Park. Bring a blanket and wine, claim the hill.", "tags": ["music", "musicals", "outdoor", "free"], "mood": ["romantic", "cultured"], "energy": "low", "env": "outdoor"}, {"cat": "Out in It", "title": "Sunrise or sunset at Katy's Willow Fork Park", "body": "Right in your backyard. Wide skies, walking trails, and the disc golf course you already know. Bring coffee at dawn or a bottle at dusk and just walk it slow together.", "tags": ["nature", "katy", "outdoor", "free"], "mood": ["calm", "romantic"], "energy": "low", "env": "outdoor"}, {"cat": "Out in It", "title": "Cypress trails at the Houston Arboretum", "body": "155 acres of trails inside the loop — prairie, pond, forest. Free, quiet, and a completely different mood than the city two minutes away. Do the pond loop at golden hour.", "tags": ["hiking", "nature", "outdoor", "free"], "mood": ["calm", "adventurous"], "energy": "med", "env": "outdoor"}, {"cat": "Out in It", "title": "Kayak the Armand Bayou paddling trail", "body": "One of the largest urban wilderness preserves in the country, southeast of town. Guided sunset paddles let you spot herons and gators without the planning. Adventure without a whole expedition.", "tags": ["adventure", "nature", "outdoor", "$$"], "mood": ["adventurous"], "energy": "high", "env": "outdoor"}, {"cat": "Out in It", "title": "Pick-your-own at a Katy-area farm", "body": "Froberg's or a seasonal U-pick within reach of Katy — strawberries, peaches, or a fall pumpkin patch depending on the month. Cheap, hands-in-the-dirt, and you leave with something to cook together.", "tags": ["nature", "katy", "adventure", "outdoor", "$"], "mood": ["playful", "fun"], "energy": "med", "env": "outdoor"}, {"cat": "Eyes & Minds", "title": "The Health Museum or Houston Center for Contemporary Craft", "body": "Two under-the-radar picks: the Health Museum's interactive body exhibits scratch the science itch, and the Craft center (free) speaks straight to her crafting side with working artist studios you can watch.", "tags": ["museums", "science", "crafting", "indoor", "$"], "mood": ["cultured", "playful"], "energy": "low", "env": "indoor"}, {"cat": "Eyes & Minds", "title": "Cockrell Butterfly Center after dark event", "body": "The rainforest dome at HMNS runs special evening and behind-the-scenes events. Warm, green, thousands of butterflies — genuinely romantic in a way you won't expect.", "tags": ["science", "nature", "indoor", "$$"], "mood": ["romantic", "cultured"], "energy": "low", "env": "indoor"}, {"cat": "Eyes & Minds", "title": "A lecture at the Progressive Forum or Inprint reading", "body": "Inprint brings major authors to Houston; the Progressive Forum books big thinkers. Go learn something together, then take the argument to a wine bar afterward.", "tags": ["talks", "learning", "indoor", "$$"], "mood": ["cultured"], "energy": "low", "env": "indoor"}, {"cat": "Eyes & Minds", "title": "Contemporary Arts Museum + Turrell skyspace at Rice", "body": "CAMH is free and always provocative. Time it so you end at James Turrell's 'Twilight Epiphany' skyspace at Rice for the sunset light sequence — silent, slow, unforgettable.", "tags": ["art", "museums", "free"], "mood": ["calm", "romantic", "cultured"], "energy": "low", "env": "outdoor"}, {"cat": "Move & Make", "title": "Salsa or country two-step lesson", "body": "She loves to dance — so book it. Social salsa nights around town start with a beginner lesson, or find a honky-tonk two-step class. Show up knowing nothing, leave having laughed a lot.", "tags": ["dancing", "learning", "indoor", "$$"], "mood": ["fun", "romantic"], "energy": "high", "env": "indoor"}, {"cat": "Move & Make", "title": "Couples' pottery wheel at a local studio", "body": "A wheel-throwing session for two — messy, hands-on, and you each go home with something wobbly and real. Straight down the middle of her crafting love.", "tags": ["crafting", "learning", "indoor", "$$"], "mood": ["playful", "romantic"], "energy": "med", "env": "indoor"}, {"cat": "Move & Make", "title": "Candle-making or leatherworking workshop", "body": "Houston has drop-in maker workshops — pour candles, stamp leather, blend a scent. Pick one neither of you has done and make the thing side by side.", "tags": ["crafting", "learning", "indoor", "$$"], "mood": ["playful", "calm"], "energy": "med", "env": "indoor"}, {"cat": "Move & Make", "title": "Sound bath or guided meditation session", "body": "Weekend sound baths and guided sits run all over town. An hour of doing genuinely nothing, together — then breakfast tacos while you compare what your brains did in there.", "tags": ["meditation", "learning", "indoor", "$$"], "mood": ["calm"], "energy": "low", "env": "indoor"}, {"cat": "Slow & Good", "title": "Dinner + a movie at a real cinema", "body": "Skip the multiplex — do a dine-in theater or the arthouse programming at the MFAH film series or a River Oaks Theatre-style screening. Real film, real dinner, real date.", "tags": ["movies", "restaurants", "evening", "$$"], "mood": ["romantic", "calm"], "energy": "low", "env": "indoor"}, {"cat": "Slow & Good", "title": "Global food adventure in Katy Asian Town", "body": "Close to home and a whole world: hot pot, Korean BBQ, boba, Vietnamese. Order the thing you can't pronounce, split everything, make it a tasting crawl across a couple of spots.", "tags": ["restaurants", "katy", "adventure", "$$"], "mood": ["adventurous", "fun"], "energy": "low", "env": "indoor"}, {"cat": "Slow & Good", "title": "Wine flight + live music on a patio", "body": "A pour of five, a shared board, and a duo playing in the corner. Look for a Heights or Katy patio with weekend music — low-key, romantic, no reservation stress.", "tags": ["restaurants", "music", "evening", "$$"], "mood": ["romantic", "calm"], "energy": "low", "env": "outdoor"}, {"cat": "Slow & Good", "title": "Farmers market breakfast + slow morning", "body": "Urban Harvest or a Katy market on a Saturday morning — coffee, kolaches, fresh flowers, a bag of produce, and no agenda. The whole date is the wandering.", "tags": ["restaurants", "nature", "calm", "$"], "mood": ["calm", "playful"], "energy": "low", "env": "outdoor"}, {"cat": "Live & Loud", "title": "Symphony night at Jones Hall", "body": "The Houston Symphony in a hall built for it. Look for a film-score night or a pops program if a full classical evening feels like a lot — either way, dress up a little and make it an occasion.", "tags": ["music", "evening", "indoor", "$$$"], "mood": ["romantic", "cultured"], "energy": "low", "env": "indoor"}, {"cat": "Live & Loud", "title": "Ballet or opera at the Wortham", "body": "Houston Ballet and Houston Grand Opera share this space downtown. Even if neither of you are regulars, one big production a year is the kind of night you remember. Balcony seats are cheaper and the view's great.", "tags": ["musicals", "cultured", "evening", "indoor", "$$$"], "mood": ["romantic", "cultured"], "energy": "low", "env": "indoor"}, {"cat": "Live & Loud", "title": "Honky-tonk two-step at a real dance hall", "body": "Find a Texas dance hall with a live band and a wooden floor — Mo's Place or similar out toward Katy. Two-step lessons early, then dance until your feet quit. Straight to her love of dancing.", "tags": ["dancing", "music", "evening", "$$"], "mood": ["fun", "romantic"], "energy": "high", "env": "indoor"}, {"cat": "Live & Loud", "title": "Open-air concert at The Lawn at White Oak or Cynthia Woods", "body": "Cynthia Woods Mitchell Pavilion up in The Woodlands does lawn seating under the trees. Bring a blanket, split a bottle, let whoever's touring carry the night.", "tags": ["music", "outdoor", "evening", "$$"], "mood": ["fun", "romantic"], "energy": "med", "env": "outdoor"}, {"cat": "Out in It", "title": "Bike the Terry Hershey Park trail", "body": "Miles of paved trail right near Katy along Buffalo Bayou's west end. Rent or bring bikes, ride till you find a shady spot, picnic, ride back. Low-key adventure without leaving your side of town.", "tags": ["nature", "katy", "adventure", "outdoor", "free"], "mood": ["adventurous", "playful"], "energy": "high", "env": "outdoor"}, {"cat": "Out in It", "title": "Stargazing at George Observatory", "body": "Inside Brazos Bend, the observatory opens its big telescope to the public on clear Saturday nights. Drive out, look through real optics, and let the dark sky do the romancing.", "tags": ["science", "nature", "adventure", "outdoor", "$"], "mood": ["romantic", "adventurous"], "energy": "med", "env": "outdoor"}, {"cat": "Out in It", "title": "Wander the Lynn Wyatt / McGovern gardens", "body": "The McGovern Centennial Gardens in Hermann Park — formal gardens, a walkable mount with a view, and quiet corners. Free, pretty, and an easy slow afternoon with coffee in hand.", "tags": ["nature", "art", "outdoor", "free"], "mood": ["calm", "romantic"], "energy": "low", "env": "outdoor"}, {"cat": "Out in It", "title": "Day trip to Galveston's Strand + beach", "body": "An hour south: historic Strand district, a pier, and the Gulf. Do the seawall, eat shrimp, put your feet in the water. A whole reset without a real vacation.", "tags": ["adventure", "nature", "outdoor", "$$"], "mood": ["adventurous", "fun"], "energy": "high", "env": "outdoor"}, {"cat": "Eyes & Minds", "title": "Buffalo Soldiers or Holocaust Museum, then talk", "body": "Two of Houston's most affecting small museums. Heavy, worth it, and the kind of visit that gives you something real to talk through over a long dinner afterward.", "tags": ["museums", "learning", "indoor", "$"], "mood": ["cultured"], "energy": "low", "env": "indoor"}, {"cat": "Eyes & Minds", "title": "Space Center Houston, full nerd mode", "body": "Lean all the way into the science date — real spacecraft, the tram to Mission Control, moon rocks. Go on a weekday if you can and give it the whole afternoon.", "tags": ["science", "museums", "learning", "indoor", "$$"], "mood": ["playful", "cultured"], "energy": "med", "env": "indoor"}, {"cat": "Eyes & Minds", "title": "Moody Center for the Arts at Rice", "body": "Free, sharp contemporary shows on a beautiful campus. Small enough to see in an hour, then walk the Rice loop or hit the Turrell skyspace at dusk. An easy art-and-air combo.", "tags": ["art", "museums", "free"], "mood": ["cultured", "calm"], "energy": "low", "env": "indoor"}, {"cat": "Eyes & Minds", "title": "Trivia night as a two-person team", "body": "Find a bar trivia night in the Heights or near Katy and enter as a duo. Low pressure, a little competitive, and you find out fast whose useless knowledge covers what. Cheap, fun, repeatable.", "tags": ["learning", "fun", "evening", "$"], "mood": ["fun", "playful"], "energy": "med", "env": "indoor"}, {"cat": "Move & Make", "title": "Aerial silks or an intro circus class", "body": "Houston has aerial studios that run beginner drop-ins. Slightly terrifying, genuinely fun, and you'll both be sore and laughing. Adventure indoors when it's 100 degrees out.", "tags": ["adventure", "learning", "indoor", "$$"], "mood": ["playful", "adventurous"], "energy": "high", "env": "indoor"}, {"cat": "Move & Make", "title": "Glassblowing or flameworking session", "body": "A few Houston studios offer make-a-piece sessions — blow a small ornament or pull a glass bead together. Hot, hands-on, and you leave with something you actually made. Craft date, leveled up.", "tags": ["crafting", "learning", "indoor", "$$$"], "mood": ["playful", "romantic"], "energy": "med", "env": "indoor"}, {"cat": "Move & Make", "title": "Couples' cooking class", "body": "Book a hands-on class — pasta, sushi, Thai — at a Houston cooking school. You cook it, you eat it, you steal the technique for your own kitchen. Learning event and dinner in one.", "tags": ["learning", "restaurants", "indoor", "$$"], "mood": ["fun", "romantic"], "energy": "med", "env": "indoor"}, {"cat": "Move & Make", "title": "Yoga in the park + smoothies", "body": "Free or donation community yoga runs in Houston parks on weekend mornings. Do the class, then grab smoothies and a slow walk. Gentle, restorative, and an easy yes.", "tags": ["meditation", "nature", "outdoor", "free"], "mood": ["calm"], "energy": "med", "env": "outdoor"}, {"cat": "Slow & Good", "title": "Rooftop or skyline-view cocktails", "body": "Head to a rooftop bar downtown for the skyline at blue hour. One good cocktail each, no dinner agenda, just the view and each other. Splurge on the setting, keep the rest simple.", "tags": ["restaurants", "romantic", "evening", "$$$"], "mood": ["romantic", "calm"], "energy": "low", "env": "outdoor"}, {"cat": "Slow & Good", "title": "Dessert-first date", "body": "Flip the script — start with dessert somewhere great (a proper patisserie or gelato spot), then wander and figure out dinner by feel. Playful, low-stakes, and it always makes her laugh.", "tags": ["restaurants", "playful", "$"], "mood": ["playful", "fun"], "energy": "low", "env": "indoor"}, {"cat": "Slow & Good", "title": "Brewery or winery afternoon near Katy", "body": "A local taproom or the Hill Country-style wineries within driving reach — a flight, a shared board, maybe live music on the patio. Unhurried weekend-afternoon energy.", "tags": ["restaurants", "katy", "calm", "$$"], "mood": ["calm", "fun"], "energy": "low", "env": "outdoor"}, {"cat": "Slow & Good", "title": "Night market or food hall crawl", "body": "Hit a weekend night market or a food hall like POST Houston — dozens of vendors, rooftop park, live energy. Graze your way through and people-watch. Adventure you can do on a whim.", "tags": ["restaurants", "adventure", "fun", "$$"], "mood": ["fun", "adventurous"], "energy": "med", "env": "indoor"}];
+
+let lastIdx=-1;
+// odds the button attempts a live web pull instead of the deck
+const LIVE_CHANCE=0.4;
+
+// Trusted domains — a live event URL is only shown as a direct ticket/event
+// link if its host ends in one of these. Anything else falls back to search.
+const TRUSTED=[
+  "houstonsymphony.org","houstonballet.org","houstongrandopera.org","thehobbycenter.org",
+  "alleytheatre.org","spacecenter.org","hmns.org","mfah.org","menil.org","camh.org",
+  "themoody.rice.edu","rice.edu","hermannpark.org","houstonarboretum.org","miller","milleroutdoortheatre.com",
+  "eventbrite.com","ticketmaster.com","axs.com","seatgeek.com","etix.com","showclix.com",
+  "visithoustontexas.com","houstontheaterdistrict.org","whiteoakmusichall.com","thesecretgroup.org",
+  "livenation.com","cynthiawoodspavilion.com","stationtheater.com","mainstreettheater.com",
+  "houstonfirstcorporation.com","292theater.com","houston.culturemap.com","dogwoodartsfestival.org",
+  "urbanharvest.org","posthtx.com","galveston.com","thestrand.com","katyasiantown.com","cityofkaty.com"
+];
+function safeSearchURL(q){
+  return "https://www.google.com/search?q="+encodeURIComponent(q+" Houston tickets");
+}
+// Returns {href, direct} — direct=true only if the URL is on the trusted list.
+function linkFor(card){
+  if(card.url){
+    try{
+      const u=new URL(card.url);
+      if(u.protocol==="https:"){
+        const host=u.hostname.replace(/^www\./,"");
+        if(TRUSTED.some(d=>host===d||host.endsWith("."+d)||host.includes(d))){
+          return {href:card.url, direct:true};
+        }
+      }
+    }catch(e){}
+  }
+  // no trusted URL — safe search fallback on the title/venue
+  return {href:safeSearchURL(card.title), direct:false};
+}
+function render(card,live){
+  const el=document.getElementById('card');
+  el.style.animation='none';el.offsetHeight;el.style.animation='';
+  window.currentCard=card; // stash for the share button
+  const lk=linkFor(card);
+  const linkLabel=lk.direct?'View event &amp; tickets':'Find it';
+  const linkHTML=
+    '<div class="card-actions">'+
+      '<a class="card-link" href="'+lk.href+'" target="_blank" rel="noopener noreferrer">'+
+        linkLabel+' <span class="arrow">→</span></a>'+
+      '<button class="card-share" onclick="shareCard()">↗ Send this</button>'+
+    '</div>'+
+    (lk.direct?'':'<span class="link-note">Opens a web search for the venue — safest way to reach the real site.</span>');
+  el.innerHTML=(live?'<div class="live-badge">Happening soon</div>':'')+
+    '<div class="card-cat">'+card.cat+'</div>'+
+    '<div class="card-title">'+card.title+'</div>'+
+    '<div class="card-body">'+card.body+'</div>'+
+    '<div class="card-tags">'+card.tags.map(t=>'<span class="tag">'+t+'</span>').join('')+'</div>'+
+    linkHTML;
+}
+function showShareBox(text){
+  // guaranteed-visible fallback: a selectable box right on the card
+  let box=document.getElementById('shareBox');
+  if(box)box.remove();
+  box=document.createElement('div');
+  box.id='shareBox';
+  box.className='share-box';
+  box.innerHTML='<div class="share-box-label">Copy &amp; paste this to send it:</div>'+
+    '<textarea readonly>'+text.replace(/</g,'&lt;')+'</textarea>';
+  const actions=document.querySelector('.card-actions');
+  actions.parentNode.insertBefore(box, actions.nextSibling);
+  const ta=box.querySelector('textarea');
+  ta.focus();ta.select();
+}
+function shareCard(){
+  const card=window.currentCard;
+  if(!card)return;
+  const lk=linkFor(card);
+  const text='Date idea: '+card.title+'\n\n'+card.body+'\n\nFind it: '+lk.href;
+  const btn=document.querySelector('.card-share');
+  const flash=()=>{if(btn){const o=btn.textContent;btn.textContent='✓ Copied!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('copied');},1800);}};
+
+  // 1) native share sheet (real browser / phone)
+  if(navigator.share){
+    navigator.share({title:'Date idea: '+card.title, text:text})
+      .catch(()=>{ tryClipboard(); });
+    return;
+  }
+  tryClipboard();
+
+  function tryClipboard(){
+    // 2) clipboard API
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(flash).catch(()=>showShareBox(text));
+    }else{
+      // 3) always-visible fallback (sandboxed preview lands here)
+      showShareBox(text);
+    }
+  }
+}
+function drawFromDeck(){
+  let idx;do{idx=Math.floor(Math.random()*DECK.length);}while(DECK.length>1&&idx===lastIdx);
+  lastIdx=idx;render(DECK[idx],false);
+  return true;
+}
+async function tryLive(){
+  const prompt='Search the web for a REAL event, show, exhibit, festival, or happening in the Houston / Katy, Texas area in the next 2-3 weeks that would make a great, surprising date for a couple who love: musicals, plays, comedy, live music, nature, hiking, museums, science, talks, live shows, movies, art, restaurants, dancing, crafting, meditation, learning, and adventure. Pick something at random across these interests — surprise them. Find something currently scheduled with a real venue and rough date. Then respond with ONLY a JSON object, no markdown, no preamble: {"cat":"2-3 word label","title":"the event/idea, one line","body":"2-3 sentences: what it is, the real venue, the rough date/timeframe, and why it fits a date","tags":["4-5","lowercase","one-word","tags"],"url":"the official event or ticket page URL you actually found in the search results — the real venue site, Eventbrite, Ticketmaster, etc. Only include a URL you genuinely found; if you are not confident it is real, use an empty string"}';
+  const res=await fetch("https://date-night-proxy.jdbates.workers.dev",{
+    method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      model:"claude-sonnet-4-6",max_tokens:1500,
+      messages:[{role:"user",content:prompt}],
+      tools:[{type:"web_search_20250305",name:"web_search"}]
+    })
+  });
+  const data=await res.json();
+  let text=data.content.filter(b=>b.type==="text").map(b=>b.text).join("").trim();
+  text=text.replace(/```json|```/g,"").trim();
+  const m=text.match(/\{[\s\S]*\}/);
+  if(m)text=m[0];
+  const card=JSON.parse(text);
+  card.cat=(card.cat||"Happening").toUpperCase();
+  render(card,true);
+}
+document.getElementById('aiBtn').onclick=async(e)=>{
+  const btn=e.currentTarget;
+  const goLive=Math.random()<LIVE_CHANCE;
+  if(!goLive){drawFromDeck();return;}
+  btn.disabled=true;const orig=btn.innerHTML;
+  btn.innerHTML='<span class="spinner"></span> Searching…';
+  try{
+    await tryLive();
+  }catch(err){
+    // live pull failed — fall back to the deck so the button never dead-ends
+    drawFromDeck();
+  }finally{btn.disabled=false;btn.innerHTML=orig;}
+};
+</script>
+</body>
+</html>
