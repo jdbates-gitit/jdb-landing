@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twenty for Twenty — Notes — Jason Dale Bates</title>
+<meta name="description" content="A weekend pipeline sorted W-2s and paystubs perfectly. That result taught me more about testing than it did about the pipeline.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    --paper:#F2EDE1;--paper-2:#EAE3D3;--line:#D8CFBA;--line-2:#C9BFA6;
+    --ink:#1E1B14;--ink-dim:#6B6453;--brass:#9A6B16;--brass-bright:#B5841F;
+    --display:"Fraunces",Georgia,serif;--body:"Inter Tight",system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;--maxw:1080px;
+    background:var(--paper);color:var(--ink);font-family:var(--body);
+    font-weight:400;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--brass);color:var(--paper)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(242,237,225,.82);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line-2)}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:var(--mono);font-weight:600;letter-spacing:.18em;font-size:14px}
+  .brand b{color:var(--brass)}
+  .nav-links{display:flex;gap:30px;font-size:13px;font-family:var(--mono);letter-spacing:.04em}
+  .nav-links a{color:var(--ink-dim);transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--ink-dim);border-radius:2px;transition:all 0.3s}
+  .mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;background:rgba(242,237,225,0.98);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line-2);padding:16px 28px;z-index:49;flex-direction:column}
+  .mobile-menu a{display:block;font-family:var(--mono);font-size:13px;letter-spacing:0.06em;color:var(--ink-dim);
+    padding:14px 0;border-bottom:1px solid var(--line);transition:color 0.2s}
+  .mobile-menu a:last-child{border-bottom:none}
+  .mobile-menu a:hover{color:var(--brass)}
+  .mobile-menu.open{display:flex}
+  @media(max-width:680px){.nav-links{display:none}.hamburger{display:flex}}
+
+  article{max-width:680px;margin:0 auto;padding:72px 28px 40px}
+  .post-meta{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--brass);margin-bottom:22px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .post-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--line-2)}
+  h1.post-title{font-family:var(--display);font-weight:340;font-size:clamp(30px,4.4vw,46px);
+    line-height:1.1;letter-spacing:-.015em;margin-bottom:18px}
+  .post-standfirst{font-family:var(--display);font-style:italic;font-weight:300;
+    font-size:clamp(17px,2vw,21px);color:var(--ink-dim);line-height:1.5;
+    margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--line-2)}
+  .post-body p{font-size:17px;line-height:1.72;color:var(--ink);margin-bottom:1.5rem;max-width:64ch}
+  .post-body p:first-of-type::first-letter{
+    font-family:var(--display);font-size:3.4em;line-height:.8;float:left;
+    padding:6px 10px 0 0;color:var(--brass);font-weight:400}
+  .post-body h2{font-family:var(--display);font-weight:400;font-size:25px;letter-spacing:-.01em;
+    margin:42px 0 16px;color:var(--ink)}
+  .post-body strong{font-weight:600;color:var(--ink)}
+  .post-body em{font-style:italic}
+  .pullquote{font-family:var(--display);font-style:italic;font-weight:300;
+    font-size:clamp(20px,2.6vw,26px);line-height:1.4;color:var(--brass);
+    margin:36px 0;padding:8px 0 8px 28px;border-left:2px solid var(--brass);max-width:60ch}
+  .inline-link{color:var(--brass-bright);border-bottom:1px solid rgba(154,107,22,.35);transition:.2s}
+  .inline-link:hover{border-color:var(--brass)}
+  .post-foot{max-width:680px;margin:0 auto;padding:32px 28px 80px;border-top:1px solid var(--line-2)}
+  .post-foot .back{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-dim);transition:color .2s}
+  .post-foot .back:hover{color:var(--brass)}
+  .sig{font-family:var(--display);font-style:italic;font-size:18px;color:var(--ink-dim);margin-top:6px}
+
+  footer{border-top:1px solid var(--line-2);padding:34px 0;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-dim)}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand">JDB<b>.</b></a>
+    <nav class="nav-links">
+      <a href="/#builds">Builds</a>
+      <a href="/#about">About</a>
+      <a href="/#stack">Stack</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#fun">Fun</a>
+      <a href="/#connect">Connect</a>
+      <span style="width:1px;height:16px;background:var(--line-2);display:inline-block"></span>
+      <a href="/team.html">Team</a>
+      <a href="/notes.html">Notes</a>
+      <a href="https://discipline.jdb-builds.com">Discipline</a>
+      <a href="/spirit.html">Spirit</a>
+      <a href="/expand.html">Expand</a>
+      <a href="/belief.html">Belief</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/#builds">Builds</a>
+  <a href="/#about">About</a>
+  <a href="/team.html">Team</a>
+  <a href="/notes.html">Notes</a>
+  <a href="https://discipline.jdb-builds.com">Discipline</a>
+  <a href="/spirit.html">Spirit</a>
+  <a href="/expand.html">Expand</a>
+  <a href="/belief.html">Belief</a>
+</div>
+
+<article>
+  <div class="post-meta">
+    <span>Notes</span><span class="dot"></span><span>August 12, 2026</span><span class="dot"></span><span>Building</span>
+  </div>
+  <h1 class="post-title">Twenty for Twenty</h1>
+  <div class="post-standfirst">A weekend pipeline sorted W-2s and paystubs perfectly. That result taught me more about testing than it did about the pipeline.</div>
+
+  <div class="post-body">
+    <p>I’ve spent 16 years in mortgage operations. W-2s, paystubs, bank statements — I don’t have to think about what I’m looking at anymore, I just know. So when it came time to point AI at something closer to the actual work, this is where I started: teach a pipeline to do the part of the job that’s pure pattern recognition, and see how far that actually gets you.</p>
+
+    <p>Two weekends, three sessions. A Make.com scenario watches a folder, sends each new document to Claude, gets back a document type and the key fields as structured data, and files it — or holds it back for a person to look at if it’s not confident. Just a note: every document in my test set is fabricated top to bottom. Names, numbers, employers, all of it made up.</p>
+
+    <p>I ran 20 documents through the finished pipeline — five each of W-2, paystub, bank statement, and non-mortgage junk, with some deliberately broken: a bad scan here, a smudged field there. I wanted a test that could actually fail. A test that can’t fail doesn’t tell you anything.</p>
+
+    <p>It didn’t fail. Classification: 20 for 20. Field extraction: 85 for 85 gradable fields, including three documents I built specifically to have unreadable data — and in every one of those, the pipeline came back with a null instead of making something up. That mattered more to me than the perfect score. A system that admits it doesn’t know something is more trustworthy than one that’s always confident.</p>
+
+    <p>The perfect score comes with an asterisk, though. My “degraded” documents were still clean, machine-readable text — the scan problems were described as literal text markers, not the actual visual noise of a real scanner or a phone photo in bad light. This hasn’t been tested against what a document actually looks like coming in rough. That’s the honest next test, not something this run already answered.</p>
+
+    <p>I also found something I didn’t expect. The confidence score didn’t track difficulty the way I assumed it would. Documents with real problems — missing data, damaged sections — still scored 0.95 confidence in most cases, same as a clean document. Only one of my broken test docs actually tripped the review threshold. If I were running this for real, I wouldn’t trust that number to tell me something’s wrong. That’s a finding, not a footnote.</p>
+
+    <p>And there was a plain build bug. Partway through scoring, the extracted field data — employer names, wage figures, account balances — wasn’t showing up in my log. No errors anywhere. Everything upstream looked fine. Turned out I’d wired the field mappings into the wrong branch of the pipeline — the low-confidence path, not the one my real test documents were actually flowing through. Nothing broke. I’d just built the right thing in the wrong place. Running clean and running correctly aren’t the same thing. You have to check what came out the other end, not just whether anything threw an error.</p>
+
+    <p>While I was writing this up, I had “build an income calculator” listed as the next step — pull the wage and YTD data this pipeline already extracts, project a monthly income figure, route it for sign-off. Then Make.com shipped a new AI feature, and I used it to build that exact tool in a few seconds. It writes to a second tab in my log and annualizes income straight off the YTD numbers.</p>
+
+    <p>I want to be straight about what that is and isn’t. The math is deliberately simple — a straight YTD annualization, nothing more — because the point wasn’t to nail underwriting-grade income calculation in one sitting. The point was proving the capability exists end to end: extracted data flowing into a calculation, landing somewhere useful, with no new pipeline built by hand. The real logic underwriting needs — averaging periods, handling variable or overtime pay, knowing when a YTD figure is a fair basis to annualize — is a rules problem, not an AI problem. The ceiling here was never the tool. It’s the formulas I tell it to run.</p>
+
+    <p>I didn’t learn that AI can replace document review in mortgage lending. I learned something narrower: a well-scoped piece of that problem is buildable in a weekend, testable honestly, and — when the eval comes back at 100% — worth being suspicious of your own test set instead of just taking the win.</p>
+
+    <p><a class="inline-link" href="/doc-classifier.html">Full case study, pipeline diagram, and numbers →</a></p>
+  </div>
+</article>
+
+<div class="post-foot">
+  <a class="back" href="/notes.html">← all notes</a>
+  <div class="sig">— Jason</div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>jdb-builds.com · Jason Dale Bates</span>
+    <span>Houston, TX · NMLS #406344</span>
+  </div>
+</footer>
+
+<script>
+  const hamburger=document.getElementById('hamburger');
+  const mobileMenu=document.getElementById('mobileMenu');
+  hamburger.addEventListener('click',()=>{mobileMenu.classList.toggle('open')});
+  document.addEventListener('click',(e)=>{
+    if(!hamburger.contains(e.target)&&!mobileMenu.contains(e.target)){mobileMenu.classList.remove('open')}
+  });
+</script>
+</body>
+</html>
