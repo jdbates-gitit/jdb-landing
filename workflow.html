@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Full Loan Lifecycle Workflow — Jason Dale Bates</title>
-<meta name="description" content="An abstracted view of a 414-step, 9-stage loan-manufacturing workflow — documented, role-mapped, and managed end to end.">
+<meta name="description" content="An abstracted view of a 270+-step, 9-stage loan-manufacturing workflow — documented, role-mapped, and managed end to end.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -155,8 +155,8 @@
 
   <div class="topstats">
     <div class="topstat"><div class="n">9</div><div class="l">Lifecycle<br>stages</div></div>
-    <div class="topstat"><div class="n">400<span>+</span></div><div class="l">Documented<br>steps</div></div>
-    <div class="topstat"><div class="n">10<span>+</span></div><div class="l">Roles &amp;<br>owners mapped</div></div>
+    <div class="topstat"><div class="n">270<span>+</span></div><div class="l">Documented<br>steps</div></div>
+    <div class="topstat"><div class="n">15<span>+</span></div><div class="l">Roles &amp;<br>owners mapped</div></div>
     <div class="topstat"><div class="n">8</div><div class="l">Handoff gates<br>with definitions of done</div></div>
   </div>
 
@@ -175,8 +175,8 @@
         <div class="stage-detail">
           
           <div class="detail-row"><span class="dk">Primary owners</span><span class="dv">LO · LOA3 · Automation</span></div>
-          <div class="detail-row"><span class="dk">Systems of record</span><span class="dv">HubSpot · nCino</span></div>
-          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">Deal exists, owner assigned, application path launched</span></div>
+          <div class="detail-row"><span class="dk">Systems of record</span><span class="dv">HubSpot</span></div>
+          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">LOA2 confirms receipt and begins scrub — application handoff complete</span></div>
         </div>
       </button>
       <button class="stage focus" aria-expanded="false" onclick="toggleStage(this)">
@@ -192,23 +192,23 @@
           <span class="focus-tag">Team focus window</span>
           <div class="detail-row"><span class="dk">Primary owners</span><span class="dv">LOA2 · LO</span></div>
           <div class="detail-row"><span class="dk">Systems of record</span><span class="dv">Encompass · HubSpot · nCino · DDA</span></div>
-          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">Borrower summary complete, AUS pre-approval issued</span></div>
+          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">Borrower summary complete, AUS pre-approval issued, file returned to LOA2 queue</span></div>
         </div>
       </button>
       <button class="stage focus" aria-expanded="false" onclick="toggleStage(this)">
         <div class="stage-head">
           <div class="stage-num">03</div>
           <div class="stage-title-wrap">
-            <div class="stage-title">Pre-Approval → Optional Early UW</div>
-            <div class="stage-arc">LOA2 preps & submits UW pre-approval</div>
+            <div class="stage-title">AUS Pre-Approval → UW Pre-Approval Optional</div>
+            <div class="stage-arc">PROC1 preps & submits UW pre-approval</div>
           </div>
           <div class="stage-chevron">+</div>
         </div>
         <div class="stage-detail">
           <span class="focus-tag">Team focus window</span>
-          <div class="detail-row"><span class="dk">Primary owners</span><span class="dv">LOA2 · UW</span></div>
-          <div class="detail-row"><span class="dk">Systems of record</span><span class="dv">Encompass · DDA · nCino</span></div>
-          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">UW pre-approval prepped, submitted, and returned</span></div>
+          <div class="detail-row"><span class="dk">Primary owners</span><span class="dv">PROC1 · LO · UW</span></div>
+          <div class="detail-row"><span class="dk">Systems of record</span><span class="dv">HubSpot · Encompass · DDA</span></div>
+          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">UW pre-approval prepped, submitted, and returned — PROC1 begins early UW prep</span></div>
         </div>
       </button>
       <button class="stage focus" aria-expanded="false" onclick="toggleStage(this)">
@@ -224,14 +224,14 @@
           <span class="focus-tag">Team focus window</span>
           <div class="detail-row"><span class="dk">Primary owners</span><span class="dv">PROC1 · LO</span></div>
           <div class="detail-row"><span class="dk">Systems of record</span><span class="dv">Encompass · HubSpot · DDA</span></div>
-          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">File disclosed, packaged, submitted to underwriting, and handed off to processing</span></div>
+          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">File disclosed, packaged, and submitted to underwriting — PROC1 confirms receipt and the live loan begins</span></div>
         </div>
       </button>
       <button class="stage" aria-expanded="false" onclick="toggleStage(this)">
         <div class="stage-head">
           <div class="stage-num">05</div>
           <div class="stage-title-wrap">
-            <div class="stage-title">UW Decision</div>
+            <div class="stage-title">UW Decision / Suspense</div>
             <div class="stage-arc">Underwriting decision</div>
           </div>
           <div class="stage-chevron">+</div>
@@ -304,7 +304,7 @@
           
           <div class="detail-row"><span class="dk">Primary owners</span><span class="dv">Post-Close · Compliance</span></div>
           <div class="detail-row"><span class="dk">Systems of record</span><span class="dv">HubSpot · Encompass</span></div>
-          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">Trailing docs cleared, borrower nurture begun</span></div>
+          <div class="detail-row"><span class="dk">Handoff gate</span><span class="dv">Trailing docs cleared, HMDA data finalized and submitted</span></div>
         </div>
       </button>
   </div>
