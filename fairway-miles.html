@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100E17">
+<meta name="description" content="A bogey-free eight-under round at Willow Fork, running between throws. Fairway Miles pairs UDisc scorecards with Garmin activity data and personal field notes.">
+<title>Fairway Miles — Every hole had a chance | Jason Bates</title>
+<link rel="canonical" href="https://jdb-builds.com/fairway-miles">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;1,400&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap');
+#fairway-miles-preview{background:#100E17;color:#F0EDE8;font-family:'Inter Tight',sans-serif;padding:clamp(22px,5vw,48px);line-height:1.65}
+#fairway-miles-preview *{box-sizing:border-box}
+#fairway-miles-preview .fm-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#C4956A;margin:0 0 16px}
+#fairway-miles-preview h2,#fairway-miles-preview h3{font-family:'Fraunces',Georgia,serif;font-weight:400;line-height:1.12;margin:0 0 16px}
+#fairway-miles-preview h2{font-size:clamp(32px,5vw,44px)}
+#fairway-miles-preview h3{font-size:25px}
+#fairway-miles-preview p{margin:0 0 18px;color:#B8B1C3;font-size:16px}
+#fairway-miles-preview .fm-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+#fairway-miles-preview .fm-card{background:#171421;border:1px solid #332C3D;border-radius:4px;padding:26px 24px;display:flex;flex-direction:column;gap:10px}
+#fairway-miles-preview .fm-card p{font-size:14.5px;margin:0}
+#fairway-miles-preview .fm-card h3{margin:0}
+#fairway-miles-preview .fm-card .fm-eyebrow{margin:0;font-size:10px}
+#fairway-miles-preview .fm-feature{border-top:2px solid #7A9E8A}
+#fairway-miles-preview .fm-feature .fm-eyebrow{color:#A0BEAC}
+#fairway-miles-preview a{color:#C4956A;text-decoration:none}
+#fairway-miles-preview a:hover{text-decoration:underline}
+#fairway-miles-preview .fm-link{font-family:'JetBrains Mono',monospace;font-size:12px;margin-top:auto;padding-top:12px;display:block}
+#fairway-miles-preview button.fm-link{border:0;background:transparent;color:#C4956A;text-align:left;padding-left:0;padding-right:0;min-height:44px;cursor:pointer}
+#fairway-miles-preview .fm-facts{font-family:'JetBrains Mono',monospace;color:#A0BEAC;font-size:11px;letter-spacing:.025em;padding:8px 0}
+#fairway-miles-preview .fm-entry{border-top:1px solid #332C3D;margin-top:48px;padding-top:42px}
+#fairway-miles-preview .fm-entry h2{font-size:clamp(36px,6vw,58px);max-width:560px}
+#fairway-miles-preview em{color:#C4956A}
+#fairway-miles-preview .fm-deck{font-family:'Fraunces',Georgia,serif;font-size:22px;line-height:1.5;color:#F0EDE8;max-width:580px}
+#fairway-miles-preview .fm-scoreline{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:24px 0;border-top:1px solid #332C3D;border-bottom:1px solid #332C3D;margin:28px 0}
+#fairway-miles-preview .fm-scoreline strong{display:block;font-family:'Fraunces',serif;font-size:38px;font-weight:400;color:#F0EDE8;line-height:1.2}
+#fairway-miles-preview .fm-scoreline span{font-family:'JetBrains Mono',monospace;font-size:10px;color:#B8B1C3;text-transform:uppercase;letter-spacing:.04em}
+#fairway-miles-preview .fm-nines{display:grid;grid-template-columns:1fr;gap:20px;margin:24px 0}
+#fairway-miles-preview .fm-nine-title{display:flex;justify-content:space-between;gap:12px;margin-bottom:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#B8B1C3}
+#fairway-miles-preview .fm-holes{display:grid;grid-template-columns:repeat(9,1fr);gap:4px}
+#fairway-miles-preview .fm-hole{background:#171421;text-align:center;padding:8px 2px;border-radius:3px}
+#fairway-miles-preview .fm-hole small{display:block;color:#B8B1C3;font-family:'JetBrains Mono',monospace;font-size:10px}
+#fairway-miles-preview .fm-hole b{display:block;font-size:20px;font-weight:500}
+#fairway-miles-preview .fm-hole i{display:block;font-size:10px;font-style:normal;color:#B8B1C3}
+#fairway-miles-preview .fm-birdie{background:#1B2C24;color:#A9CFB9}
+#fairway-miles-preview .fm-birdie i{color:#A9CFB9}
+#fairway-miles-preview .fm-section{margin-top:38px}
+#fairway-miles-preview .fm-note{font-size:13px;color:#B8B1C3}
+#fairway-miles-preview .fm-two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+#fairway-miles-preview .fm-window{padding:20px;background:#171421;border-left:2px solid #C4956A}
+#fairway-miles-preview .fm-window:last-child{border-color:#9A8FB2}
+#fairway-miles-preview .fm-window strong{font-family:'Fraunces',serif;font-size:26px;font-weight:400;display:block;margin:8px 0}
+#fairway-miles-preview .fm-window p{font-size:13px;margin:0}
+#fairway-miles-preview .fm-window .fm-eyebrow{font-size:10px}
+#fairway-miles-preview .fm-effort{margin:24px 0;padding:20px 0;border-top:1px solid #332C3D;border-bottom:1px solid #332C3D}
+#fairway-miles-preview .fm-effort-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+#fairway-miles-preview .fm-effort-grid span{font-size:11px;color:#B8B1C3;display:block}
+#fairway-miles-preview .fm-effort-grid strong{font-size:22px;font-weight:500;color:#F0EDE8}
+#fairway-miles-preview .fm-effort-grid .fm-pulse{height:4px;margin-top:10px;background:#C4956A;display:block}
+#fairway-miles-preview details{border-top:1px solid #332C3D;margin-top:26px;padding-top:16px}
+#fairway-miles-preview summary{cursor:pointer;color:#C4956A;font-family:'JetBrains Mono',monospace;font-size:12px;min-height:44px;display:list-item}
+#fairway-miles-preview details p{font-size:13px}
+#fairway-miles-preview .fm-footer{border-top:1px solid #332C3D;padding-top:24px;margin-top:38px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:11px;color:#B8B1C3}
+@media(max-width:540px){#fairway-miles-preview .fm-cards,#fairway-miles-preview .fm-two{grid-template-columns:1fr}#fairway-miles-preview .fm-scoreline strong{font-size:30px}#fairway-miles-preview .fm-effort-grid{grid-template-columns:1fr 1fr}#fairway-miles-preview .fm-hole b{font-size:17px}}
+
+html{scroll-behavior:smooth;background:#100E17}
+body{margin:0;background:#100E17}
+#fairway-miles-preview{max-width:1080px;margin:0 auto}
+#fairway-miles-preview .fm-entry{border-top:0;margin:0 auto;padding-top:54px;max-width:820px}
+#fairway-miles-preview .fm-site-nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:20px;border-bottom:1px solid #332C3D;font-family:'JetBrains Mono',monospace;font-size:12px}
+#fairway-miles-preview h1{font-family:'Fraunces',Georgia,serif;font-weight:400;line-height:1.12;margin:0 0 16px;font-size:clamp(36px,6vw,58px);max-width:560px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main id="fairway-miles-preview">
+<nav class="fm-site-nav" aria-label="Fairway Miles navigation"><a href="/#fun">JDB · Life outside the office</a><a href="/disc">The Bag Tag Dossier ↗</a></nav>
+  <article id="fm-first-round" class="fm-entry" aria-labelledby="fm-round-title">
+    <div class="fm-eyebrow">Fairway Miles / Field note 001</div>
+    <h1 id="fm-round-title">Every hole<br>had <em>a chance.</em></h1>
+    <p class="fm-note">September 13, 2026 · Willow Fork DGC · Main 18</p>
+    <p class="fm-deck">I ran from throw to throw. The thing I want to remember is how often I stood over the next shot thinking: I have a chance here.</p>
+    <div class="fm-scoreline" aria-label="Round totals">
+      <div><strong>47 <em>−8</em></strong><span>Strokes / versus par</span></div>
+      <div><strong>8 / 0</strong><span>Birdies / bogeys</span></div>
+      <div><strong>200</strong><span>UDisc round rating</span></div>
+    </div>
+    <p>I finished with eight birdies and ten pars. I missed some chances, but this was the first round where I felt every drive put me close enough to have a real look. That part matters to me as much as the final number.</p>
+    <div class="fm-nines">
+      <div><div class="fm-nine-title"><span>Front nine</span><span>23 strokes · −4</span></div>
+        <div class="fm-holes" aria-label="Front nine hole scores">
+          <div class="fm-hole fm-birdie"><small>1</small><b>2</b><i>−1</i></div><div class="fm-hole fm-birdie"><small>2</small><b>2</b><i>−1</i></div><div class="fm-hole"><small>3</small><b>3</b><i>par</i></div><div class="fm-hole fm-birdie"><small>4</small><b>2</b><i>−1</i></div><div class="fm-hole"><small>5</small><b>3</b><i>par</i></div><div class="fm-hole"><small>6</small><b>3</b><i>par</i></div><div class="fm-hole"><small>7</small><b>3</b><i>par</i></div><div class="fm-hole fm-birdie"><small>8</small><b>2</b><i>−1</i></div><div class="fm-hole"><small>9</small><b>3</b><i>par</i></div>
+        </div>
+      </div>
+      <div><div class="fm-nine-title"><span>Back nine</span><span>24 strokes · −4</span></div>
+        <div class="fm-holes" aria-label="Back nine hole scores">
+          <div class="fm-hole"><small>10</small><b>3</b><i>par</i></div><div class="fm-hole"><small>11</small><b>3</b><i>par</i></div><div class="fm-hole fm-birdie"><small>12</small><b>2</b><i>−1</i></div><div class="fm-hole fm-birdie"><small>13</small><b>2</b><i>−1</i></div><div class="fm-hole"><small>14</small><b>3</b><i>par</i></div><div class="fm-hole"><small>15</small><b>3</b><i>par</i></div><div class="fm-hole"><small>16</small><b>3</b><i>par</i></div><div class="fm-hole fm-birdie"><small>17</small><b>2</b><i>−1</i></div><div class="fm-hole fm-birdie"><small>18</small><b>3</b><i>−1</i></div>
+        </div>
+      </div>
+    </div>
+    <p class="fm-note">Hole 18 is a par 4; all other holes are par 3. Green marks a birdie.</p>
+    <section class="fm-section" aria-labelledby="fm-movement-title">
+      <div class="fm-eyebrow">The outing</div>
+      <h3 id="fm-movement-title">Throw. Move. Settle. Repeat.</h3>
+      <p>Garmin recorded a mix of running, walking, and standing. The score held together across both nines while I kept moving between shots.</p>
+      <div class="fm-two">
+        <div class="fm-window"><div class="fm-eyebrow">UDisc scorecard window</div><strong>About 31 minutes</strong><p>10:16–10:47 CT<br>About 1.70 miles recorded by Garmin through 10:47.</p></div>
+        <div class="fm-window"><div class="fm-eyebrow">Full Garmin recording</div><strong>2.07 miles · 45:57</strong><p>10:16–11:02 CT<br>Recording continues about 15 minutes beyond the UDisc end time.</p></div>
+      </div>
+      <div class="fm-effort">
+        <div class="fm-eyebrow">Heart rate / averages by elapsed window</div>
+        <div class="fm-effort-grid" aria-label="Average heart rate was 112 beats per minute during minutes zero to ten, 141 during ten to twenty, 156 during twenty to thirty-one, and 130 for the remaining recording.">
+          <div><span>0–10 min</span><strong>112</strong> <span>bpm</span><i class="fm-pulse" style="width:71.8%" aria-hidden="true"></i></div>
+          <div><span>10–20 min</span><strong>141</strong> <span>bpm</span><i class="fm-pulse" style="width:90.2%" aria-hidden="true"></i></div>
+          <div><span>20–31 min</span><strong>156</strong> <span>bpm</span><i class="fm-pulse" style="width:100%" aria-hidden="true"></i></div>
+          <div><span>31 min–end</span><strong>130</strong> <span>bpm</span><i class="fm-pulse" style="width:83.4%" aria-hidden="true"></i></div>
+        </div>
+      </div>
+      <p class="fm-note">Full recording: 135 bpm average · 166 bpm peak. Garmin classified about 17:45 as running, 15:56 as walking, and 12:16 as standing. These totals include the time after the scorecard ended.</p>
+    </section>
+    <section class="fm-section" aria-labelledby="fm-noticed-title">
+      <div class="fm-eyebrow">What I noticed</div>
+      <h3 id="fm-noticed-title">A par can tell two different stories.</h3>
+      <p>A par after a drive that left me a birdie chance feels different from a par I had to scramble for. The scorecard records them the same way. Today, the opportunities stood out.</p>
+      <p>Three birdies in the first four holes. Four under on each nine. Birdies on the last two. I don't know yet whether running helped my rhythm. This is one round, but it's a useful place to start looking.</p>
+      <p>Next time, I want to remember roughly how far those birdie attempts were. That would help me tell the difference between getting closer and simply feeling more confident about the shot.</p>
+    </section>
+    <details>
+      <summary>About these numbers</summary>
+      <p>Scoring comes from the September 13 UDisc export. Distance, elapsed time, heart rate, and movement classifications come from the Garmin activity recorded that morning. The scorecard has minute-level start and end times; Garmin contains second-level samples. Their end times differ, so the round window and full outing are shown separately.</p>
+      <p>Having a chance after every drive is my recollection of the round, not a tracked Circle 1 statistic. Neither file records putt distances or shot times. Heart-rate windows cannot be assigned to individual holes. UDisc's round rating uses its own scale and is not a PDGA rating.</p>
+    </details>
+    <footer class="fm-footer"><a href="https://jdb-builds.com/">JDB · Home ↗</a><span>Fairway Miles · September 2026</span></footer>
+  </article>
+</main>
+</body>
+</html>
