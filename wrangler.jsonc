@@ -1,0 +1,8 @@
+{
+  "name":"jdb-landing",
+  "pages_build_output_dir":"./dist",
+  "compatibility_date":"2026-09-14",
+  "compatibility_flags":["nodejs_compat"],
+  "d1_databases":[{"binding":"YOURTIME_DB","database_name":"jdb-yourtime","database_id":"4696353d-4761-4a2e-a901-9f9b357ab412","migrations_dir":"migrations"}],
+  "env":{"preview":{"d1_databases":[]}}
+}
