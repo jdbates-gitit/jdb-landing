@@ -117,10 +117,57 @@
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
 </style>
+<link rel="stylesheet" href="/assets/site-navigation.css?v=e684e54f1fe0"><script defer src="/assets/site-navigation.js?v=81b296ff41ac"></script>
 </head>
 <body>
+<header id="jdb-site-navigation" class="jdb-nav" data-theme="default">
+  <div class="jdb-nav-inner">
+    <a class="jdb-brand" href="/" aria-label="JDB-Builds — back to the main page"><span>JDB<b>-</b>Builds</span></a>
+    <button class="jdb-hamburger cursor-interaction" id="jdb-site-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="jdb-site-menu"><span></span><span></span><span></span></button>
+    <nav class="jdb-grouped-nav" id="jdb-site-menu" aria-label="Main navigation">
+      <details class="jdb-nav-group" data-group="about">
+  <summary class="jdb-group-trigger cursor-interaction">About<span class="jdb-menu-caret" aria-hidden="true">⌄</span></summary>
+  <div class="jdb-group-panel" aria-label="About links">
+    <a href="/#personal-about" data-group="about" aria-label="About me — A little more about me."><span class="jdb-menu-name">About me</span><span class="jdb-menu-description">A little more about me.</span></a>
+<a href="/notes.html" data-group="about" aria-label="Notes — Thoughts, observations, and things worth sharing."><span class="jdb-menu-name">Notes</span><span class="jdb-menu-description">Thoughts, observations, and things worth sharing.</span></a>
+  </div>
+</details>
+<details class="jdb-nav-group" data-group="work">
+  <summary class="jdb-group-trigger cursor-interaction">Work<span class="jdb-menu-caret" aria-hidden="true">⌄</span></summary>
+  <div class="jdb-group-panel" aria-label="Work links">
+    <a href="/#jdb-current-rebalanced-work" data-group="work" aria-label="Work story — The original story, in its own space."><span class="jdb-menu-name">Work story</span><span class="jdb-menu-description">The original story, in its own space.</span></a>
+<a href="/#about" data-group="work" aria-label="How I work — Operator first. Always learning."><span class="jdb-menu-name">How I work</span><span class="jdb-menu-description">Operator first. Always learning.</span></a>
+<a href="/#experience" data-group="work" aria-label="Career & Résumé — Experience, education, and the path so far."><span class="jdb-menu-name">Career & Résumé</span><span class="jdb-menu-description">Experience, education, and the path so far.</span></a>
+<a href="/team.html" data-group="work" aria-label="Team — The people behind the work."><span class="jdb-menu-name">Team</span><span class="jdb-menu-description">The people behind the work.</span></a>
+  </div>
+</details>
+<details class="jdb-nav-group jdb-current-group" data-group="builds">
+  <summary class="jdb-group-trigger cursor-interaction">Builds<span class="jdb-menu-caret" aria-hidden="true">⌄</span></summary>
+  <div class="jdb-group-panel" aria-label="Builds links">
+    <a href="/#builds" data-group="builds" aria-label="Projects — Things I've made and am learning from."><span class="jdb-menu-name">Projects</span><span class="jdb-menu-description">Things I've made and am learning from.</span></a>
+<a href="/#professional-builds" data-group="builds" aria-label="Professional builds — Tools shaped by the work."><span class="jdb-menu-name">Professional builds</span><span class="jdb-menu-description">Tools shaped by the work.</span></a>
+<a href="/#stack" data-group="builds" aria-label="Stack & AI — The tools I'm using and exploring."><span class="jdb-menu-name">Stack & AI</span><span class="jdb-menu-description">The tools I'm using and exploring.</span></a>
+<a href="https://briefing.jdb-builds.com/" data-group="builds" aria-label="Daily Signal — The public, read-only daily briefing."><span class="jdb-menu-name">Daily Signal</span><span class="jdb-menu-description">The public, read-only daily briefing.</span></a>
+  </div>
+</details>
+<details class="jdb-nav-group" data-group="life">
+  <summary class="jdb-group-trigger cursor-interaction">Life<span class="jdb-menu-caret" aria-hidden="true">⌄</span></summary>
+  <div class="jdb-group-panel" aria-label="Life links">
+<a href="/#fun" data-group="life" aria-label="Life & interests — Things I do for the love of it."><span class="jdb-menu-name">Life &amp; interests</span><span class="jdb-menu-description">Things I do for the love of it.</span></a>
+    <a href="/disc.html" data-group="life" aria-label="Disc Golf — The Bag Tag Dossier."><span class="jdb-menu-name">Disc Golf</span><span class="jdb-menu-description">The Bag Tag Dossier.</span></a>
+<a href="/fairway-miles.html" data-group="life" aria-label="Fairway Miles — Rounds, miles, and field notes."><span class="jdb-menu-name">Fairway Miles</span><span class="jdb-menu-description">Rounds, miles, and field notes.</span></a>
+<a href="/date-night.html" data-group="life" aria-label="Date Night — Let chance pick a night together."><span class="jdb-menu-name">Date Night</span><span class="jdb-menu-description">Let chance pick a night together.</span></a>
+<a href="/spirit.html" data-group="life" aria-label="Spirit — Reflection and practice."><span class="jdb-menu-name">Spirit</span><span class="jdb-menu-description">Reflection and practice.</span></a>
+<a href="/expand.html" data-group="life" aria-label="Expand — Books and ideas."><span class="jdb-menu-name">Expand</span><span class="jdb-menu-description">Books and ideas.</span></a>
+<a href="/belief.html" data-group="life" aria-label="Belief — Perspective and questions I return to."><span class="jdb-menu-name">Belief</span><span class="jdb-menu-description">Perspective and questions I return to.</span></a>
+<a href="https://discipline.jdb-builds.com" data-group="life" aria-label="Daily Discipline — A daily reading and practice."><span class="jdb-menu-name">Daily Discipline</span><span class="jdb-menu-description">A daily reading and practice.</span></a>
+  </div>
+</details>
+      <a class="jdb-connect-link" href="/#connect">Connect</a>
+    </nav><div class="jdb-breadcrumb" aria-label="Page location"><span>Builds</span><span aria-hidden="true">/</span><span>Document Classifier</span></div></div>
+</header>
 
-<header class="nav">
+<header class="nav" data-retired-site-nav hidden>
   <div class="nav-inner">
     <a href="/" class="brand">JDB<b>.</b></a>
     <nav class="nav-links">
@@ -141,7 +188,7 @@
     <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
 </header>
-<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu" id="mobileMenu" data-retired-site-nav hidden>
   <a href="/#builds">Builds</a>
   <a href="/#about">About</a>
   <a href="/team.html">Team</a>
@@ -156,7 +203,7 @@
   <div class="page-hero">
     <div class="meta">Case Study · Mortgage Ops</div>
     <h1>Classify. Extract. <em>File.</em></h1>
-    <p class="sub">A working pipeline that watches an intake folder, classifies each incoming mortgage document, pulls the key fields out as structured data, and routes anything it's not confident about to a human instead of guessing. Built and tested end to end against a fully synthetic 20-document set — no real borrower data touched any part of this.</p>
+    <p class="sub">I built a working pipeline that watches an intake folder, classifies each incoming mortgage document, pulls the key fields out as structured data, and routes anything it's not confident about to a human instead of guessing. I tested it end to end against a fully synthetic 20-document set — no real borrower data touched any part of this.</p>
   </div>
 
   <div class="topstats">
@@ -168,11 +215,11 @@
 
   <div class="section">
     <div class="eyebrow">The Pipeline</div>
-    <p>An intake folder is watched for new PDFs. Each one goes to Claude with a single prompt that classifies the document — W-2, paystub, bank statement, or other — and extracts the relevant fields as structured JSON, with a confidence score and any quality flags attached. A router splits on that confidence: high-confidence, correctly-typed documents get logged, renamed, and filed automatically. Everything else — low confidence, or a document type it doesn't recognize — gets logged and routed to a review folder instead of a guess.</p>
+    <p>I set up an intake folder to watch for new PDFs. Each one goes to Claude with a single prompt that classifies the document — W-2, paystub, bank statement, or other — and extracts the relevant fields as structured JSON, with a confidence score and any quality flags attached. A router splits on that confidence: high-confidence, correctly-typed documents get logged, renamed, and filed automatically. Everything else — low confidence, or a document type it doesn't recognize — gets logged and routed to a review folder instead of a guess.</p>
     <div class="diagram-frame">
       <img src="/assets/doc-classifier-pipeline.png" alt="Make.com pipeline diagram: Google Drive watch folder, download, Claude classify and extract, JSON parse, router splitting to high-confidence filing, low-confidence review, and income summary logging.">
     </div>
-    <div class="diagram-cap">Actual pipeline, built in Make.com</div>
+    <div class="diagram-cap">My pipeline, built in Make.com</div>
   </div>
 
   <div class="section">
@@ -187,15 +234,15 @@
     <div class="eyebrow">What The Test Found</div>
     <div class="finding">
       <div class="fmark">—</div>
-      <p>Classification landed 20/20 and field extraction 85/85 gradable fields — including three documents built specifically to have unreadable data, where the pipeline correctly returned null instead of inventing a number.</p>
+      <p>My test returned 20/20 classifications and 85/85 gradable fields — including three documents built specifically to have unreadable data, where the pipeline correctly returned null instead of inventing a number.</p>
     </div>
     <div class="finding">
       <div class="fmark">—</div>
-      <p>The confidence score didn't reliably track difficulty. Documents with real problems still scored 0.95 in most cases, same as a clean document — meaning it isn't yet a trustworthy signal on its own for "this doc had a problem."</p>
+      <p>I found that the confidence score did not reliably track difficulty. Documents with real problems still scored 0.95 in most cases, same as a clean document — meaning it isn't yet a trustworthy signal on its own for "this doc had a problem."</p>
     </div>
     <div class="finding">
       <div class="fmark">—</div>
-      <p>The "degraded" test documents were clean, machine-readable text with scan issues described as literal markers — not the real visual noise of an actual scanner or phone photo. That's the honest next test, not something this run already proved.</p>
+      <p>My "degraded" test documents were clean, machine-readable text with scan issues described as literal markers — not the real visual noise of an actual scanner or phone photo. That's the honest next test, not something this run already proved.</p>
     </div>
   </div>
 
@@ -219,7 +266,7 @@
   </div>
 
   <div class="closing">
-    <p>Classify, extract, and file is the smallest piece of what actually happens to a document in a mortgage file. But it's the <em>first domino</em> — and the honest miss mattered more here than the perfect score.</p>
+    <p>Classify, extract, and file is the smallest piece of what actually happens to a document in a mortgage file. For me, it is the <em>first domino</em>—and the honest miss mattered more than the perfect score.</p>
     <a class="back-link" href="/">← return home</a>
   </div>
 </div>

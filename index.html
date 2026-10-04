@@ -1,538 +1,370 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jason Dale Bates — jdb-builds.com</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    --paper:#100E17;
-    --paper-2:#171421;
-    --line:#262231;
-    --line-2:#332C3D;
-    --ink:#F0EDE8;
-    --ink-dim:#B8B1C3;
-    --brass:#C4956A;
-    --brass-bright:#E0B47F;
-    --brass-bg:#211A22;
-    --blue:#9A8FB2;
-    --blue-bg:#1E1A2A;
-    --display:"Fraunces",Georgia,serif;
-    --body:"Inter Tight",system-ui,sans-serif;
-    --mono:"JetBrains Mono",ui-monospace,monospace;
-    --maxw:1080px;
-    background:radial-gradient(circle at 84% 8%,rgba(196,149,106,.10),transparent 30rem),radial-gradient(circle at 12% 54%,rgba(122,158,138,.07),transparent 34rem),var(--paper);
-    color:var(--ink);
-    font-family:var(--body);
-    font-weight:400;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  a{color:inherit;text-decoration:none}
-  ::selection{background:var(--brass);color:#18131A}
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jason Dale Bates · JDB-Builds</title><meta name="description" content="I'm Jason Dale Bates. Curious about the world and learning as I go—my life, work, builds, reflections, and things I do for the love of it."><link rel="canonical" href="https://jdb-builds.com/"><meta property="og:title" content="Jason Dale Bates · JDB-Builds"><meta property="og:description" content="I'm Jason Dale Bates. Curious about the world and learning as I go—my life, work, builds, reflections, and things I do for the love of it."><meta property="og:type" content="website"><meta property="og:url" content="https://jdb-builds.com/"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/home.css?v=75580267b329"><script defer src="/assets/home.js?v=861717afccaf"></script></head><body><div id="jdb-current-rebalanced" aria-label="Current JDB Builds design with a personal opening">
 
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
 
-  .eyebrow{
-    font-family:var(--mono);font-size:11px;letter-spacing:.28em;
-    text-transform:uppercase;color:var(--brass);
-    display:flex;align-items:center;gap:12px;margin-bottom:26px;
-  }
-  .eyebrow::after{content:"";height:1px;flex:1;background:var(--line-2)}
-
-  section{padding:96px 0;border-top:1px solid var(--line-2)}
-
-  h2.section-title{
-    font-family:var(--display);font-weight:340;
-    font-size:clamp(30px,4.2vw,46px);line-height:1.08;
-    letter-spacing:-.01em;margin-bottom:18px;
-  }
-  h2.section-title em{font-style:italic;color:var(--brass)}
-
-  /* NAV */
-  header.nav{
-    position:sticky;top:0;z-index:50;
-    background:rgba(16,14,23,.88);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--line-2);
-  }
-  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:16px 28px;
-    display:flex;align-items:center;justify-content:space-between}
-  .brand{font-family:var(--mono);font-weight:600;letter-spacing:.18em;font-size:14px}
-  .brand b{color:var(--brass)}
-  .nav-links{display:flex;gap:30px;font-size:13px;font-family:var(--mono);letter-spacing:.04em}
-  .nav-links a{color:var(--ink-dim);transition:color .2s}
-  .nav-links a:hover{color:var(--ink)}
-  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
-  .hamburger span{display:block;width:22px;height:2px;background:var(--ink-dim);border-radius:2px;transition:all 0.3s;}
-  .mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;background:rgba(16,14,23,0.98);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-2);padding:16px 28px;z-index:49;flex-direction:column;gap:0;}
-  .mobile-menu a{display:block;font-family:var(--mono);font-size:13px;letter-spacing:0.06em;color:var(--ink-dim);padding:14px 0;border-bottom:1px solid var(--line);transition:color 0.2s;}
-  .mobile-menu a:last-child{border-bottom:none;}
-  .mobile-menu a:hover{color:var(--brass);}
-  .mobile-menu.open{display:flex;}
-  @media(max-width:680px){
-    .nav-links{display:none}
-    .hamburger{display:flex}
-  }
-
-  /* HERO */
-  .hero{padding:130px 0 108px;position:relative}
-  .hero .meta{
-    font-family:var(--mono);font-size:12px;letter-spacing:.16em;
-    color:var(--ink-dim);text-transform:uppercase;margin-bottom:40px;
-  }
-  .hero h1{
-    font-family:var(--display);font-weight:330;
-    font-size:clamp(38px,6.4vw,82px);
-    line-height:1.02;letter-spacing:-.022em;max-width:16ch;
-  }
-  .hero h1 .lede{display:block}
-  .hero h1 em{font-style:italic;font-weight:380;color:var(--brass)}
-  .hero p.sub{
-    margin:36px 0 8px;max-width:54ch;
-    font-size:clamp(16px,1.6vw,19px);
-    color:var(--ink-dim);line-height:1.62;
-  }
-  .pills{display:flex;flex-wrap:wrap;gap:8px;margin:30px 0 40px}
-  .pill{
-    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
-    color:var(--ink-dim);border:1px solid var(--line-2);
-    padding:6px 12px;border-radius:2px;
-  }
-  .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-  .btn{
-    font-family:var(--mono);font-size:13px;letter-spacing:.04em;
-    padding:13px 22px;border-radius:3px;transition:.2s;cursor:pointer;
-    display:inline-flex;align-items:center;gap:9px;
-  }
-  .btn-primary{background:var(--brass);color:#18131A;font-weight:600}
-  .btn-primary:hover{background:var(--brass-bright);transform:translateY(-1px)}
-  .btn-ghost{border:1px solid var(--line-2);color:var(--ink)}
-  .btn-ghost:hover{border-color:var(--brass);color:var(--brass)}
-  .live-dot{width:8px;height:8px;border-radius:50%;background:var(--brass);
-    box-shadow:0 0 0 0 rgba(196,149,106,.5);animation:pulse 2.4s infinite}
-  @keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(196,149,106,.5)}
-    70%{box-shadow:0 0 0 9px rgba(196,149,106,0)}
-    100%{box-shadow:0 0 0 0 rgba(196,149,106,0)}
-  }
-
-  /* STATS */
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;
-    border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
-  .stat{padding:42px 24px;border-right:1px solid var(--line-2)}
-  .stat:last-child{border-right:none}
-  .stat .num{font-family:var(--display);font-weight:330;
-    font-size:clamp(38px,5vw,56px);line-height:1;color:var(--ink)}
-  .stat .num span{color:var(--brass)}
-  .stat .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--ink-dim);margin-top:14px;line-height:1.4}
-  @media(max-width:680px){.stats{grid-template-columns:repeat(2,1fr)}
-    .stat:nth-child(2){border-right:none}
-    .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--line-2)}}
-
-  /* BUILDS */
-  .build-list{display:flex;flex-direction:column;margin-top:14px}
-  .build{
-    display:grid;grid-template-columns:64px 1fr auto;gap:28px;align-items:start;
-    padding:34px 0;border-top:1px solid var(--line-2);transition:.25s;
-  }
-  .build:hover{background:linear-gradient(90deg,var(--paper-2),transparent 70%)}
-  .build .idx{font-family:var(--mono);font-size:13px;color:var(--brass);padding-top:6px}
-  .build .body h3{font-family:var(--display);font-weight:400;font-size:24px;
-    letter-spacing:-.01em;margin-bottom:10px}
-  .build .body .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
-    text-transform:uppercase;color:var(--ink-dim);margin-bottom:14px;display:inline-block}
-  .build .body p{color:var(--ink-dim);max-width:60ch;font-size:15px}
-  .build .body .stack{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
-  .build .body .stack span{font-family:var(--mono);font-size:10.5px;color:var(--ink-dim);
-    border:1px solid var(--line-2);padding:4px 9px;border-radius:2px}
-  .build .right{display:flex;flex-direction:column;align-items:flex-end;gap:10px;padding-top:4px}
-  .build .live-badge{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--brass);display:flex;align-items:center;gap:7px;white-space:nowrap}
-  .build .arrow{font-family:var(--mono);font-size:13px;color:var(--ink-dim);transition:.2s;white-space:nowrap}
-  .build:hover .arrow{color:var(--brass);transform:translateX(3px)}
-  .build.soon{opacity:.55}
-  .build.soon .idx{color:var(--ink-dim)}
-  @media(max-width:680px){.build{grid-template-columns:38px 1fr;gap:16px}
-    .build .right{grid-column:1/-1;align-items:flex-start;flex-direction:row;margin-top:6px}}
-
-  /* STACK */
-  .stacks{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:24px}
-  .stack-col h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--ink-dim);margin-bottom:22px;line-height:1.6}
-  .stack-col.ai h4{color:var(--brass)}
-  .chiprow{display:flex;flex-wrap:wrap;gap:10px}
-  .chip{font-family:var(--mono);font-size:13px;padding:10px 15px;border-radius:3px}
-  .chip.solid{background:var(--paper-2);border:1px solid var(--line-2);color:var(--ink)}
-  .chip.dashed{background:transparent;border:1px dashed var(--brass);color:var(--brass)}
-  .stack-note{font-family:var(--display);font-style:italic;font-size:17px;
-    color:var(--ink-dim);max-width:60ch;margin-bottom:36px;line-height:1.5}
-  @media(max-width:680px){.stacks{grid-template-columns:1fr;gap:38px}}
-
-  /* FUN */
-  .fun-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:28px}
-  .fun-card{border:1px solid var(--line-2);border-radius:4px;padding:28px 24px;transition:.22s;display:flex;flex-direction:column;gap:10px}
-  .fun-card:hover{border-color:var(--brass);transform:translateY(-2px);background:var(--paper-2)}
-  .fun-card .fc-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--brass)}
-  .fun-card h3{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:-.01em}
-  .fun-card p{font-size:14.5px;color:var(--ink-dim);line-height:1.6}
-  .fun-card .fc-arrow{font-family:var(--mono);font-size:13px;color:var(--ink-dim);margin-top:auto;padding-top:12px;transition:.2s}
-  .fun-card:hover .fc-arrow{color:var(--brass)}
-
-  /* TIMELINE */
-  .timeline{margin-top:10px;border-left:1px solid var(--line-2);padding-left:0}
-  .tl{display:grid;grid-template-columns:160px 1fr;gap:0;
-    border-top:1px solid var(--line-2);padding:30px 0 30px 32px;position:relative}
-  .tl::before{content:"";position:absolute;left:-4.5px;top:36px;width:8px;height:8px;
-    border-radius:50%;background:var(--paper);border:1px solid var(--ink-dim)}
-  .tl:first-child::before{background:var(--brass);border-color:var(--brass)}
-  .tl .when{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
-    color:var(--brass);text-transform:uppercase;padding-top:3px}
-  .tl .role h3{font-family:var(--display);font-weight:400;font-size:21px;margin-bottom:4px}
-  .tl .role .org{font-family:var(--mono);font-size:12px;color:var(--ink-dim);margin-bottom:12px}
-  .tl .role p{color:var(--ink-dim);font-size:14.5px;max-width:62ch}
-  @media(max-width:680px){.tl{grid-template-columns:1fr;gap:8px;padding-left:26px}}
-  .edu{font-family:var(--mono);font-size:12px;color:var(--ink-dim);margin-top:30px;padding-left:32px}
-
-  /* CONNECT */
-  .connect-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
-  .ccard{border:1px solid var(--line-2);border-radius:4px;padding:24px 22px;transition:.22s}
-  .ccard:hover{border-color:var(--brass);transform:translateY(-2px);background:var(--paper-2)}
-  .ccard .k{font-family:var(--mono);font-size:10px;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--ink-dim);margin-bottom:12px}
-  .ccard .v{font-size:15px;color:var(--ink)}
-  .ccard:hover .v{color:var(--brass)}
-  @media(max-width:780px){.connect-grid{grid-template-columns:repeat(2,1fr)}}
-
-  /* FOOTER */
-  footer{border-top:1px solid var(--line-2);padding:34px 0;
-    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-dim)}
-  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-
-  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
-
-  .nav-divider{width:1px;height:16px;background:var(--line-2);margin:0 2px;flex:none}
-  .mobile-divider{height:1px;background:var(--line-2);margin:8px 0}
-</style>
-</head>
-<body>
-
-<header class="nav">
-  <div class="nav-inner">
-    <div class="brand">JDB<b>.</b></div>
-    <nav class="nav-links">
-      <a href="#builds">Builds</a>
-      <a href="#about">About</a>
-      <a href="#stack">Stack</a>
-      <a href="#experience">Experience</a>
-      <a href="#fun">Fun</a>
-      <a href="#connect">Connect</a>
-      <span class="nav-divider"></span>
-      <a href="/team.html">Team</a>
-      <a href="/notes.html">Notes</a>
-      <a href="https://discipline.jdb-builds.com">Discipline</a>
-      <a href="/spirit.html">Spirit</a>
-      <a href="/expand.html">Expand</a>
-      <a href="/belief.html">Belief</a>
+<header class="jdb-nav">
+  <div class="jdb-nav-inner">
+    <a class="jdb-brand" href="#jdb-current-rebalanced-home" aria-label="JDB-Builds — back to the main page"><span>JDB<b>-</b>Builds</span></a>
+    <button class="jdb-hamburger cursor-interaction" id="jdb-current-rebalanced-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="jdb-current-rebalanced-navigation"><span></span><span></span><span></span></button>
+    <nav class="jdb-grouped-nav" id="jdb-current-rebalanced-navigation" aria-label="Main navigation">
+      <details class="jdb-nav-group" data-group="about">
+  <summary class="jdb-group-trigger cursor-interaction">About<span class="jdb-menu-caret" aria-hidden="true">⌄</span></summary>
+  <div class="jdb-group-panel" aria-label="About links">
+    <a href="#personal-about" data-group="about" aria-label="About me — A little more about me."><span class="jdb-menu-name">About me</span><span class="jdb-menu-description">A little more about me.</span></a>
+<a href="/notes.html" data-group="about" aria-label="Notes — Thoughts, observations, and things worth sharing."><span class="jdb-menu-name">Notes</span><span class="jdb-menu-description">Thoughts, observations, and things worth sharing.</span></a>
+  </div>
+</details>
+<details class="jdb-nav-group" data-group="work">
+  <summary class="jdb-group-trigger cursor-interaction">Work<span class="jdb-menu-caret" aria-hidden="true">⌄</span></summary>
+  <div class="jdb-group-panel" aria-label="Work links">
+    <a href="#jdb-current-rebalanced-work" data-group="work" aria-label="Work story — The original story, in its own space."><span class="jdb-menu-name">Work story</span><span class="jdb-menu-description">The original story, in its own space.</span></a>
+<a href="#about" data-group="work" aria-label="How I work — Operator first. Always learning."><span class="jdb-menu-name">How I work</span><span class="jdb-menu-description">Operator first. Always learning.</span></a>
+<a href="#experience" data-group="work" aria-label="Career & Résumé — Experience, education, and the path so far."><span class="jdb-menu-name">Career & Résumé</span><span class="jdb-menu-description">Experience, education, and the path so far.</span></a>
+<a href="/team.html" data-group="work" aria-label="Team — The people behind the work."><span class="jdb-menu-name">Team</span><span class="jdb-menu-description">The people behind the work.</span></a>
+  </div>
+</details>
+<details class="jdb-nav-group" data-group="builds">
+  <summary class="jdb-group-trigger cursor-interaction">Builds<span class="jdb-menu-caret" aria-hidden="true">⌄</span></summary>
+  <div class="jdb-group-panel" aria-label="Builds links">
+    <a href="#builds" data-group="builds" aria-label="Projects — Things I've made and am learning from."><span class="jdb-menu-name">Projects</span><span class="jdb-menu-description">Things I've made and am learning from.</span></a>
+<a href="#professional-builds" data-group="builds" aria-label="Professional builds — Tools shaped by the work."><span class="jdb-menu-name">Professional builds</span><span class="jdb-menu-description">Tools shaped by the work.</span></a>
+<a href="#stack" data-group="builds" aria-label="Stack & AI — The tools I'm using and exploring."><span class="jdb-menu-name">Stack & AI</span><span class="jdb-menu-description">The tools I'm using and exploring.</span></a>
+<a href="https://briefing.jdb-builds.com/" data-group="builds" aria-label="Daily Signal — The public, read-only daily briefing."><span class="jdb-menu-name">Daily Signal</span><span class="jdb-menu-description">The public, read-only daily briefing.</span></a>
+  </div>
+</details>
+<details class="jdb-nav-group" data-group="life">
+  <summary class="jdb-group-trigger cursor-interaction">Life<span class="jdb-menu-caret" aria-hidden="true">⌄</span></summary>
+  <div class="jdb-group-panel" aria-label="Life links">
+<a href="#fun" data-group="life" aria-label="Life & interests — Things I do for the love of it."><span class="jdb-menu-name">Life &amp; interests</span><span class="jdb-menu-description">Things I do for the love of it.</span></a>
+    <a href="/disc.html" data-group="life" aria-label="Disc Golf — The Bag Tag Dossier."><span class="jdb-menu-name">Disc Golf</span><span class="jdb-menu-description">The Bag Tag Dossier.</span></a>
+<a href="/fairway-miles" data-group="life" aria-label="Fairway Miles — Rounds, miles, and field notes."><span class="jdb-menu-name">Fairway Miles</span><span class="jdb-menu-description">Rounds, miles, and field notes.</span></a>
+<a href="/date-night.html" data-group="life" aria-label="Date Night — Let chance pick a night together."><span class="jdb-menu-name">Date Night</span><span class="jdb-menu-description">Let chance pick a night together.</span></a>
+<a href="/spirit.html" data-group="life" aria-label="Spirit — Reflection and practice."><span class="jdb-menu-name">Spirit</span><span class="jdb-menu-description">Reflection and practice.</span></a>
+<a href="/expand.html" data-group="life" aria-label="Expand — Books and ideas."><span class="jdb-menu-name">Expand</span><span class="jdb-menu-description">Books and ideas.</span></a>
+<a href="/belief.html" data-group="life" aria-label="Belief — Perspective and questions I return to."><span class="jdb-menu-name">Belief</span><span class="jdb-menu-description">Perspective and questions I return to.</span></a>
+<a href="https://discipline.jdb-builds.com" data-group="life" aria-label="Daily Discipline — A daily reading and practice."><span class="jdb-menu-name">Daily Discipline</span><span class="jdb-menu-description">A daily reading and practice.</span></a>
+  </div>
+</details>
+      <a class="jdb-connect-link" href="#connect">Connect</a>
     </nav>
-    <button class="hamburger" id="hamburger" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </header>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#builds" onclick="closeMenu()">Builds</a>
-  <a href="#about" onclick="closeMenu()">About</a>
-  <a href="#stack" onclick="closeMenu()">Stack</a>
-  <a href="#experience" onclick="closeMenu()">Experience</a>
-  <a href="#fun" onclick="closeMenu()">Fun</a>
-  <a href="#connect" onclick="closeMenu()">Connect</a>
-  <div class="mobile-divider"></div>
-  <a href="/team.html">Team</a>
-  <a href="/notes.html">Notes</a>
-  <a href="https://discipline.jdb-builds.com">Discipline</a>
-  <a href="/spirit.html">Spirit</a>
-  <a href="/expand.html">Expand</a>
-  <a href="/belief.html">Belief</a>
-</div>
 
-<div class="wrap">
-  <div class="hero">
-    <div class="meta">Jason Dale Bates · Houston, TX · NMLS #406344</div>
-    <h1>
-        <span class="lede">Started as a Loan Origination Assistant.</span>
-        <em>Now leading a national team</em>
-        that supports 110+ loan originators.
-        <em>Learning to build.</em>
-      </h1>
-    <p class="sub">15+ years working through every level of the mortgage business — from origination to operations to national team leadership. Now adding AI to the mix: capacity models, full loan lifecycle workflows, and tools that give time back to the people doing the work.</p>
-    <div class="pills">
-      <span class="pill">Operations Management</span>
-      <span class="pill">National Team Leadership</span>
-      <span class="pill">AI &amp; Automation</span>
-      <span class="pill">Mortgage Lifecycle</span>
-      <span class="pill">Work in Progress</span>
-    <span class="pill">1% Better Daily</span>
-    </div>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="https://briefing.jdb-builds.com/"><span class="live-dot"></span>Live Briefing</a>
-      <a class="btn btn-ghost" href="#connect">Get in touch →</a>
-    </div>
+
+<main id="jdb-current-rebalanced-home" class="jdb-screen" data-screen="home">
+<div class="jdb-wrap">
+  <div class="jdb-hero">
+    <div class="jdb-meta">Jason Dale Bates · Houston, TX</div>
+    <h1 class="jdb-personal-title">Curious about the world <em>&amp; Learning as I go.</em></h1>
+    <p class="jdb-sub">I build things, play disc golf, read, and follow the questions that catch my attention. Some lead to a new project. Others take me outside, into a book, or give me something to sit with.</p>
+    <div class="jdb-pills"><span class="jdb-pill">People &amp; Connection</span><span class="jdb-pill">Disc Golf &amp; Outdoors</span><span class="jdb-pill">Books &amp; Ideas</span><span class="jdb-pill">Spirit &amp; Reflection</span><span class="jdb-pill">Building &amp; Exploring</span><span class="jdb-pill">Work in Progress</span></div>
+    <div class="jdb-cta-row"><a class="jdb-btn jdb-btn-primary" href="#personal-about">A little about me ↓</a><a class="jdb-btn jdb-btn-ghost" href="#connect">Get in touch →</a><a class="jdb-btn jdb-btn-ghost" href="https://briefing.jdb-builds.com/">Live Briefing ↗</a></div>
   </div>
-</div>
-
-<div class="wrap">
-  <div class="stats">
-    <div class="stat"><div class="num">30</div><div class="lbl">LOAs managed nationally</div></div>
-    <div class="stat"><div class="num">110<span>+</span></div><div class="lbl">Loan originators supported</div></div>
-    <div class="stat"><div class="num">75<span>%</span></div><div class="lbl">Of company production supported</div></div>
-    <div class="stat"><div class="num">15<span>+</span></div><div class="lbl">Years in mortgage</div></div>
+</div><section id="jdb-current-rebalanced-about">
+  <div class="jdb-wrap">
+    <div class="jdb-eyebrow">About</div>
+    <h2 class="jdb-section-title">A little more <em>about me.</em></h2>
+    <p style="color:var(--ink-dim);max-width:64ch;margin-bottom:1.5rem">My interests don't fit neatly into one category. I'm drawn to technology and making things, but also to a good book, music, time outside, and questions about how I want to live. I like learning by trying something real.</p>
+    <p style="color:var(--ink-dim);max-width:64ch">I work in mortgage operations and team leadership. The people I work with matter to me, as do the people I care about, the things I enjoy, and the parts of myself I'm still getting to know. This site is a place to share a little of all of it.</p>
   </div>
-</div>
-
-<section id="builds">
-  <div class="wrap">
-    <div class="eyebrow">What I build</div>
-    <h2 class="section-title">Real tools. <em>Running in production.</em></h2>
-    <p style="color:var(--ink-dim);max-width:60ch;margin-bottom:8px">Every project solves an actual problem — in mortgage operations, team management, or my own daily workflow. Built with Python, AI APIs, and a bias toward shipping fast and iterating.</p>
-    <div class="build-list">
-      <a class="build" href="https://briefing.jdb-builds.com/">
-        <div class="idx">01</div>
-        <div class="body">
-          <span class="tag">Daily Intelligence</span>
-          <h3>Signal Room &amp; Daily Signal</h3>
-          <p>An AI-powered personal intelligence system that researches the day across technology, business, finance, work, wellness, culture, and the wider world—then connects the strongest signals into one focused briefing. The private Signal Room turns discoveries into an Idea Inbox and running Project Ledger; the public Daily Signal shares a separate, read-only edition without exposing private votes or project data.</p>
-          <div class="stack"><span>OpenAI API</span><span>Cloudflare Workers</span><span>Cloudflare D1</span><span>Cloudflare Access</span></div>
-        </div>
-        <div class="right">
-          <div class="live-badge" style="background:var(--brass-bg);border:1px solid var(--brass);color:var(--brass);padding:5px 10px;border-radius:3px;font-size:10px;font-family:var(--mono);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:7px;white-space:nowrap;"><span class="live-dot"></span>Live · Updated Daily</div>
-          <div class="arrow">View live ↗</div>
-        </div>
-      </a>
-      <a class="build" href="https://discipline.jdb-builds.com">
-        <div class="idx">02</div>
-        <div class="body">
-          <span class="tag">Daily Practice</span>
-          <h3>Daily Discipline</h3>
-          <p>A daily practice for recovery, reflection, and spiritual growth. One challenging question opens a lead reading, a companion, and a brief Echo from six public-domain works: Tao Te Ching, Chuang Tzu, Epictetus, Brother Lawrence, Psalms, and Heraclitus. Tao leads one day in four; Psalms is the companion every other day. Claude Haiku 4.5 selects the Echo and writes connective notes, the Confluence, and the practice carried into the day: Notice, Surrender, Act. Return Tonight offers an evening question and an optional note saved only in your browser; the Seven-Day Trail keeps recent questions and practices close. Auto-built each morning.</p>
-          <div class="stack"><span>Python</span><span>JavaScript</span><span>Claude Haiku 4.5</span><span>GitHub Actions</span><span>Public-Domain Library</span><span>Cloudflare Pages</span></div>
-        </div>
-        <div class="right">
-          <div class="live-badge" style="background:var(--brass-bg);border:1px solid var(--brass);color:var(--brass);padding:5px 10px;border-radius:3px;font-size:10px;font-family:var(--mono);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:7px;white-space:nowrap;"><span class="live-dot"></span>Live · Daily</div>
-          <div class="arrow">View live ↗</div>
-        </div>
-      </a>
-      <a class="build" href="/capacity.html" target="_blank">
-        <div class="idx">03</div>
-        <div class="body">
-          <span class="tag">Mortgage Ops</span>
-          <h3>LOA Capacity Planning Model</h3>
-          <p>Interactive, time-study-calibrated staffing calculator for PROC1, LOA2, and HYBRID roles. Enter monthly TBD and contract volume, current headcount, and ramp factors — outputs staffing gaps, utilization, role-by-role breakdown, and Conservative / Base / Aggressive scenario projections.</p>
-          <div class="stack"><span>Time-Study Data</span><span>Claude AI</span><span>JavaScript</span><span>Feb 2026</span></div>
-        </div>
-        <div class="right">
-          <div class="live-badge" style="background:var(--blue-bg);border:1px solid #6E6380;color:var(--blue);padding:5px 10px;border-radius:3px;font-size:10px;font-family:var(--mono);letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap;">⚡ Live Tool</div>
-          <div class="arrow">Try it ↗</div>
-        </div>
-      </a>
-      <a class="build" href="/workflow.html">
-        <div class="idx">04</div>
-        <div class="body">
-          <span class="tag">Mortgage Ops</span>
-          <h3>Full Loan Lifecycle Workflow</h3>
-          <p>End-to-end workflow design covering lead through funding — one path, one process, used by both sales and operations to establish and maintain alignment across the full loan manufacturing process.</p>
-          <div class="stack"><span>Workflow Design</span><span>Claude AI</span><span>Operations</span></div>
-        </div><div class="right">
-            <div class="arrow">View reference ↗</div>
-          </div>
-        </a>
-      <a class="build" href="/doc-classifier.html">
-        <div class="idx">05</div>
-        <div class="body">
-          <span class="tag">Mortgage Ops · AI Pipeline</span>
-          <h3>Mortgage Doc Classifier</h3>
-          <p>A Claude-powered pipeline that watches an intake folder, classifies incoming W-2s, paystubs, and bank statements, extracts the key fields as structured data, and routes anything it's not confident about to a person instead of a guess. Also projects a basic annualized income figure straight off the extracted YTD data. Tested end to end against a fully synthetic 20-document set — 20/20 classification, 85/85 fields extracted correctly.</p>
-          <div class="stack"><span>Make.com</span><span>Claude API</span><span>Google Drive</span><span>Google Sheets</span></div>
-        </div><div class="right">
-            <div class="arrow">View case study ↗</div>
-          </div>
-        </a>
-    </div>
-  </div>
-</section>
-
-<section id="about">
-  <div class="wrap">
-    <div class="eyebrow">About</div>
-    <h2 class="section-title">Operator first. <em>Always learning.</em></h2>
-    <p style="color:var(--ink-dim);max-width:64ch;margin-bottom:1.5rem">I've spent 15 years working through every level of the mortgage business — starting as an LOA, learning the craft, and eventually building and leading a national team that now supports the majority of company production. I know what slows teams down because I've lived it — and collaborated on solving it — throughout the loan manufacturing process.</p>
-    <p style="color:var(--ink-dim);max-width:64ch">Now I'm adding AI to that foundation — not as a buzzword, but as a practical tool. Capacity models, loan lifecycle workflows, automated reporting, daily intelligence. I'm learning to build things that make real work easier, and sharing the process as I go.</p>
-  </div>
-</section>
-
-<section id="stack">
-  <div class="wrap">
-    <div class="eyebrow">Tools &amp; Stack</div>
-    <h2 class="section-title">Two stacks. <em>One operator.</em></h2>
-    <p class="stack-note">For the first time in my life, AI is opening doors I didn't know how to walk through. These are the tools I'm exploring.</p>
-    <div class="stacks">
-      <div class="stack-col">
-        <h4>The foundation — tools I've worked with for years</h4>
-        <div class="chiprow">
-          <span class="chip solid">Encompass LOS</span>
-          <span class="chip solid">AUS (DU / LP)</span>
-          <span class="chip solid">Microsoft PowerBI</span>
-          <span class="chip solid">HubSpot CRM</span>
-          <span class="chip solid">Microsoft Office Suite</span>
-        </div>
-      </div>
-      <div class="stack-col ai">
-        <h4>What AI is unlocking — tools I'm exploring for the first time</h4>
-        <div class="chiprow">
-          <span class="chip dashed">Claude AI / Anthropic API</span>
-          <span class="chip dashed">Python</span>
-          <span class="chip dashed">Make.com</span>
-          <span class="chip dashed">GitHub / Cloudflare Pages</span>
-          <span class="chip dashed">Ollama / LM Studio</span>
-          <span class="chip dashed">ChatGPT / Copilot</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="experience">
-  <div class="wrap">
-    <div class="eyebrow">Experience</div>
-    <h2 class="section-title">Where I've been.</h2>
-    <div class="timeline">
-      <div class="tl">
-        <div class="when">Aug 2023 — Present</div>
-        <div class="role">
-          <h3>Operations Manager &amp; National Production Fulfillment Group LOA Manager</h3>
-          <div class="org">Envoy Mortgage / PLACE — Houston, TX (Remote/National)</div>
-          <p>Built and scaled a national LOA team from 2 to 30 members across 3 specialty roles — covering Broker, Renovation/Construction, and Onboarding — serving 110+ Loan Originators nationwide. The team supports the originators behind 75% of company production. Partnered with executive leadership to design end-to-end workflows, develop AI-assisted capacity models, and shape company-wide process standards.</p>
-        </div>
-      </div>
-      <div class="tl">
-        <div class="when">May 2018 — Aug 2023</div>
-        <div class="role">
-          <h3>Operations &amp; Pipeline Manager</h3>
-          <div class="org">Envoy Mortgage — Houston, TX</div>
-          <p>Managed active loan pipeline for Houston, Kingwood, and The Woodlands branches. Primary operations resource for file restructuring, AUS execution, condition clearing, and cross-departmental escalations. Delivered monthly production projections and pipeline status updates to branch leadership.</p>
-        </div>
-      </div>
-      <div class="tl">
-        <div class="when">May 2016 — May 2018</div>
-        <div class="role">
-          <h3>Branch Captain / Loan Officer Assistant</h3>
-          <div class="org">Waterstone Mortgage Corporation — Houston, TX</div>
-          <p>Supported the Branch Manager's full pipeline from pre-qualification through funding. Primary contact for resolving complex income scenarios, rush requests, and suspended files. Maintained referral partner databases and collaborated with Realtors, builders, and title companies.</p>
-        </div>
-      </div>
-      <div class="tl">
-        <div class="when">Jul 2012 — May 2016</div>
-        <div class="role">
-          <h3>Loan Officer Assistant / Mortgage Banker</h3>
-          <div class="org">Envoy Mortgage — Houston, TX</div>
-          <p>Assisted Branch Manager in converting leads to closed loans. Managed personal pipeline, took mortgage applications, structured deals, priced rates, and hosted client meetings. Earned and maintained NMLS #406344.</p>
-        </div>
-      </div>
-      <div class="tl">
-        <div class="when">Oct 2010 — Jul 2012</div>
-        <div class="role">
-          <h3>Home Mortgage Consultant</h3>
-          <div class="org">Wells Fargo Home Mortgage — Missouri City, TX</div>
-          <p>Consistently met and exceeded production quotas. Selected for multiple bank-wide pilot programs including Builder Team, Accelerated HMC, and High Performing Sales — ranking among top performers in first year. Mentored new hires on systems, loan guidelines, and client management.</p>
-        </div>
-      </div>
-      <div class="tl">
-        <div class="when">Prior to 2010</div>
-        <div class="role">
-          <h3>Earlier Career</h3>
-          <div class="org">Sales Leadership · Account Management · Recruiting · Team Development</div>
-          <p>A career built across diverse industries — MotorSkill Venture Group (National Account & Sales Manager), SearchPath Houston (SAP Recruiting), PWM Electronic Price Signs, The Lead Dogs / Adobe Systems (Inside Sales Lead & Trainer), Dell Computer Corporation, and Janus Capital Group (Investment Specialist, Series 6 & 63 Licensed). This foundation in sales, communication, and leadership carried directly into 15 years in mortgage.</p>
-        </div>
-      </div>
-    </div>
-    <div class="edu">B.B.A. Marketing · B.A. Japanese Language — University of Texas at Austin, 1999 &nbsp;·&nbsp; <a href="/Jason_Bates_Resume_FINAL.pdf" style="color:var(--brass)">↓ Download Résumé</a></div>
-  </div>
-</section>
-
-<section id="fun">
-  <div class="wrap">
-    <div class="eyebrow">Fun</div>
-    <h2 class="section-title">Life outside the office.</h2>
-    <p style="color:var(--ink-dim);max-width:60ch;margin-bottom:8px">Not everything worth building is for work. Some of it is just for the love of the game.</p>
-    <div class="fun-grid">
-      <a class="fun-card" href="/disc.html" target="_blank">
-        <div class="fc-tag">Disc Golf · PDGA #186874</div>
+</section><section id="jdb-current-rebalanced-fun">
+  <div class="jdb-wrap">
+    <div class="jdb-eyebrow">Fun</div>
+    <h2 class="jdb-section-title">Things I do <em>for the love of it.</em></h2>
+    <p style="color:var(--ink-dim);max-width:60ch;margin-bottom:8px">Disc golf, time together, books, and a little space to slow down. Some things are worth doing simply because I enjoy them.</p>
+    <div class="jdb-life-original"><h3>Life outside the office.</h3><p>Not everything worth building is for work. Some of it is just for the love of the game.</p></div>
+    <div class="jdb-fun-grid">
+      <a class="jdb-fun-card" href="/disc.html" target="_blank" rel="noopener noreferrer">
+        <div class="jdb-fc-tag">Disc Golf · PDGA #186874</div>
         <h3>The Bag Tag Dossier</h3>
-        <p>472 rounds. 23 courses. 5 seasons of UDisc data, read closely. What's working, what's leaking strokes, and where the next rating points are hiding.</p>
-        <div class="fc-arrow">View the data ↗</div>
+        <p>I looked closely at my UDisc data: 472 rounds, 23 courses, and 5 seasons. What's working in my game, where I'm leaking strokes, and where I might find the next rating points.</p>
+        <div class="jdb-fc-arrow">View the data ↗</div>
       </a>
-      <a class="fun-card" href="/fairway-miles" style="border-top:2px solid #7A9E8A">
-        <div class="fc-tag" style="color:#A0BEAC">Disc Golf · Running · Field Notes</div>
+      <a class="jdb-fun-card" href="/fairway-miles" style="border-top:2px solid #7A9E8A">
+        <div class="jdb-fc-tag" style="color:#A0BEAC">Disc Golf · Running · Field Notes</div>
         <h3>Fairway Miles</h3>
         <p>I ran between throws at Willow Fork and shot eight under without a bogey. For the first time, I felt every drive left me a chance. Scorecards, miles, and notes from the rounds I want to remember.</p>
         <p style="font-family:var(--mono);font-size:11px;color:#A0BEAC">18 holes · −8 · Bogey-free</p>
-        <div class="fc-arrow">Read the round ↗</div>
+        <div class="jdb-fc-arrow">Read the round ↗</div>
       </a>
-      <a class="fun-card" href="/date-night.html" target="_blank">
-        <div class="fc-tag">Houston &amp; Katy · For Two</div>
+      <a class="jdb-fun-card" href="/date-night.html" target="_blank" rel="noopener noreferrer">
+        <div class="jdb-fc-tag">Houston &amp; Katy · For Two</div>
         <h3>Date Night</h3>
-        <p>58 curated date ideas across Houston and Katy, one random pull at a time. Hit the button, let chance pick the night.</p>
-        <div class="fc-arrow">Pull a card ↗</div>
+        <p>I put together 58 date ideas across Houston and Katy—a little help when we want to do something together but haven't decided what. One random pull at a time.</p>
+        <div class="jdb-fc-arrow">Pull a card ↗</div>
+      </a>
+      <a class="jdb-fun-card" href="/spirit.html">
+        <div class="jdb-fc-tag">Reflection &amp; Practice</div><h3>Spirit</h3>
+        <p>My space for a different kind of practice: reflection and the questions I keep coming back to.</p><div class="jdb-fc-arrow">Spend a moment ↗</div>
+      </a>
+      <a class="jdb-fun-card" href="/expand.html">
+        <div class="jdb-fc-tag">Books &amp; Ideas</div><h3>Expand</h3>
+        <p>The books that have left a mark on how I see things. Most recently, The Power of Now—and a reminder to pay attention to the stress I create for myself.</p><div class="jdb-fc-arrow">Visit the reading list ↗</div>
+      </a>
+      <a class="jdb-fun-card" href="/belief.html">
+        <div class="jdb-fc-tag">Perspective</div><h3>Belief</h3>
+        <p>The ideas I return to, question, and keep working through. A little of how I make sense of the world.</p><div class="jdb-fc-arrow">Explore Belief ↗</div>
       </a>
     </div>
   </div>
-</section>
-
-<section id="connect">
-  <div class="wrap">
-    <div class="eyebrow">Connect</div>
-    <h2 class="section-title">Let's talk.</h2>
-    <p style="color:var(--ink-dim);max-width:62ch">I'm not looking — I'm building. This site exists to document the journey, share what I'm learning, and connect with people who are thinking about the same problems. If something here resonates, reach out.</p>
-    <div class="connect-grid">
-      <a class="ccard" href="mailto:JDBates@gmail.com"><div class="k">Email</div><div class="v">JDBates@gmail.com ↗</div></a>
-      <a class="ccard" href="https://www.linkedin.com/in/jdbates/"><div class="k">LinkedIn</div><div class="v">Jason Dale Bates ↗</div></a>
-      <a class="ccard" href="https://github.com/jdbates-gitit"><div class="k">GitHub</div><div class="v">jdbates-gitit ↗</div></a>
-      <a class="ccard" href="https://briefing.jdb-builds.com/"><div class="k">Live Build</div><div class="v">briefing.jdb-builds.com ↗</div></a>
+</section><section id="jdb-current-rebalanced-builds">
+  <div class="jdb-wrap">
+    <div class="jdb-eyebrow">What I build</div>
+    <h2 class="jdb-section-title">Things I've built. <em>Learning by doing.</em></h2>
+    <p style="color:var(--ink-dim);max-width:60ch;margin-bottom:8px">Some builds solve a practical problem. Others start with curiosity or something I want in my own life. These are a few of the things I've made and am learning from.</p>
+    <div class="jdb-project-group" id="jdb-current-rebalanced-life-builds" role="region" aria-labelledby="jdb-life-builds-title">
+    <h3 class="jdb-project-group-title" id="jdb-life-builds-title">Life &amp; <em>learning.</em></h3>
+    <div class="jdb-build-list">
+      <a class="jdb-build" href="https://briefing.jdb-builds.com/">
+        <div class="jdb-idx">01</div>
+        <div class="jdb-body">
+          <span class="jdb-tag">Daily Intelligence</span>
+          <h3>Signal Room &amp; Daily Signal</h3>
+          <p>I built a personal intelligence system to research the day across technology, business, finance, work, wellness, culture, and the wider world—then connect the strongest signals into one focused briefing. My private Signal Room turns discoveries into an Idea Inbox and running Project Ledger. I share a separate, read-only Daily Signal without exposing my private votes or project data.</p>
+          <div class="jdb-stack"><span>OpenAI API</span><span>Cloudflare Workers</span><span>Cloudflare D1</span><span>Cloudflare Access</span></div>
+        </div>
+        <div class="jdb-right">
+          <div class="jdb-live-badge" style="background:var(--brass-bg);border:1px solid var(--brass);color:var(--brass);padding:5px 10px;border-radius:3px;font-size:10px;font-family:var(--mono);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:7px;white-space:nowrap;"><span class="jdb-live-dot"></span>Live · Updated Daily</div>
+          <div class="jdb-arrow">View live ↗</div>
+        </div>
+      </a>
+      <a class="jdb-build" href="https://discipline.jdb-builds.com">
+        <div class="jdb-idx">02</div>
+        <div class="jdb-body">
+          <span class="jdb-tag">Daily Practice</span>
+          <h3>Daily Discipline</h3>
+          <p>I built a daily practice for recovery, reflection, and spiritual growth. One challenging question opens a lead reading, a companion, and a brief Echo from six public-domain works: Tao Te Ching, Chuang Tzu, Epictetus, Brother Lawrence, Psalms, and Heraclitus. Tao leads one day in four; Psalms is the companion every other day. I use Claude Haiku 4.5 to select the Echo and write connective notes, the Confluence, and a practice for the day: Notice, Surrender, Act. I added Return Tonight for an evening question and an optional browser-only note, plus a Seven-Day Trail of recent questions and practices. My workflow builds a fresh edition each morning.</p>
+          <div class="jdb-stack"><span>Python</span><span>JavaScript</span><span>Claude Haiku 4.5</span><span>GitHub Actions</span><span>Public-Domain Library</span><span>Cloudflare Pages</span></div>
+        </div>
+        <div class="jdb-right">
+          <div class="jdb-live-badge" style="background:var(--brass-bg);border:1px solid var(--brass);color:var(--brass);padding:5px 10px;border-radius:3px;font-size:10px;font-family:var(--mono);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:7px;white-space:nowrap;"><span class="jdb-live-dot"></span>Live · Daily</div>
+          <div class="jdb-arrow">View live ↗</div>
+        </div>
+      </a>
+    </div>
+    </div>
+    <div class="jdb-project-group" id="jdb-current-rebalanced-professional-builds" role="region" aria-labelledby="jdb-professional-builds-title">
+    <h3 class="jdb-project-group-title" id="jdb-professional-builds-title">From the work. <em>Built for the work.</em></h3>
+    <p class="jdb-gateway-copy">I build around problems I've worked through in mortgage operations and team leadership. I use the tools that fit, test what I've made, and keep improving it.</p>
+    <div class="jdb-build-list">
+      <a class="jdb-build" href="/capacity.html" target="_blank" rel="noopener noreferrer">
+        <div class="jdb-idx">03</div>
+        <div class="jdb-body">
+          <span class="jdb-tag">Mortgage Ops</span>
+          <h3>LOA Capacity Planning Model</h3>
+          <p>I built a time-study-calibrated staffing calculator for PROC1, LOA2, and HYBRID roles. I use monthly TBD and contract volume, current headcount, and ramp factors to model staffing gaps, utilization, role-by-role breakdowns, and Conservative / Base / Aggressive scenario projections.</p>
+          <div class="jdb-stack"><span>Time-Study Data</span><span>Claude AI</span><span>JavaScript</span><span>Feb 2026</span></div>
+        </div>
+        <div class="jdb-right">
+          <div class="jdb-live-badge" style="background:var(--blue-bg);border:1px solid #6E6380;color:var(--blue);padding:5px 10px;border-radius:3px;font-size:10px;font-family:var(--mono);letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap;">⚡ Live Tool</div>
+          <div class="jdb-arrow">Try it ↗</div>
+        </div>
+      </a>
+      <a class="jdb-build" href="/workflow.html">
+        <div class="jdb-idx">04</div>
+        <div class="jdb-body">
+          <span class="jdb-tag">Mortgage Ops</span>
+          <h3>Full Loan Lifecycle Workflow</h3>
+          <p>I worked with sales and operations to map the loan lifecycle from lead through funding—one shared path, clear ownership, and defined handoffs across the full loan manufacturing process.</p>
+          <div class="jdb-stack"><span>Workflow Design</span><span>Claude AI</span><span>Operations</span></div>
+        </div><div class="jdb-right">
+            <div class="jdb-arrow">View reference ↗</div>
+          </div>
+        </a>
+      <a class="jdb-build" href="/doc-classifier.html">
+        <div class="jdb-idx">05</div>
+        <div class="jdb-body">
+          <span class="jdb-tag">Mortgage Ops · AI Pipeline</span>
+          <h3>Mortgage Doc Classifier</h3>
+          <p>I built a Claude-powered pipeline to watch an intake folder, classify W-2s, paystubs, and bank statements, extract structured fields, and route uncertain results to a person. I also added a basic annualized income projection from YTD data. My synthetic 20-document test returned 20/20 classifications and 85/85 gradable fields correctly—not proof of production accuracy. The model's confidence score still needs work.</p>
+          <div class="jdb-stack"><span>Make.com</span><span>Claude API</span><span>Google Drive</span><span>Google Sheets</span></div>
+        </div><div class="jdb-right">
+            <div class="jdb-arrow">View case study ↗</div>
+          </div>
+        </a>
+    </div>
     </div>
   </div>
+</section><section id="jdb-current-rebalanced-work-intro">
+  <div class="jdb-wrap">
+    <div class="jdb-eyebrow">Work &amp; Career</div>
+    <h2 class="jdb-section-title">A big part of my life.<br><em>Not the whole of it.</em></h2>
+    <p class="jdb-gateway-copy">I've built a career in mortgage operations and team leadership, starting as a Loan Origination Assistant. The people, the lessons, and the work I'm proud of have their own place here.</p>
+    <div class="jdb-cta-row"><a class="jdb-btn jdb-btn-ghost" href="#jdb-current-rebalanced-work">My work story →</a></div>
+  </div>
+</section><section id="jdb-current-rebalanced-connect">
+  <div class="jdb-wrap">
+    <div class="jdb-eyebrow">Connect</div>
+    <h2 class="jdb-section-title">Let's talk.</h2>
+    <p style="color:var(--ink-dim);max-width:62ch">A shared interest, a good question, something you're making, or just a hello. If something here resonates, I'd be glad to hear from you.</p>
+    <div class="jdb-connect-grid">
+      <a class="jdb-ccard" href="mailto:JDBates@gmail.com"><div class="jdb-k">Email</div><div class="jdb-v">JDBates@gmail.com ↗</div></a>
+      <a class="jdb-ccard" href="https://www.linkedin.com/in/jdbates/"><div class="jdb-k">LinkedIn</div><div class="jdb-v">Jason Dale Bates ↗</div></a>
+      <a class="jdb-ccard" href="https://github.com/jdbates-gitit"><div class="jdb-k">GitHub</div><div class="jdb-v">jdbates-gitit ↗</div></a>
+      <a class="jdb-ccard" href="https://briefing.jdb-builds.com/"><div class="jdb-k">Live Build</div><div class="jdb-v">briefing.jdb-builds.com ↗</div></a>
+    </div>
+  </div>
+</section></main>
+<main id="jdb-current-rebalanced-work" class="jdb-screen" data-screen="work">
+  <div class="jdb-wrap">
+    <div class="jdb-page-path"><a href="#jdb-current-rebalanced-home">← Back to the rest of me</a><span>Work &amp; Career</span></div>
+    <div class="jdb-hero jdb-work-hero">
+      <div class="jdb-meta">Jason Dale Bates · Houston, TX · NMLS #406344</div>
+      <h1><span class="jdb-lede">I started as a Loan Origination Assistant.</span><em>Now I lead a national team</em> that supports 110+ loan originators. <em>I'm learning to build.</em></h1>
+      <p class="jdb-sub">I've spent 15+ years working through every level of the mortgage business—from origination to operations to national team leadership. Now I'm adding AI to the mix: capacity models, full loan lifecycle workflows, and tools that give time back to the people doing the work.</p>
+      <div class="jdb-pills"><span class="jdb-pill">Operations Management</span><span class="jdb-pill">National Team Leadership</span><span class="jdb-pill">AI &amp; Automation</span><span class="jdb-pill">Mortgage Lifecycle</span><span class="jdb-pill">Work in Progress</span><span class="jdb-pill">1% Better Daily</span></div>
+      <div class="jdb-cta-row"><a class="jdb-btn jdb-btn-primary" href="#professional-builds">See the work →</a><a class="jdb-btn jdb-btn-ghost" href="#experience">Career &amp; experience ↓</a><a class="jdb-btn jdb-btn-ghost" href="https://briefing.jdb-builds.com/">Live Briefing ↗</a></div>
+    </div>
+    <div class="jdb-stats">
+    <div class="jdb-stat"><div class="jdb-num">30</div><div class="jdb-lbl">LOAs managed nationally</div></div>
+    <div class="jdb-stat"><div class="jdb-num">110<span>+</span></div><div class="jdb-lbl">Loan originators supported</div></div>
+    <div class="jdb-stat"><div class="jdb-num">75<span>%</span></div><div class="jdb-lbl">Of company production supported</div></div>
+    <div class="jdb-stat"><div class="jdb-num">15<span>+</span></div><div class="jdb-lbl">Years in mortgage</div></div>
+  </div>
+  </div>
+  <section id="jdb-current-rebalanced-how-i-work">
+    <div class="jdb-wrap">
+      <div class="jdb-eyebrow">How I work</div>
+      <h2 class="jdb-section-title">Operator first.<br><em>Always learning.</em></h2>
+      <div class="jdb-career-intro"><p style="color:var(--ink-dim);max-width:64ch;margin-bottom:1.5rem">I've spent 15 years working through every level of the mortgage business — starting as an LOA, learning the craft, and eventually building and leading a national team that now supports the majority of company production. I know what slows teams down because I've lived it — and collaborated on solving it — throughout the loan manufacturing process.</p>
+<p style="color:var(--ink-dim);max-width:64ch">Now I'm adding AI to that foundation — not as a buzzword, but as a practical tool. Capacity models, loan lifecycle workflows, automated reporting, daily intelligence. I'm learning to build things that make real work easier, and sharing the process as I go.</p></div>
+      <a class="jdb-btn jdb-btn-ghost" href="/team.html">The people behind the work →</a>
+    </div>
+  </section>
+  <section id="jdb-current-rebalanced-work-projects">
+    <div class="jdb-wrap">
+      <div class="jdb-eyebrow">Professional builds</div>
+      <h2 class="jdb-section-title">Putting experience <em>to work.</em></h2>
+      <p class="jdb-gateway-copy">Tools and workflows shaped by the problems I've worked through in mortgage operations.</p>
+      <div class="jdb-cta-row"><a class="jdb-btn jdb-btn-ghost" href="#professional-builds">Explore my professional builds →</a></div>
+    </div>
+  </section>
+  <section id="jdb-current-rebalanced-stack">
+  <div class="jdb-wrap">
+    <div class="jdb-eyebrow">Tools &amp; Stack</div>
+    <h2 class="jdb-section-title">My tools. <em>A growing range.</em></h2>
+    <p class="jdb-stack-note">AI has opened doors I didn't know how to walk through. Now I'm using these tools to build websites, automate useful tasks, and try ideas of my own. Some are part of live projects; others are local prototypes or experiments.</p>
+    <div class="jdb-stacks">
+      <div class="jdb-stack-col">
+        <h4>The foundation — tools I've worked with for years</h4>
+        <div class="jdb-chiprow">
+          <span class="jdb-chip jdb-solid">Encompass LOS</span>
+          <span class="jdb-chip jdb-solid">AUS (DU / LP)</span>
+          <span class="jdb-chip jdb-solid">Microsoft Power BI</span>
+          <span class="jdb-chip jdb-solid">HubSpot CRM</span>
+          <span class="jdb-chip jdb-solid">Microsoft Office Suite</span>
+        </div>
+      </div>
+      <div class="jdb-stack-col jdb-ai">
+        <h4>AI partners &amp; APIs — what I build with</h4>
+        <p class="jdb-tool-context">I use AI for research, drafting, design, and coding assistance. My briefing and document projects also use API calls for specific tasks; I test the output rather than treat it as a final authority.</p>
+        <div class="jdb-chiprow">
+          <span class="jdb-chip jdb-solid">ChatGPT</span><span class="jdb-chip jdb-solid">Codex</span><span class="jdb-chip jdb-solid">Claude</span><span class="jdb-chip jdb-solid">OpenAI API</span><span class="jdb-chip jdb-solid">Anthropic API</span>
+        </div>
+      </div>
+      <div class="jdb-stack-col">
+        <h4>Websites &amp; apps — what I'm making</h4>
+        <p class="jdb-tool-context">I build lightweight pages with HTML, CSS, and JavaScript. I'm also exploring TypeScript, React, Next.js, and Tailwind CSS in my local Leaves prototype.</p>
+        <div class="jdb-chiprow"><span class="jdb-chip jdb-solid">HTML / CSS / JavaScript</span><span class="jdb-chip jdb-solid">TypeScript</span><span class="jdb-chip jdb-solid">Node.js</span><span class="jdb-chip jdb-dashed">React / Next.js</span><span class="jdb-chip jdb-dashed">Tailwind CSS</span></div>
+      </div>
+      <div class="jdb-stack-col">
+        <h4>Hosting, storage &amp; access — behind my sites</h4>
+        <p class="jdb-tool-context">I keep source in GitHub, host sites on Cloudflare Pages, and use Workers for server-side features. I use D1 for stored app data and Access for protected areas. My Supabase / PostgreSQL work is a separate local pilot.</p>
+        <div class="jdb-chiprow"><span class="jdb-chip jdb-solid">Git / GitHub</span><span class="jdb-chip jdb-solid">Cloudflare Pages / Functions</span><span class="jdb-chip jdb-solid">Cloudflare Workers</span><span class="jdb-chip jdb-solid">Cloudflare D1</span><span class="jdb-chip jdb-solid">Cloudflare Access</span><span class="jdb-chip jdb-dashed">Supabase / PostgreSQL · Local pilot</span></div>
+      </div>
+      <div class="jdb-stack-col">
+        <h4>Workflows &amp; testing — how I connect the pieces</h4>
+        <p class="jdb-tool-context">I use Python and GitHub Actions for scheduled generation, and Make.com with Google Drive and Sheets for my document-classification experiment. I check application logic and browser behavior with automated tests. I also turn my UDisc and Garmin exports into charts and personal field notes.</p>
+        <div class="jdb-chiprow"><span class="jdb-chip jdb-solid">Python</span><span class="jdb-chip jdb-solid">GitHub Actions</span><span class="jdb-chip jdb-solid">Make.com</span><span class="jdb-chip jdb-solid">Google Drive / Sheets</span><span class="jdb-chip jdb-solid">JSON / SQL</span><span class="jdb-chip jdb-solid">Playwright / Vitest</span><span class="jdb-chip jdb-solid">Chart.js</span><span class="jdb-chip jdb-solid">UDisc / Garmin</span><span class="jdb-chip jdb-solid">Windows / PowerShell</span></div>
+      </div>
+      <div class="jdb-stack-col jdb-ai">
+        <h4>Local AI — my hands-on lab</h4>
+        <p class="jdb-tool-context">I've run models locally and compared their answers. My Docker-based lab brings together Ollama, Open WebUI, and AnythingLLM. I've also explored LM Studio. I'm learning how local inference and document retrieval fit together, starting with the limits of the models themselves.</p>
+        <div class="jdb-chiprow"><span class="jdb-chip jdb-dashed">Docker</span><span class="jdb-chip jdb-dashed">Ollama</span><span class="jdb-chip jdb-dashed">Open WebUI</span><span class="jdb-chip jdb-dashed">AnythingLLM</span><span class="jdb-chip jdb-dashed">LM Studio</span></div>
+      </div>
+    </div>
+    <p class="jdb-tool-context jdb-tool-boundary">I work with AI assistance and learn by building. Solid tags mark my established tools and project work; dashed tags mark local prototypes and exploration. I'm also exploring Copilot. My experience is growing, and it isn't the same depth across every tool.</p>
+  </div>
 </section>
-
+  <section id="jdb-current-rebalanced-experience">
+    <div class="jdb-wrap">
+      <div class="jdb-eyebrow">Career &amp; Experience</div>
+      <h2 class="jdb-section-title">Where I've been.</h2>
+    <div class="jdb-timeline">
+      <div class="jdb-tl">
+        <div class="jdb-when">Aug 2023 — Present</div>
+        <div class="jdb-role">
+          <h3>Operations Manager &amp; National Production Fulfillment Group LOA Manager</h3>
+          <div class="jdb-org">Envoy Mortgage / PLACE — Houston, TX (Remote/National)</div>
+          <p>I built and scaled a national LOA team from 2 to 30 members across 3 specialty roles—covering Broker, Renovation/Construction, and Onboarding—serving 110+ Loan Originators nationwide. My team supports the originators behind 75% of company production. I partnered with executive leadership to design end-to-end workflows, develop AI-assisted capacity models, and shape company-wide process standards.</p>
+        </div>
+      </div>
+      <div class="jdb-tl">
+        <div class="jdb-when">May 2018 — Aug 2023</div>
+        <div class="jdb-role">
+          <h3>Operations &amp; Pipeline Manager</h3>
+          <div class="jdb-org">Envoy Mortgage — Houston, TX</div>
+          <p>I managed the active loan pipeline for Houston, Kingwood, and The Woodlands branches. I was the primary operations resource for file restructuring, AUS execution, condition clearing, and cross-departmental escalations. I delivered monthly production projections and pipeline status updates to branch leadership.</p>
+        </div>
+      </div>
+      <div class="jdb-tl">
+        <div class="jdb-when">May 2016 — May 2018</div>
+        <div class="jdb-role">
+          <h3>Branch Captain / Loan Officer Assistant</h3>
+          <div class="jdb-org">Waterstone Mortgage Corporation — Houston, TX</div>
+          <p>I supported the Branch Manager's full pipeline from pre-qualification through funding. I was the primary contact for resolving complex income scenarios, rush requests, and suspended files. I maintained referral partner databases and collaborated with Realtors, builders, and title companies.</p>
+        </div>
+      </div>
+      <div class="jdb-tl">
+        <div class="jdb-when">Jul 2012 — May 2016</div>
+        <div class="jdb-role">
+          <h3>Loan Officer Assistant / Mortgage Banker</h3>
+          <div class="jdb-org">Envoy Mortgage — Houston, TX</div>
+          <p>I assisted the Branch Manager in converting leads to closed loans. I managed my own pipeline, took mortgage applications, structured deals, priced rates, and hosted client meetings. I earned and maintained NMLS #406344.</p>
+        </div>
+      </div>
+      <div class="jdb-tl">
+        <div class="jdb-when">Oct 2010 — Jul 2012</div>
+        <div class="jdb-role">
+          <h3>Home Mortgage Consultant</h3>
+          <div class="jdb-org">Wells Fargo Home Mortgage — Missouri City, TX</div>
+          <p>I consistently met and exceeded production quotas. I was selected for multiple bank-wide pilot programs including Builder Team, Accelerated HMC, and High Performing Sales—ranking among top performers in my first year. I mentored new hires on systems, loan guidelines, and client management.</p>
+        </div>
+      </div>
+      <div class="jdb-tl">
+        <div class="jdb-when">Prior to 2010</div>
+        <div class="jdb-role">
+          <h3>Earlier Career</h3>
+          <div class="jdb-org">Sales Leadership · Account Management · Recruiting · Team Development</div>
+          <p>I built my earlier career across diverse industries—MotorSkill Venture Group (National Account &amp; Sales Manager), SearchPath Houston (SAP Recruiting), PWM Electronic Price Signs, The Lead Dogs / Adobe Systems (Inside Sales Lead &amp; Trainer), Dell Computer Corporation, and Janus Capital Group (Investment Specialist, Series 6 &amp; 63 Licensed). I carried that foundation in sales, communication, and leadership directly into 15 years in mortgage.</p>
+        </div>
+      </div>
+    </div>
+    <div class="jdb-edu">B.B.A. Marketing · B.A. Japanese Language — University of Texas at Austin, 1999 &nbsp;·&nbsp; <a href="/Jason_Bates_Resume_FINAL.pdf" style="color:var(--brass)">↓ Download Résumé</a></div>
+    </div>
+  </section>
+  <section id="jdb-current-rebalanced-work-connect">
+    <div class="jdb-wrap">
+      <div class="jdb-eyebrow">Work &amp; Connection</div>
+      <h2 class="jdb-section-title">Let's talk.</h2>
+      <p class="jdb-gateway-copy">I'm not looking — I'm building. This site exists to document the journey, share what I'm learning, and connect with people who are thinking about the same problems. If something here resonates, reach out.</p>
+      <a class="jdb-btn jdb-btn-ghost" href="#connect">Get in touch →</a>
+    </div>
+  </section>
+  <section>
+    <div class="jdb-wrap">
+      <div class="jdb-eyebrow">Keep exploring</div>
+      <h2 class="jdb-section-title">There's more <em>to the story.</em></h2>
+      <div class="jdb-cta-row"><a class="jdb-btn jdb-btn-ghost" href="#jdb-current-rebalanced-home">Back to the rest of me →</a><a class="jdb-btn jdb-btn-ghost" href="#jdb-current-rebalanced-connect">Let's connect →</a></div>
+    </div>
+  </section>
+</main>
 <footer>
-  <div class="wrap">
+  <div class="jdb-wrap">
     <span>jdb-builds.com · Jason Dale Bates</span>
-    <span>Houston, TX · NMLS #406344</span>
+    <span class="jdb-footer-personal">Houston, TX</span><span class="jdb-footer-professional" hidden>Houston, TX · NMLS #406344</span>
   </div>
 </footer>
 
-<script>
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  hamburger.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-  });
-  function closeMenu() {
-    mobileMenu.classList.remove('open');
-  }
-  // Close menu when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
-      mobileMenu.classList.remove('open');
-    }
-  });
-</script>
-</body>
-</html>
-
-
+</div>
+</body></html>

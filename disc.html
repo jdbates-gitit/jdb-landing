@@ -114,20 +114,68 @@ footer b{color:var(--moss)}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
 </style>
+<link rel="stylesheet" href="/assets/site-navigation.css?v=e684e54f1fe0"><script defer src="/assets/site-navigation.js?v=81b296ff41ac"></script>
+<style>@media(max-width:480px){.scorecard{grid-template-columns:repeat(6,minmax(0,1fr))}}</style>
 </head>
 <body>
+<header id="jdb-site-navigation" class="jdb-nav" data-theme="default">
+  <div class="jdb-nav-inner">
+    <a class="jdb-brand" href="/" aria-label="JDB-Builds — back to the main page"><span>JDB<b>-</b>Builds</span></a>
+    <button class="jdb-hamburger cursor-interaction" id="jdb-site-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="jdb-site-menu"><span></span><span></span><span></span></button>
+    <nav class="jdb-grouped-nav" id="jdb-site-menu" aria-label="Main navigation">
+      <details class="jdb-nav-group" data-group="about">
+  <summary class="jdb-group-trigger cursor-interaction">About<span class="jdb-menu-caret" aria-hidden="true">⌄</span></summary>
+  <div class="jdb-group-panel" aria-label="About links">
+    <a href="/#personal-about" data-group="about" aria-label="About me — A little more about me."><span class="jdb-menu-name">About me</span><span class="jdb-menu-description">A little more about me.</span></a>
+<a href="/notes.html" data-group="about" aria-label="Notes — Thoughts, observations, and things worth sharing."><span class="jdb-menu-name">Notes</span><span class="jdb-menu-description">Thoughts, observations, and things worth sharing.</span></a>
+  </div>
+</details>
+<details class="jdb-nav-group" data-group="work">
+  <summary class="jdb-group-trigger cursor-interaction">Work<span class="jdb-menu-caret" aria-hidden="true">⌄</span></summary>
+  <div class="jdb-group-panel" aria-label="Work links">
+    <a href="/#jdb-current-rebalanced-work" data-group="work" aria-label="Work story — The original story, in its own space."><span class="jdb-menu-name">Work story</span><span class="jdb-menu-description">The original story, in its own space.</span></a>
+<a href="/#about" data-group="work" aria-label="How I work — Operator first. Always learning."><span class="jdb-menu-name">How I work</span><span class="jdb-menu-description">Operator first. Always learning.</span></a>
+<a href="/#experience" data-group="work" aria-label="Career & Résumé — Experience, education, and the path so far."><span class="jdb-menu-name">Career & Résumé</span><span class="jdb-menu-description">Experience, education, and the path so far.</span></a>
+<a href="/team.html" data-group="work" aria-label="Team — The people behind the work."><span class="jdb-menu-name">Team</span><span class="jdb-menu-description">The people behind the work.</span></a>
+  </div>
+</details>
+<details class="jdb-nav-group" data-group="builds">
+  <summary class="jdb-group-trigger cursor-interaction">Builds<span class="jdb-menu-caret" aria-hidden="true">⌄</span></summary>
+  <div class="jdb-group-panel" aria-label="Builds links">
+    <a href="/#builds" data-group="builds" aria-label="Projects — Things I've made and am learning from."><span class="jdb-menu-name">Projects</span><span class="jdb-menu-description">Things I've made and am learning from.</span></a>
+<a href="/#professional-builds" data-group="builds" aria-label="Professional builds — Tools shaped by the work."><span class="jdb-menu-name">Professional builds</span><span class="jdb-menu-description">Tools shaped by the work.</span></a>
+<a href="/#stack" data-group="builds" aria-label="Stack & AI — The tools I'm using and exploring."><span class="jdb-menu-name">Stack & AI</span><span class="jdb-menu-description">The tools I'm using and exploring.</span></a>
+<a href="https://briefing.jdb-builds.com/" data-group="builds" aria-label="Daily Signal — The public, read-only daily briefing."><span class="jdb-menu-name">Daily Signal</span><span class="jdb-menu-description">The public, read-only daily briefing.</span></a>
+  </div>
+</details>
+<details class="jdb-nav-group jdb-current-group" data-group="life">
+  <summary class="jdb-group-trigger cursor-interaction">Life<span class="jdb-menu-caret" aria-hidden="true">⌄</span></summary>
+  <div class="jdb-group-panel" aria-label="Life links">
+<a href="/#fun" data-group="life" aria-label="Life & interests — Things I do for the love of it."><span class="jdb-menu-name">Life &amp; interests</span><span class="jdb-menu-description">Things I do for the love of it.</span></a>
+    <a href="/disc.html" aria-current="page" data-group="life" aria-label="Disc Golf — The Bag Tag Dossier."><span class="jdb-menu-name">Disc Golf</span><span class="jdb-menu-description">The Bag Tag Dossier.</span></a>
+<a href="/fairway-miles.html" data-group="life" aria-label="Fairway Miles — Rounds, miles, and field notes."><span class="jdb-menu-name">Fairway Miles</span><span class="jdb-menu-description">Rounds, miles, and field notes.</span></a>
+<a href="/date-night.html" data-group="life" aria-label="Date Night — Let chance pick a night together."><span class="jdb-menu-name">Date Night</span><span class="jdb-menu-description">Let chance pick a night together.</span></a>
+<a href="/spirit.html" data-group="life" aria-label="Spirit — Reflection and practice."><span class="jdb-menu-name">Spirit</span><span class="jdb-menu-description">Reflection and practice.</span></a>
+<a href="/expand.html" data-group="life" aria-label="Expand — Books and ideas."><span class="jdb-menu-name">Expand</span><span class="jdb-menu-description">Books and ideas.</span></a>
+<a href="/belief.html" data-group="life" aria-label="Belief — Perspective and questions I return to."><span class="jdb-menu-name">Belief</span><span class="jdb-menu-description">Perspective and questions I return to.</span></a>
+<a href="https://discipline.jdb-builds.com" data-group="life" aria-label="Daily Discipline — A daily reading and practice."><span class="jdb-menu-name">Daily Discipline</span><span class="jdb-menu-description">A daily reading and practice.</span></a>
+  </div>
+</details>
+      <a class="jdb-connect-link" href="/#connect">Connect</a>
+    </nav><div class="jdb-breadcrumb" aria-label="Page location"><span>Life</span><span aria-hidden="true">/</span><span>Disc Golf</span></div></div>
+</header>
 
 <header class="hero wrap">
   <div class="eyebrow reveal">PDGA #186874 &nbsp;//&nbsp; Willow Fork &amp; Beyond</div>
   <h1 class="reveal">The <em>Bag Tag</em><br>Dossier.</h1>
-  <p class="sub reveal">Five seasons of UDisc scorecards, read closely. <b>What''s working, what''s leaking strokes, and where the next rating points are hiding.</b></p>
+  <p class="sub reveal">I looked closely at five seasons of my UDisc scorecards. <b>What's working in my game, where I'm leaking strokes, and where I might find the next rating points.</b></p>
   <div class="bigstat reveal">
     <div class="num">235</div>
-    <div class="cap">Career-best round rating, posted <b>Jul 2024</b> at Willow Fork on a 12-under card.</div>
+    <div class="cap">My career-best UDisc round rating, posted <b>Jul 2024</b> at Willow Fork on a 12-under card.</div>
   </div>
   <div class="strip reveal">
     <div class="cell"><div class="v">472</div><div class="l">Rounds logged</div></div>
-    <div class="cell"><div class="v">180</div><div class="l">Avg round rating</div></div>
+    <div class="cell"><div class="v">180</div><div class="l">Avg UDisc round rating</div></div>
     <div class="cell"><div class="v">23</div><div class="l">Courses played</div></div>
     <div class="cell"><div class="v">-12</div><div class="l">Best vs par</div></div>
   </div>
@@ -135,19 +183,19 @@ footer b{color:var(--moss)}
 
 <section class="sec wrap">
   <div class="sec-head reveal"><span class="sec-num">01</span><h2>The form curve</h2></div>
-  <p class="lede reveal">Round rating, month by month. The <b>2024 peak (186 avg, a 235 ceiling)</b> is real — and so is the slide since. The recent trend is the headline of this whole report.</p>
+  <p class="lede reveal">My UDisc round rating, month by month. The <b>2024 peak (186 avg, a 235 ceiling)</b> is real—and so is my slide since. The recent trend is the headline of my report.</p>
   <div class="card reveal"><div class="chartbox"><canvas id="trendChart"></canvas></div></div>
 </section>
 
 <section class="sec wrap">
   <div class="sec-head reveal"><span class="sec-num">02</span><h2>Volume vs. scoring</h2></div>
-  <p class="lede reveal">Rounds played each year against average score to par. <b>2024 was your fewest reps but your lowest scores</b> — a clue worth sitting with.</p>
+  <p class="lede reveal">My rounds each year against average score to par. <b>2024 brought fewer reps but my lowest scores</b>—a clue I want to sit with.</p>
   <div class="card reveal"><div class="chartbox"><canvas id="yearChart"></canvas></div></div>
 </section>
 
 <section class="sec wrap">
   <div class="sec-head reveal"><span class="sec-num">03</span><h2>Willow Fork, hole by hole</h2></div>
-  <p class="lede reveal">Your home course, <b>REPL_WFROUNDS main-18 rounds</b>. Bar height = how often you birdie. The short bars are where the strokes live.</p>
+  <p class="lede reveal">My home course, <b>REPL_WFROUNDS main-18 rounds</b>. Bar height shows how often I birdie. The short bars are where I can look for strokes.</p>
   <div class="card reveal">
     <div class="scorecard" id="scorecard"></div>
     <div class="legend">
@@ -159,25 +207,25 @@ footer b{color:var(--moss)}
 
 <section class="sec wrap">
   <div class="sec-head reveal"><span class="sec-num">04</span><h2>The training targets</h2></div>
-  <p class="lede reveal">Five holes at Willow Fork you par or worse far too often for their length. Convert these and your home rating moves first.</p>
+  <p class="lede reveal">Five holes at Willow Fork where I make par or worse more often than I would like. These are targets for my practice—not a guarantee of a rating change.</p>
   <div class="targets" id="targets"></div>
 </section>
 
 <section class="sec wrap">
   <div class="sec-head reveal"><span class="sec-num">05</span><h2>Read between the rounds</h2></div>
-  <p class="lede reveal">Patterns the scorecard won''t tell you to your face.</p>
+  <p class="lede reveal">Patterns I found between the scorecards.</p>
   <div class="insights" id="insights"></div>
 </section>
 
 <section class="sec wrap">
   <div class="sec-head reveal"><span class="sec-num">06</span><h2>The tour so far</h2></div>
-  <p class="lede reveal">Where the rounds happened. Bar = round volume; number = avg rating at that course.</p>
+  <p class="lede reveal">Where I played. Bar = my round volume; number = my average UDisc rating at that course.</p>
   <div class="courses reveal" id="courses"></div>
 </section>
 
 <footer class="wrap">
-  Built from <b>472 UDisc scorecards</b>, 2021–2026 &nbsp;//&nbsp; Jason &nbsp;//&nbsp; PDGA #186874<br>
-  <span style="color:var(--mute)">Self-scouting report — update it after every tournament block.</span>
+  I built this from <b>472 UDisc scorecards</b>, 2021–2026 &nbsp;//&nbsp; Jason &nbsp;//&nbsp; PDGA #186874<br>
+  <span style="color:var(--mute)">My self-scouting report. These are UDisc ratings, not PDGA ratings.</span>
 </footer>
 
 <script>
@@ -188,7 +236,7 @@ const DATA = {"yearly": [{"year": 2021, "rounds": 45, "avg_to_par": 2.56, "avg_r
 const H=DATA.headline;
 document.querySelector('.strip').innerHTML=`
  <div class="cell"><div class="v">${H.total_rounds}</div><div class="l">Rounds logged</div></div>
- <div class="cell"><div class="v">${H.avg_rating}</div><div class="l">Avg round rating</div></div>
+ <div class="cell"><div class="v">${H.avg_rating}</div><div class="l">Avg UDisc round rating</div></div>
  <div class="cell"><div class="v">${H.courses}</div><div class="l">Courses played</div></div>
  <div class="cell"><div class="v">${H.best_to_par}</div><div class="l">Best vs par</div></div>`;
 document.querySelectorAll('.lede').forEach(e=>{e.innerHTML=e.innerHTML.replace('REPL_WFROUNDS',DATA.wf_rounds)});
@@ -245,11 +293,11 @@ DATA.holes.forEach(h=>{
 // targets: lowest birdie rate, par 3s
 const t=[...DATA.holes].sort((a,b)=>a.birdie-b.birdie).slice(0,5);
 const notes={
- 9:"Long, tight par 3 — your most-parred hole on the course. A reliable upshot or a controlled drive that holds the line turns these into looks.",
- 3:"Birdie under 18%. The drive isn''t getting you to a Circle 1 look often enough — chart the landing zone and commit a disc to it.",
- 6:"High par rate with a bogey tail. Scrambles are costing you here; tighten the approach to stop the leaks.",
- 1:"Opening hole — you start flat. A pre-round warmup routine and a go-to opening disc could swing this one.",
- 14:"Highest bogey-plus rate on the card (11.7%). This is a blow-up hole, not a birdie hole — play it for a clean 3 first."
+ 9:"Long, tight par 3—my most-parred hole on the course. I want to work on a reliable upshot and a controlled drive that holds the line.",
+ 3:"Birdie under 18%. My scorecard does not record Circle 1 landing distances; I want to track where my drives land before drawing that conclusion.",
+ 6:"High par rate with a bogey tail. I want to track my approaches and scrambles to understand where these strokes are going.",
+ 1:"Opening hole—I want to test a pre-round warmup routine and a go-to opening disc.",
+ 14:"Highest bogey-plus rate on my card (11.7%). I want to aim for a clean 3 here before chasing a birdie."
 };
 document.getElementById('targets').innerHTML=t.map(h=>`
  <div class="target"><div class="hn">${h.hole}</div>
@@ -259,10 +307,10 @@ document.getElementById('targets').innerHTML=t.map(h=>`
 
 // insights
 const ins=[
- {tag:"Recent form",h:"The slide is real — and reversible",p:"Your 12-month average has eased from <b>186 (2024)</b> toward the <b>low 170s</b>. Fewer reps, more rust. The data says volume — not technique — is the lever right now."},
- {tag:"Back nine",h:"You finish stronger than you start",p:"At Willow Fork your back nine runs <b>"+DATA.nines.back_to_par+" to par</b> versus <b>"+DATA.nines.front_to_par+"</b> on the front. You warm into rounds — so build a real warmup and steal those front-nine strokes."},
- {tag:"Best window",h:"Midday is your scoring window",p:"Rated rounds played midday average <b>"+(DATA.tod.find(x=>x.period==='Midday')||{}).rating+"</b>, clearly ahead of evening rounds. When a tournament tee time is yours to pick, you know the window."},
- {tag:"Signature hole",h:"Hole 18 is your closer",p:"You birdie the par-4 18th <b>~68% of the time</b> — your single best hole. That''s a finisher you can lean on when a round is on the line."}
+ {tag:"Recent form",h:"My recent form has slipped",p:"My annual average UDisc rating has eased from <b>186 (2024)</b> toward the <b>low 170s</b>. I have logged fewer rounds, but these scores alone cannot tell me whether volume, technique, or something else explains the change."},
+ {tag:"Back nine",h:"I finish stronger than I start",p:"At Willow Fork my back nine runs <b>"+DATA.nines.back_to_par+" to par</b> versus <b>"+DATA.nines.front_to_par+"</b> on the front. My back nine scores better. I want to test whether a warmup helps my front nine."},
+ {tag:"Best window",h:"Midday has been my scoring window",p:"My rated rounds played midday average <b>"+(DATA.tod.find(x=>x.period==='Midday')||{}).rating+"</b>, clearly ahead of evening rounds. That is a pattern in my recorded rounds, not a promise about my next tee time."},
+ {tag:"Signature hole",h:"Hole 18 is my closer",p:"I birdie the par-4 18th <b>~68% of the time</b> — my single best hole. That's a pattern I can keep in mind when a round is on the line."}
 ];
 document.getElementById('insights').innerHTML=ins.map(i=>`<div class="ins"><div class="tag">${i.tag}</div><h3>${i.h}</h3><p>${i.p}</p></div>`).join('');
 
