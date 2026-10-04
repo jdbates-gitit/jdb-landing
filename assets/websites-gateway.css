@@ -1,0 +1,11 @@
+/* A separate gallery entrance, without duplicating the existing project cards. */
+#jdb-current-rebalanced .jdb-websites-gateway{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:48px;padding:32px;border:1px solid var(--line-2);background:linear-gradient(120deg,#211a2290,var(--paper-2));}
+#jdb-current-rebalanced .jdb-websites-gateway .jdb-tag{font:10px/1.5 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--brass-bright);}
+#jdb-current-rebalanced .jdb-websites-gateway h3{font:400 clamp(25px,3vw,34px)/1.15 var(--display);margin:12px 0 15px;letter-spacing:-.015em;}
+#jdb-current-rebalanced .jdb-websites-gateway h3 em{color:var(--brass-bright);}
+#jdb-current-rebalanced .jdb-websites-gateway p{color:var(--ink-dim);font-size:15px;line-height:1.65;max-width:44ch;}
+#jdb-current-rebalanced .jdb-websites-gateway .jdb-btn{margin-top:24px;}
+#jdb-current-rebalanced .jdb-websites-mosaic{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center;}
+#jdb-current-rebalanced .jdb-websites-mosaic img{width:100%;height:auto;aspect-ratio:1.6;object-fit:cover;object-position:top;display:block;border:1px solid var(--line-2);box-shadow:0 10px 20px #0003;}
+#jdb-current-rebalanced .jdb-websites-mosaic img:first-child{grid-column:1/-1;width:85%;justify-self:center;}
+@media(max-width:680px){#jdb-current-rebalanced .jdb-websites-gateway{grid-template-columns:1fr;padding:24px;gap:28px;}#jdb-current-rebalanced .jdb-websites-mosaic{max-width:460px;}#jdb-current-rebalanced .jdb-websites-mosaic img:first-child{width:76%;}#jdb-current-rebalanced .jdb-websites-gateway .jdb-btn{max-width:100%;font-size:12px;}}

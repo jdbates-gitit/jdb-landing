@@ -27,13 +27,14 @@ test('legacy homepage hashes retain their public meaning and native links are gu
 test('every main-site page and Notes article has the shared home navigation',async()=>{
   const files=(await readdir(root)).filter(file=>file.endsWith('.html')&&file!=='index.html');
   files.push(...(await readdir(join(root,'notes'))).filter(file=>file.endsWith('.html')).map(file=>'notes/'+file));
-  assert.equal(files.length,15);
+  assert.equal(files.length,16);
   for(const file of files){
     const text=await readFile(join(root,file),'utf8');
     assert.equal((text.match(/id="jdb-site-navigation"/g)||[]).length,1,file);
     assert.match(text,/class="jdb-brand" href="\/"/,file);
     assert.match(text,/assets\/site-navigation\.css\?v=/,file);
     assert.match(text,/assets\/site-navigation\.js\?v=/,file);
+    assert.match(text,/href="\/websites"/,file);
     assert.doesNotMatch(text,/PRIVATE CONCEPT|noindex,nofollow|data-private-retired-nav/,file);
   }
 });
