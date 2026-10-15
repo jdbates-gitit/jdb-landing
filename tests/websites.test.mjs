@@ -18,6 +18,15 @@ test('gallery has nine public destinations and one noninteractive private previe
   assert.match(gallery,/href="https:\/\/jdb-builds\.com\/"/);
   assert.equal((gallery.match(/target="_blank" rel="noopener noreferrer"/g)||[]).length,9);
 });
+test('Pencil Wars introduces all three games and the existing game chooser',()=>{
+  const card=gallery.match(/<article[^>]+data-site-id="pencil-wars"[\s\S]*?<\/article>/)?.[0];
+  assert(card);
+  for(const name of ['Battlefield','Last Line','Lost Orbit'])assert(card.includes(name),name);
+  assert.match(card,/Pencil Wars · JDB Games/);
+  assert.match(card,/Open JDB Games at the top right to choose your game/);
+  assert.match(card,/Explore JDB Games/);
+  assert.match(card,/href="https:\/\/pencilwars\.jdb-builds\.com\/"/);
+});
 test('all ten previews are local, content-versioned snapshots',async()=>{
   const images=[...gallery.matchAll(/<img src="(\/assets\/websites\/[^"?]+)\?v=([a-f0-9]+)"[^>]+>/g)];
   assert.equal(images.length,10);
