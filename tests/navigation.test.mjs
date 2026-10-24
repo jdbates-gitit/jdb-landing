@@ -38,6 +38,21 @@ test('every main-site page and Notes article has the shared home navigation',asy
     assert.doesNotMatch(text,/PRIVATE CONCEPT|noindex,nofollow|data-private-retired-nav/,file);
   }
 });
+test('JDB Games follows Websites once in every main-site Builds menu',async()=>{
+  const files=(await readdir(root)).filter(file=>file.endsWith('.html'));
+  files.push(...(await readdir(join(root,'notes'))).filter(file=>file.endsWith('.html')).map(file=>'notes/'+file));
+  assert.equal(files.length,18);
+  for(const file of files){
+    const html=await readFile(join(root,file),'utf8');
+    const builds=html.match(/<details[^>]*data-group="builds"[\s\S]*?<\/details>/)?.[0];
+    assert(builds,file);
+    assert.match(builds,/<a[^>]+href="\/websites"[^>]*>[\s\S]*?<\/a>\s*<a[^>]+href="\/games"[^>]*>/,file);
+    assert.equal((builds.match(/href="\/games"/g)||[]).length,1,file);
+    assert.match(builds,/<span class="jdb-menu-name">JDB Games<\/span>/,file);
+    assert.match(builds,/Four games\. Choose your next adventure\./,file);
+    if(file==='games.html')assert.match(builds,/href="\/games" aria-current="page"/,file);
+  }
+});
 test('home asset URLs exist, and public build does not include project internals',async()=>{
   for(const [,url] of home.matchAll(/(?:src|href)="(\/assets\/[^"?]+)(?:\?[^" ]*)?"/g))assert((await stat(join(root,url))).isFile());
   const build=await readFile(join(root,'scripts/build.mjs'),'utf8');
