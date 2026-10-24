@@ -10,4 +10,5 @@
 .website-frame img{height:auto}
 .website-private{display:flex;flex-direction:column}
 .website-private .website-frame img{object-fit:contain}
+.website-card .website-frame img.games-family-preview{object-fit:contain;background:#0c171a}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}

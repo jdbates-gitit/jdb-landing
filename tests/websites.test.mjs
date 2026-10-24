@@ -13,22 +13,26 @@ test('gallery has nine public destinations and one noninteractive private previe
   assert(privateCard);assert.match(privateCard,/Private.*preview/);
   assert.doesNotMatch(privateCard,/<a\b|<button\b|<input\b|<select\b|<textarea\b|tabindex|onclick|href=/i);
   assert.doesNotMatch(gallery,/href="[^" ]*(?:yourtime|watchtower)|\/yourtime\/|api\/list|cynthiaplitt68/i);
-  for(const domain of ['inmemoryoflindakay.org','jennilynn.net','pencilwars.jdb-builds.com','rewind.jdb-builds.com','briefing.jdb-builds.com','discipline.jdb-builds.com','jdb-memorial-demo.pages.dev'])assert(gallery.includes('href="https://'+domain+'/"'),domain);
+  for(const domain of ['inmemoryoflindakay.org','jennilynn.net','rewind.jdb-builds.com','briefing.jdb-builds.com','discipline.jdb-builds.com','jdb-memorial-demo.pages.dev'])assert(gallery.includes('href="https://'+domain+'/"'),domain);
+  assert.match(gallery,/href="\/games"/);
   assert.match(gallery,/href="https:\/\/jdb-builds\.com\/date-night"/);
   assert.match(gallery,/href="https:\/\/jdb-builds\.com\/"/);
-  assert.equal((gallery.match(/target="_blank" rel="noopener noreferrer"/g)||[]).length,9);
+  assert.equal((gallery.match(/target="_blank" rel="noopener noreferrer"/g)||[]).length,8);
 });
-test('Pencil Wars introduces all three games and the existing game chooser',()=>{
+test('JDB Games introduces four games and opens the local launch page',()=>{
   const card=gallery.match(/<article[^>]+data-site-id="pencil-wars"[\s\S]*?<\/article>/)?.[0];
   assert(card);
-  for(const name of ['Battlefield','Last Line','Lost Orbit'])assert(card.includes(name),name);
-  assert.match(card,/Pencil Wars · JDB Games/);
-  assert.match(card,/Open JDB Games at the top right to choose your game/);
-  assert.match(card,/Explore JDB Games/);
-  assert.match(card,/href="https:\/\/pencilwars\.jdb-builds\.com\/"/);
+  for(const name of ['Battlefield','Last Line','Lost Orbit','Hollowtown'])assert(card.includes(name),name);
+  assert.match(card,/<h3 id="site-pencil-wars">JDB Games<\/h3>/);
+  assert.match(card,/The Pencil Wars family · Four adventures/);
+  assert.match(card,/Choose your next adventure on the launch page/);
+  assert.match(card,/Choose your adventure/);
+  assert.match(card,/href="\/games"/);
+  assert.match(card,/\/assets\/games\/family-menu\.png\?v=/);
+  assert.doesNotMatch(card,/Opens in a new tab|target="_blank"/);
 });
 test('all ten previews are local, content-versioned snapshots',async()=>{
-  const images=[...gallery.matchAll(/<img src="(\/assets\/websites\/[^"?]+)\?v=([a-f0-9]+)"[^>]+>/g)];
+  const images=[...gallery.matchAll(/<img[^>]* src="(\/assets\/(?:websites\/[^"?]+|games\/family-menu\.png))\?v=([a-f0-9]+)"[^>]+>/g)];
   assert.equal(images.length,10);
   for(const [tag,path,version] of images){
     const file=await readFile(join(root,path));
