@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bag Tag — A Disc Golf Dossier</title>
+<title>The Bag Tag Dossier · Updated October 2026 · JDB-Builds</title>
+<meta name="description" content="My evolving disc golf self-scouting report: 526 logged UDisc scorecards, a fresh look at my recent form, and the holes I want to work on next.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Spline+Sans+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
@@ -113,6 +114,32 @@ footer{padding:80px 0 60px;margin-top:80px;border-top:1px solid var(--line);colo
 footer b{color:var(--moss)}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
+
+/* October field update: keep the original fairway palette and typography. */
+.hero.wrap,.sec.wrap{padding-left:24px;padding-right:24px}
+.edition-line{font-family:'Spline Sans Mono',monospace;font-size:11px;line-height:1.7;color:var(--moss);margin-top:24px}
+.edition-line a,.report-links a,.method a{color:var(--basket);text-underline-offset:4px}
+.field-update{margin-top:36px;background:linear-gradient(130deg,rgba(92,207,122,.09),var(--field2));border:1px solid #39543f;border-radius:16px;padding:28px}
+.field-update .tag{font-family:'Spline Sans Mono',monospace;color:var(--fairway);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.field-update h2{font-family:'Fraunces',serif;font-size:clamp(26px,4vw,36px);font-weight:600;line-height:1.15;margin-bottom:12px}
+.field-update p{color:var(--moss);font-size:15px;line-height:1.65;max-width:72ch}
+.field-update b{color:var(--chalk)}
+.comparison{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0 16px}
+.comparison>div{padding:18px;background:var(--field);border:1px solid var(--line);border-radius:10px}
+.comparison .current{border-color:#5a9168}
+.comparison .label{display:block;color:var(--moss);font-family:'Spline Sans Mono',monospace;font-size:11px;line-height:1.6}
+.comparison strong{display:block;font-family:'Fraunces',serif;font-size:38px;font-weight:600;margin:6px 0;color:var(--chalk)}
+.comparison .current strong{color:var(--fairway)}
+.comparison small{display:block;color:var(--moss);font-size:12px;line-height:1.6}
+.report-links{display:flex;gap:20px;flex-wrap:wrap;margin-top:22px;font-size:13px;line-height:1.6}
+.sample-note{font-size:12px;line-height:1.65;color:var(--moss);margin-top:14px;max-width:74ch}
+.method{margin-top:28px;padding:20px 24px;border:1px solid var(--line);border-radius:12px;color:var(--moss);font-size:13px;line-height:1.75}
+.method summary{cursor:pointer;color:var(--chalk);font-weight:600;font-size:14px}
+.method p{margin-top:12px}
+.method:focus-within{outline:2px solid var(--basket);outline-offset:4px}
+.chart-description{color:var(--moss);font-size:12px;line-height:1.6;margin-top:18px}
+@media(max-width:600px){.hero{padding-top:48px}.eyebrow{font-size:10px;letter-spacing:.15em}.hero .sub{font-size:16px}.field-update{padding:20px}.comparison{gap:8px}.comparison>div{padding:13px}.comparison strong{font-size:32px}.target{flex-wrap:wrap;gap:10px;padding:18px}.target .hn{min-width:34px}.target .tx{min-width:190px}.target .pct{margin-left:44px;text-align:left}.crow{grid-template-columns:1fr;gap:7px;padding:16px 20px}.card{padding:18px}.strip .cell{padding:20px 16px}.strip .cell .l{color:var(--moss)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{transform:none}}
 </style>
 <link rel="stylesheet" href="/assets/site-navigation.css?v=e684e54f1fe0"><script defer src="/assets/site-navigation.js?v=81b296ff41ac"></script>
 <style>@media(max-width:480px){.scorecard{grid-template-columns:repeat(6,minmax(0,1fr))}}</style>
@@ -170,46 +197,60 @@ footer b{color:var(--moss)}
 <header class="hero wrap">
   <div class="eyebrow reveal">PDGA #186874 &nbsp;//&nbsp; Willow Fork &amp; Beyond</div>
   <h1 class="reveal">The <em>Bag Tag</em><br>Dossier.</h1>
-  <p class="sub reveal">I looked closely at five seasons of my UDisc scorecards. <b>What's working in my game, where I'm leaking strokes, and where I might find the next rating points.</b></p>
+  <p class="sub reveal">Five hundred-plus scorecards since 2021, and I'm still finding things to learn. <b>What's changing in my game, where I'm finding strokes, and what keeps bringing me back.</b></p>
+  <p class="edition-line">Updated October 24, 2026 · Scorecards from July 2021–October 2026<br><a href="#since-last-look">Since the last look ↓</a></p>
   <div class="bigstat reveal">
     <div class="num">235</div>
     <div class="cap">My career-best UDisc round rating, posted <b>Jul 2024</b> at Willow Fork on a 12-under card.</div>
   </div>
   <div class="strip reveal">
-    <div class="cell"><div class="v">472</div><div class="l">Rounds logged</div></div>
+    <div class="cell"><div class="v">526</div><div class="l">Scorecards logged</div></div>
     <div class="cell"><div class="v">180</div><div class="l">Avg UDisc round rating</div></div>
-    <div class="cell"><div class="v">23</div><div class="l">Courses played</div></div>
+    <div class="cell"><div class="v">376</div><div class="l">Full Willow Fork main-18s</div></div>
     <div class="cell"><div class="v">-12</div><div class="l">Best vs par</div></div>
   </div>
+  <p class="sample-note">The rating average uses 215 completed, rated cards. The Willow Fork total uses full standard main-18s. <a href="#about-the-data" style="color:var(--basket)">How I counted →</a></p>
+  <div class="field-update reveal" id="since-last-look">
+    <div class="tag">October field update / Since the last look</div>
+    <h2>A little more of my game is coming back.</h2>
+    <p>My latest 20 complete main-18 rounds at Willow Fork average <b>4.80 under par</b>, compared with <b>3.85 under</b> in the previous 20. That's almost a stroke a round. My average UDisc rating moved from <b>175.9 to 181.3</b> across those same windows. It's an encouraging stretch, even though I'm still below my 2024 annual rating average.</p>
+    <div class="comparison" aria-label="Two consecutive windows of 20 complete Willow Fork main-18 rounds">
+      <div><span class="label">Previous 20 · May 20–Sep 4</span><strong>−3.85</strong><small>Average versus par<br>175.9 average UDisc rating</small></div>
+      <div class="current"><span class="label">Latest 20 · Sep 9–Oct 24</span><strong>−4.80</strong><small>Average versus par<br>181.3 average UDisc rating</small></div>
+    </div>
+    <p>The new export brings my log to <b>526 scorecards</b>: 43 rounds since May and 11 older entries recorded under my full name. I've also separated incomplete rounds from the full-round comparisons. That makes this a fresh look at the evidence, rather than just a larger number at the top.</p>
+    <div class="report-links"><a href="/fairway-miles">One round I want to remember ↗</a><a href="/assets/disc/dossier-through-may-2026.html">Read the earlier snapshot ↗</a></div>
+  </div>
+
 </header>
 
 <section class="sec wrap">
   <div class="sec-head reveal"><span class="sec-num">01</span><h2>The form curve</h2></div>
-  <p class="lede reveal">My UDisc round rating, month by month. The <b>2024 peak (186 avg, a 235 ceiling)</b> is real—and so is my slide since. The recent trend is the headline of my report.</p>
-  <div class="card reveal"><div class="chartbox"><canvas id="trendChart"></canvas></div></div>
+  <p class="lede reveal">My monthly average UDisc rating, now through <b>October 2026</b>. My 2024 average was about <b>186</b>; my 2026 average so far is about <b>176</b>. The recent Willow Fork stretch is improving, but I want to keep that longer view in sight.</p>
+  <div class="card reveal"><div class="chartbox"><canvas id="trendChart" role="img" aria-label="Monthly average UDisc round ratings through October 2026. Recent Willow Fork form is improving; my year-to-date average remains below 2024."></canvas></div></div>
 </section>
 
 <section class="sec wrap">
   <div class="sec-head reveal"><span class="sec-num">02</span><h2>Volume vs. scoring</h2></div>
-  <p class="lede reveal">My rounds each year against average score to par. <b>2024 brought fewer reps but my lowest scores</b>—a clue I want to sit with.</p>
-  <div class="card reveal"><div class="chartbox"><canvas id="yearChart"></canvas></div></div>
+  <p class="lede reveal">My logged scorecards each year, with the average UDisc rating from completed, rated scorecards. <b>82 entries in 2026 so far</b> puts me above either of the previous two years. More rounds and better scores do not always move together.</p>
+  <div class="card reveal"><div class="chartbox"><canvas id="yearChart" role="img" aria-label="Annual scorecard counts: 53 in 2021, 165 in 2022, 118 in 2023, 61 in 2024, 47 in 2025, and 82 through October 24, 2026. Rating averages are shown only where supplied."></canvas></div></div>
 </section>
 
 <section class="sec wrap">
   <div class="sec-head reveal"><span class="sec-num">03</span><h2>Willow Fork, hole by hole</h2></div>
-  <p class="lede reveal">My home course, <b>REPL_WFROUNDS main-18 rounds</b>. Bar height shows how often I birdie. The short bars are where I can look for strokes.</p>
+  <p class="lede reveal">My home course, <b>376 completed standard main-18 rounds</b>, grouped across its two UDisc names. Each round has the same par-55 hole sequence. Bar height shows how often I score birdie or better; orange marks holes where I make bogey or worse more than 7% of the time.</p>
   <div class="card reveal">
     <div class="scorecard" id="scorecard"></div>
     <div class="legend">
-      <span><i class="dot" style="background:var(--fairway)"></i> Birdie rate (taller = better)</span>
-      <span><i class="dot" style="background:var(--flight)"></i> Bogey-prone</span>
+      <span><i class="dot" style="background:var(--fairway)"></i> Birdie or better (taller = better)</span>
+      <span><i class="dot" style="background:var(--flight)"></i> Bogey+ above 7%</span>
     </div>
   </div>
 </section>
 
 <section class="sec wrap">
   <div class="sec-head reveal"><span class="sec-num">04</span><h2>The training targets</h2></div>
-  <p class="lede reveal">Five holes at Willow Fork where I make par or worse more often than I would like. These are targets for my practice—not a guarantee of a rating change.</p>
+  <p class="lede reveal">The five par-3s with my lowest birdie-or-better rates. <b>Hole 14 also has my highest bogey-plus rate.</b> These are places I want to pay attention, not proof of which part of my throw needs fixing.</p>
   <div class="targets" id="targets"></div>
 </section>
 
@@ -221,25 +262,31 @@ footer b{color:var(--moss)}
 
 <section class="sec wrap">
   <div class="sec-head reveal"><span class="sec-num">06</span><h2>The tour so far</h2></div>
-  <p class="lede reveal">Where I played. Bar = my round volume; number = my average UDisc rating at that course.</p>
+  <p class="lede reveal">Where I played, with the Willow Fork and Agnes Moffitt name changes grouped together. Bar = logged scorecards; number = my average UDisc rating from completed, rated cards at that course. An unrated course is still part of the story.</p>
   <div class="courses reveal" id="courses"></div>
+  <details class="method" id="about-the-data">
+    <summary>How I counted these rounds</summary>
+    <p>This October 24 export contains <b>526 entries</b> under my two player names: Jason and Jason Bates. I excluded every other player's scores and UDisc's par-reference rows. Of my entries, <b>502 complete the recorded layout, 22 are partial, and 2 have no hole scores</b>. All 526 remain in my log totals; only completed layouts enter the rating summaries. Ratings are available for <b>215 completed scorecards</b>, so the 180 average is not an average of all 526 entries.</p>
+    <p>The Willow Fork hole chart, practice targets, nine-hole averages and recent comparisons use <b>376 completed standard 18-hole, par-55 scorecards</b>. Custom and pro-tee layouts, incomplete cards and the empty entries are excluded. A zero in this export means an unplayed hole, not a zero-stroke score. For every scored card I checked the total against its hole scores and the recorded score versus par against the par of the holes actually played.</p>
+    <p>I grouped Willow Fork, Willow Fork Park and Willow Fork DGC in the course list, and grouped the two Agnes Moffitt names. Other course names remain as exported; they may not all represent different physical courses. Monthly and yearly ratings span different courses and layouts. The latest year and month are incomplete, and small monthly samples can swing sharply. Chart tooltips show the number of rated cards.</p>
+    <p>These are <b>UDisc round ratings, not PDGA ratings</b>. Scorecards do not measure putt distance, drive accuracy, weather or why a score changed. The earlier snapshot remains available as a record of what I saw then; its counts and methods have been superseded by this update.</p>
+  </details>
+
 </section>
 
 <footer class="wrap">
-  I built this from <b>472 UDisc scorecards</b>, 2021–2026 &nbsp;//&nbsp; Jason &nbsp;//&nbsp; PDGA #186874<br>
-  <span style="color:var(--mute)">My self-scouting report. These are UDisc ratings, not PDGA ratings.</span>
+  I built this from <b>526 logged UDisc scorecards</b>, July 2021–October 24, 2026 &nbsp;//&nbsp; Jason &nbsp;//&nbsp; PDGA #186874<br>
+  <span style="color:var(--moss)">My evolving self-scouting report. UDisc ratings, not PDGA ratings.</span><br><a href="/" style="color:var(--basket);display:inline-block;margin-top:16px">JDB-Builds · Home ↗</a>
 </footer>
 
-<script>
-const DATA = {"yearly": [{"year": 2021, "rounds": 45, "avg_to_par": 2.56, "avg_rating": null}, {"year": 2022, "rounds": 162, "avg_to_par": -1.17, "avg_rating": null}, {"year": 2023, "rounds": 118, "avg_to_par": -2.89, "avg_rating": 185.0}, {"year": 2024, "rounds": 61, "avg_to_par": -4.05, "avg_rating": 186.0}, {"year": 2025, "rounds": 47, "avg_to_par": -3.19, "avg_rating": 176.0}, {"year": 2026, "rounds": 39, "avg_to_par": -2.41, "avg_rating": 173.0}], "headline": {"total_rounds": 472, "courses": 23, "years": "2021\u20132026", "avg_rating": 180, "best_rating": 235, "best_to_par": -12, "avg_to_par": -1.9}, "holes": [{"hole": 1, "par": 3, "avg": 2.87, "to_par": -0.13, "birdie": 20.1, "bogey": 8.6}, {"hole": 2, "par": 3, "avg": 2.76, "to_par": -0.24, "birdie": 29.5, "bogey": 6.3}, {"hole": 3, "par": 3, "avg": 2.91, "to_par": -0.09, "birdie": 17.2, "bogey": 8.6}, {"hole": 4, "par": 3, "avg": 2.49, "to_par": -0.51, "birdie": 50.7, "bogey": 1.7}, {"hole": 5, "par": 3, "avg": 2.75, "to_par": -0.25, "birdie": 27.5, "bogey": 4.6}, {"hole": 6, "par": 3, "avg": 2.91, "to_par": -0.09, "birdie": 17.2, "bogey": 9.2}, {"hole": 7, "par": 3, "avg": 2.83, "to_par": -0.17, "birdie": 22.1, "bogey": 8.0}, {"hole": 8, "par": 3, "avg": 2.62, "to_par": -0.38, "birdie": 36.1, "bogey": 2.3}, {"hole": 9, "par": 3, "avg": 2.91, "to_par": -0.09, "birdie": 14.9, "bogey": 8.0}, {"hole": 10, "par": 3, "avg": 2.61, "to_par": -0.39, "birdie": 38.7, "bogey": 4.3}, {"hole": 11, "par": 3, "avg": 2.73, "to_par": -0.27, "birdie": 27.5, "bogey": 4.9}, {"hole": 12, "par": 3, "avg": 2.66, "to_par": -0.34, "birdie": 34.4, "bogey": 5.4}, {"hole": 13, "par": 3, "avg": 2.5, "to_par": -0.5, "birdie": 45.8, "bogey": 1.1}, {"hole": 14, "par": 3, "avg": 2.87, "to_par": -0.13, "birdie": 20.6, "bogey": 11.7}, {"hole": 15, "par": 3, "avg": 2.68, "to_par": -0.32, "birdie": 32.4, "bogey": 6.9}, {"hole": 16, "par": 3, "avg": 2.81, "to_par": -0.19, "birdie": 21.2, "bogey": 6.9}, {"hole": 17, "par": 3, "avg": 2.71, "to_par": -0.29, "birdie": 31.8, "bogey": 8.3}, {"hole": 18, "par": 4, "avg": 3.23, "to_par": -0.77, "birdie": 67.6, "bogey": 3.2}], "wf_rounds": 349, "courses_list": [{"name": "Willow Fork Park", "rounds": 276, "avg_rating": 185}, {"name": "Willow Fork DGC", "rounds": 74, "avg_rating": 174}, {"name": "Agnes Moffitt Park", "rounds": 27, "avg_rating": null}, {"name": "T.C. Jester Park", "rounds": 24, "avg_rating": 188}, {"name": "Zube Park DGC", "rounds": 19, "avg_rating": null}, {"name": "Stonebridge Church", "rounds": 11, "avg_rating": null}, {"name": "Jones Creek Ranch Park", "rounds": 9, "avg_rating": 164}, {"name": "Texas Army Trail (Bud\u00a0Hadfield\u00a0Park)", "rounds": 9, "avg_rating": null}], "tod": [{"period": "Morning", "rating": 175}, {"period": "Midday", "rating": 185}, {"period": "Evening", "rating": 178}], "dow": [{"day": "Mon", "rating": 190}, {"day": "Tue", "rating": 173}, {"day": "Wed", "rating": 171}, {"day": "Thu", "rating": 178}, {"day": "Fri", "rating": 172}, {"day": "Sat", "rating": 184}, {"day": "Sun", "rating": 180}], "rating_trend": [{"month": "2023-10", "rating": 179.0}, {"month": "2023-11", "rating": 190.0}, {"month": "2023-12", "rating": 182.0}, {"month": "2024-01", "rating": 192.0}, {"month": "2024-02", "rating": 183.0}, {"month": "2024-03", "rating": 183.0}, {"month": "2024-04", "rating": 187.0}, {"month": "2024-05", "rating": 183.0}, {"month": "2024-06", "rating": 191.0}, {"month": "2024-07", "rating": 194.0}, {"month": "2024-08", "rating": 194.0}, {"month": "2024-09", "rating": 182.0}, {"month": "2024-10", "rating": 173.0}, {"month": "2024-11", "rating": 180.0}, {"month": "2024-12", "rating": 173.0}, {"month": "2025-03", "rating": 184.0}, {"month": "2025-04", "rating": 169.0}, {"month": "2025-09", "rating": 181.0}, {"month": "2025-10", "rating": 185.0}, {"month": "2025-11", "rating": 171.0}, {"month": "2025-12", "rating": 175.0}, {"month": "2026-01", "rating": 178.0}, {"month": "2026-02", "rating": 199.0}, {"month": "2026-03", "rating": 173.0}, {"month": "2026-04", "rating": 166.0}, {"month": "2026-05", "rating": 172.0}], "nines": {"front_to_par": -1.95, "back_to_par": -3.19}};
-</script>
+<script src="/assets/disc/data.js?v=20261024"></script>
 <script>
 // fill headline
 const H=DATA.headline;
 document.querySelector('.strip').innerHTML=`
- <div class="cell"><div class="v">${H.total_rounds}</div><div class="l">Rounds logged</div></div>
+ <div class="cell"><div class="v">${H.total_rounds}</div><div class="l">Scorecards logged</div></div>
  <div class="cell"><div class="v">${H.avg_rating}</div><div class="l">Avg UDisc round rating</div></div>
- <div class="cell"><div class="v">${H.courses}</div><div class="l">Courses played</div></div>
+ <div class="cell"><div class="v">${DATA.wf_rounds}</div><div class="l">Full Willow Fork main-18s</div></div>
  <div class="cell"><div class="v">${H.best_to_par}</div><div class="l">Best vs par</div></div>`;
 document.querySelectorAll('.lede').forEach(e=>{e.innerHTML=e.innerHTML.replace('REPL_WFROUNDS',DATA.wf_rounds)});
 
@@ -260,7 +307,7 @@ new Chart(document.getElementById('trendChart'),{
    fill:true,backgroundColor:(c)=>{const g=c.chart.ctx.createLinearGradient(0,0,0,340);g.addColorStop(0,'rgba(255,107,53,0.22)');g.addColorStop(1,'rgba(255,107,53,0)');return g;}
  }]},
  options:{responsive:true,maintainAspectRatio:false,
-  plugins:{legend:{display:false},tooltip:{callbacks:{title:c=>c[0].label,label:c=>'Rating '+c.parsed.y}}},
+  plugins:{legend:{display:false},tooltip:{callbacks:{title:c=>c[0].label,label:c=>'Rating '+c.parsed.y.toFixed(1),afterLabel:c=>tr[c.dataIndex].rounds+' completed, rated cards'}}},
   scales:{x:{grid:{color:LINE},ticks:{maxTicksLimit:8,font:{size:10}}},
    y:{grid:{color:LINE},ticks:{font:{size:11}},suggestedMin:150,suggestedMax:200}}}
 });
@@ -269,13 +316,13 @@ new Chart(document.getElementById('trendChart'),{
 const Y=DATA.yearly;
 new Chart(document.getElementById('yearChart'),{
  data:{labels:Y.map(y=>y.year),datasets:[
-  {type:'bar',label:'Rounds',data:Y.map(y=>y.rounds),backgroundColor:'rgba(92,207,122,0.35)',borderColor:'#5ccf7a',borderWidth:1,borderRadius:6,yAxisID:'y'},
-  {type:'line',label:'Avg rating',data:Y.map(y=>y.avg_rating),borderColor:'#f2c14e',borderWidth:2.5,tension:0.3,pointBackgroundColor:'#f2c14e',pointRadius:4,yAxisID:'y1',spanGaps:true}
+  {type:'bar',label:'Logged scorecards',data:Y.map(y=>y.rounds),backgroundColor:'rgba(92,207,122,0.35)',borderColor:'#5ccf7a',borderWidth:1,borderRadius:6,yAxisID:'y'},
+  {type:'line',label:'Avg rating',data:Y.map(y=>y.avg_rating),borderColor:'#f2c14e',borderWidth:2.5,tension:0.3,pointBackgroundColor:'#f2c14e',pointRadius:4,yAxisID:'y1',spanGaps:false}
  ]},
  options:{responsive:true,maintainAspectRatio:false,
-  plugins:{legend:{labels:{color:MOSS,boxWidth:12,font:{size:12}}}},
+  plugins:{legend:{labels:{color:MOSS,boxWidth:12,font:{size:12}}},tooltip:{callbacks:{afterLabel:c=>c.datasetIndex===1?Y[c.dataIndex].rated_rounds+' completed, rated cards':''}}},
   scales:{x:{grid:{color:LINE}},
-   y:{position:'left',grid:{color:LINE},title:{display:true,text:'Rounds',color:MOSS}},
+   y:{position:'left',grid:{color:LINE},title:{display:true,text:'Logged scorecards',color:MOSS}},
    y1:{position:'right',grid:{display:false},suggestedMin:160,suggestedMax:195,title:{display:true,text:'Rating',color:'#f2c14e'}}}}
 });
 
@@ -293,26 +340,26 @@ DATA.holes.forEach(h=>{
 });
 
 // targets: lowest birdie rate, par 3s
-const t=[...DATA.holes].sort((a,b)=>a.birdie-b.birdie).slice(0,5);
+const t=DATA.holes.filter(h=>h.par===3).sort((a,b)=>a.birdie-b.birdie||a.hole-b.hole).slice(0,5);
 const notes={
- 9:"Long, tight par 3—my most-parred hole on the course. I want to work on a reliable upshot and a controlled drive that holds the line.",
- 3:"Birdie under 18%. My scorecard does not record Circle 1 landing distances; I want to track where my drives land before drawing that conclusion.",
- 6:"High par rate with a bogey tail. I want to track my approaches and scrambles to understand where these strokes are going.",
- 1:"Opening hole—I want to test a pre-round warmup routine and a go-to opening disc.",
- 14:"Highest bogey-plus rate on my card (11.7%). I want to aim for a clean 3 here before chasing a birdie."
+ 9:"My lowest birdie-or-better rate. I want to note where my drive leaves me and whether my next shot is a putt or an approach.",
+ 3:"I score birdie or better about one round in six. I want to record my landing distance before deciding whether the drive or the putt needs attention.",
+ 6:"Another low-conversion hole, with a bogey tail. I want to notice whether I'm approaching, scrambling, or putting when I lose the stroke.",
+ 14:"My highest bogey-plus rate: "+DATA.holes.find(h=>h.hole===14).bogey+"%. I want to see what changes when I favor a clean three over a risky birdie attempt.",
+ 16:"I birdie or better less than one time in five. I want to track the shape and distance of the look I leave myself."
 };
 document.getElementById('targets').innerHTML=t.map(h=>`
  <div class="target"><div class="hn">${h.hole}</div>
- <div class="tx"><div class="t">Hole ${h.hole} · par ${h.par} · birdie just ${h.birdie}%</div>
- <div class="d">${notes[h.hole]||"Low birdie conversion for its length — a target worth a focused practice block."}</div></div>
+ <div class="tx"><div class="t">Hole ${h.hole} · par ${h.par} · birdie+ ${h.birdie}%</div>
+ <div class="d">${notes[h.hole]||"I want to record the look I leave myself before deciding what to practice."}</div></div>
  <div class="pct">${h.bogey}% bogey+</div></div>`).join('');
 
 // insights
 const ins=[
- {tag:"Recent form",h:"My recent form has slipped",p:"My annual average UDisc rating has eased from <b>186 (2024)</b> toward the <b>low 170s</b>. I have logged fewer rounds, but these scores alone cannot tell me whether volume, technique, or something else explains the change."},
- {tag:"Back nine",h:"I finish stronger than I start",p:"At Willow Fork my back nine runs <b>"+DATA.nines.back_to_par+" to par</b> versus <b>"+DATA.nines.front_to_par+"</b> on the front. My back nine scores better. I want to test whether a warmup helps my front nine."},
- {tag:"Best window",h:"Midday has been my scoring window",p:"My rated rounds played midday average <b>"+(DATA.tod.find(x=>x.period==='Midday')||{}).rating+"</b>, clearly ahead of evening rounds. That is a pattern in my recorded rounds, not a promise about my next tee time."},
- {tag:"Signature hole",h:"Hole 18 is my closer",p:"I birdie the par-4 18th <b>~68% of the time</b> — my single best hole. That's a pattern I can keep in mind when a round is on the line."}
+ {tag:"Recent form",h:"I'm finding a steadier stretch",p:"Across my latest 20 complete Willow Fork main-18s, I average <b>"+DATA.recent.avg_to_par.toFixed(2)+" to par</b> and a <b>"+DATA.recent.avg_rating.toFixed(1)+" UDisc rating</b>. Both improved over the previous 20. I can recognize the improvement without calling it a permanent change."},
+ {tag:"Back nine",h:"My back nine still scores better",p:"Across the same 376 complete main-18s, my back nine averages <b>"+DATA.nines.back_to_par.toFixed(2)+" to par</b>, compared with <b>"+DATA.nines.front_to_par.toFixed(2)+"</b> on the front. The holes differ, so this alone doesn't tell me whether I warm up as I go."},
+ {tag:"Next question",h:"A par doesn't tell the whole story",p:"My scorecard can't separate a missed birdie look from a scrambling save. I want to note my approximate first-putt distance and whether I had to scramble, starting with these five target holes. That would give my next update something the totals can't."},
+ {tag:"Signature hole",h:"Hole 18 is still my closer",p:"I score birdie or better on the par-4 18th <b>"+DATA.holes.find(h=>h.hole===18).birdie.toFixed(1)+"% of the time</b>, my highest conversion rate. It's a familiar chance I enjoy having at the end of a round."}
 ];
 document.getElementById('insights').innerHTML=ins.map(i=>`<div class="ins"><div class="tag">${i.tag}</div><h3>${i.h}</h3><p>${i.p}</p></div>`).join('');
 
@@ -320,7 +367,7 @@ document.getElementById('insights').innerHTML=ins.map(i=>`<div class="ins"><div 
 const maxR=Math.max(...DATA.courses_list.map(c=>c.rounds));
 document.getElementById('courses').innerHTML=DATA.courses_list.map(c=>`
  <div class="crow"><div class="cn">${c.name}</div>
- <div class="cr">${c.avg_rating?c.avg_rating+' avg':'—'} · ${c.rounds} rounds</div>
+ <div class="cr">${c.avg_rating!==null?c.avg_rating.toFixed(1)+' avg':'Unrated'} · ${c.rounds} logged</div>
  <div class="cbar"><i style="width:${(c.rounds/maxR)*100}%"></i></div></div>`).join('');
 </script>
 </body>
