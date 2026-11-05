@@ -11,3 +11,5 @@
 @media(max-width:800px){.games-hero{grid-template-columns:1fr;gap:0;padding-top:42px}.games-eyebrow{font-size:9px;margin-bottom:18px}.games-intro{margin-top:24px;max-width:48ch}.games-caption{font-size:9px}.game-art{height:155px}.game-copy{padding:6px 20px 22px}.game-copy p{font-size:15px}.games-grid{gap:18px}}
 @media(max-width:600px){.games-wrap{padding:0 20px}h1{font-size:clamp(38px,9.8vw,52px);max-width:16ch}.games-hero{padding-bottom:28px}.games-intro{font-size:16px}.games-grid{grid-template-columns:1fr;gap:22px}.game-art{height:170px}.game-copy h2{font-size:33px}.game-copy{padding:6px 22px 23px}.games-caption{margin-bottom:18px;gap:5px}.games-footer{margin-top:26px;padding-bottom:28px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){.game-card,.game-art img{transition:none}.game-card:hover,.game-card:hover img{transform:none}}
+
+.game-card[data-game=flightschool]{--accent:#b6d1d0;--surface:#233b42}

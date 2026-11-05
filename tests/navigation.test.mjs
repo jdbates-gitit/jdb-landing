@@ -49,7 +49,7 @@ test('JDB Games follows Websites once in every main-site Builds menu',async()=>{
     assert.match(builds,/<a[^>]+href="\/websites"[^>]*>[\s\S]*?<\/a>\s*<a[^>]+href="\/games"[^>]*>/,file);
     assert.equal((builds.match(/href="\/games"/g)||[]).length,1,file);
     assert.match(builds,/<span class="jdb-menu-name">JDB Games<\/span>/,file);
-    assert.match(builds,/Four games\. Choose your next adventure\./,file);
+    assert.match(builds,/Five games\. Choose your next adventure\./,file);
     if(file==='games.html')assert.match(builds,/href="\/games" aria-current="page"/,file);
   }
 });
