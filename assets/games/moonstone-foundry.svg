@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title">
+  <title id="title">The twin forges of Moonstone Foundry</title>
+  <defs>
+    <linearGradient id="sky" x2="1" y2="1"><stop stop-color="#100b29"/><stop offset=".52" stop-color="#45216c"/><stop offset="1" stop-color="#0b4255"/></linearGradient>
+    <radialGradient id="halo"><stop stop-color="#ffe2a3" stop-opacity=".65"/><stop offset="1" stop-color="#fcaee5" stop-opacity="0"/></radialGradient>
+    <linearGradient id="gold" x2="0" y2="1"><stop stop-color="#ffefbc"/><stop offset=".36" stop-color="#f6ac66"/><stop offset="1" stop-color="#7e3b55"/></linearGradient>
+    <linearGradient id="iron" x2="0" y2="1"><stop stop-color="#415478"/><stop offset="1" stop-color="#191d38"/></linearGradient>
+    <linearGradient id="amber" x2="0" y2="1"><stop stop-color="#963b62"/><stop offset=".65" stop-color="#ff9560"/><stop offset="1" stop-color="#ffe5a2"/></linearGradient>
+    <linearGradient id="aqua" x2="0" y2="1"><stop stop-color="#3c4387"/><stop offset=".65" stop-color="#32c3e0"/><stop offset="1" stop-color="#a8faff"/></linearGradient>
+    <pattern id="stars" width="137" height="109" patternUnits="userSpaceOnUse"><circle cx="18" cy="14" r="1.6" fill="#ffe9af"/><circle cx="84" cy="32" r="1" fill="#dfccff"/><circle cx="120" cy="87" r="1.4" fill="#9ef4f7"/><circle cx="49" cy="72" r=".8" fill="#efdeff"/></pattern>
+    <pattern id="bricks" width="22" height="13" patternUnits="userSpaceOnUse"><path d="M0 0h22M10 0v13" fill="none" stroke="#a69abc" stroke-opacity=".25"/></pattern>
+    <path id="window" d="M-17 35V3Q-17-17 0-25Q17-17 17 3V35Z"/>
+    <g id="forge" stroke-linejoin="round">
+      <path d="M-167 0-114-37H103l65 37-28 22H-139Z" fill="#201d38" stroke="url(#gold)" stroke-width="3"/>
+      <path d="M-154-3-106-28H100l53 25-27 12H-125Z" fill="url(#iron)" stroke="#8f779d"/>
+      <path d="M-126-2h248M-95-11H96M-68-21H66" stroke="#a5afd0" stroke-opacity=".38"/>
+      <path d="M-74-20v-91h131l24 14v67L60-20Z" fill="url(#iron)" stroke="url(#gold)" stroke-width="2"/>
+      <path d="M-74-20v-91h131v91Z" fill="url(#bricks)"/>
+      <path d="M-52-110v-42h17v42M45-109v-56h16v66" fill="#302742" stroke="url(#gold)" stroke-width="2"/>
+      <path d="M-56-152h25v6h-25ZM41-166h24v6H41Z" fill="url(#gold)"/>
+      <path d="M-83-110Q-61-145 0-164Q53-151 72-111l11 10H-80Z" fill="currentColor" stroke="url(#gold)" stroke-width="4"/>
+      <path d="M0-162Q-49-144-62-107M0-162Q-26-139-32-106M0-162Q-1-140-2-106M0-162Q20-140 28-106M0-162Q43-144 56-106M-80-104H74" fill="none" stroke="#f8c791" stroke-width="2"/>
+      <path d="m0-173 7 11-7 10-7-10Z" fill="#fff4b5" stroke="url(#gold)"/>
+      <path d="M-71-98H57M-71-25H57M-68-99v75m24-75v75m92-75v75m-21-75v75" stroke="url(#gold)" stroke-width="2"/>
+    </g>
+    <g id="mullion"><path d="M0-23v58M-16 6h32" stroke="#452d61" stroke-width="2"/><path d="M-17 35h34" stroke="#fff0b4" stroke-width="2"/></g>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h960v540H0z"/><path fill="url(#stars)" opacity=".65" d="M0 0h960v350H0z"/>
+  <ellipse cx="491" cy="147" rx="265" ry="189" fill="url(#halo)"/>
+  <circle cx="491" cy="143" r="53" fill="#fff0c7"/><circle cx="510" cy="131" r="51" fill="#9a659b" fill-opacity=".36"/>
+  <path d="M0 300 82 202l78 47 53-71 95 79 100-63 65 77 92-68 96 65 80-94 82 80 82-34 55 49v189H0Z" fill="#514477"/>
+  <path d="M0 328 92 267l77 58 109-53 100 46 127-72 104 75 93-38 67 40 105-64 86 65v216H0Z" fill="#283957"/>
+  <path d="M0 393 109 355l149 42 180-41 156 40 149-46 217 45v145H0Z" fill="#152a43"/>
+  <path d="M401 446 478 357l39 2 95 181H344Z" fill="#184359"/><path d="M439 450h99m-106 13h124m-147 17h156m-148 21h189m-110-66h43m-54-34h25" stroke="#54cbcf" stroke-opacity=".47" stroke-width="2"/>
+  <ellipse cx="272" cy="412" rx="201" ry="92" fill="url(#halo)" opacity=".56"/><ellipse cx="709" cy="420" rx="191" ry="76" fill="url(#halo)" opacity=".32"/>
+  <g transform="translate(271 429) scale(1.25)">
+    <use href="#forge" color="#73375d"/>
+    <use href="#window" transform="translate(-8 -62)" fill="url(#amber)" stroke="#ffd99c" stroke-width="2"/><use href="#mullion" transform="translate(-8 -62)"/>
+    <use href="#window" transform="translate(-56 -51) scale(.46 .69)" fill="url(#amber)" stroke="#f3c68f" stroke-width="2"/>
+    <use href="#window" transform="translate(36 -51) scale(.49 .69)" fill="url(#amber)" stroke="#f3c68f" stroke-width="2"/>
+  </g>
+  <g transform="translate(706 435) scale(1.08)">
+    <use href="#forge" color="#2d5385"/>
+    <use href="#window" transform="translate(-8 -62)" fill="url(#aqua)" stroke="#ffd99c" stroke-width="2"/><use href="#mullion" transform="translate(-8 -62)"/>
+    <use href="#window" transform="translate(-56 -51) scale(.46 .69)" fill="url(#aqua)" stroke="#f3c68f" stroke-width="2"/>
+    <use href="#window" transform="translate(36 -51) scale(.49 .69)" fill="url(#aqua)" stroke="#f3c68f" stroke-width="2"/>
+  </g>
+  <g fill="#ffdc96"><circle cx="172" cy="367" r="3"/><circle cx="223" cy="399" r="2.2"/><circle cx="320" cy="356" r="2"/><circle cx="386" cy="318" r="2"/><circle cx="297" cy="293" r="3"/><circle cx="592" cy="404" r="2.6"/><circle cx="718" cy="360" r="2"/><circle cx="796" cy="384" r="2.8"/></g>
+  <path d="M25 27h68M25 27v53m910-53h-68m68 0v53M25 513h68m-68 0v-53m910 53h-68m68 0v-53" fill="none" stroke="#f0c68d" stroke-width="2" opacity=".7"/>
+</svg>
