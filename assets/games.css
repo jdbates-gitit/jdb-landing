@@ -13,3 +13,9 @@
 @media(prefers-reduced-motion:reduce){.game-card,.game-art img{transition:none}.game-card:hover,.game-card:hover img{transform:none}}
 
 .game-card[data-game=flightschool]{--accent:#b6d1d0;--surface:#233b42}
+.game-card[data-game=hadal-echo]{--accent:#9ae3d7;--surface:#162d3a}
+.game-card[data-game=hadal-echo] .game-art img{object-position:50% 30%}
+.game-card[data-game=hadal-echo] .game-action{
+  width:112px;min-height:44px;padding:8px 14px;border:1px solid #599588;
+  border-radius:6px;background:#213f47;color:#d6fff4
+}

@@ -19,12 +19,13 @@ test('gallery has nine public destinations and one noninteractive private previe
   assert.match(gallery,/href="https:\/\/jdb-builds\.com\/"/);
   assert.equal((gallery.match(/target="_blank" rel="noopener noreferrer"/g)||[]).length,8);
 });
-test('JDB Games introduces five games and opens the local launch page',()=>{
+test('JDB Games introduces the gallery and opens the local launch page',()=>{
   const card=gallery.match(/<article[^>]+data-site-id="pencil-wars"[\s\S]*?<\/article>/)?.[0];
   assert(card);
   for(const name of ['Battlefield','Last Line','Lost Orbit','Hollowtown','Pencil FlightSchool'])assert(card.includes(name),name);
   assert.match(card,/<h3 id="site-pencil-wars">JDB Games<\/h3>/);
-  assert.match(card,/The Pencil Wars family · Five adventures/);
+  assert.match(card,/Browser game gallery/);
+  assert.match(card,/Hadal Echo/);
   assert.match(card,/Choose your next adventure on the launch page/);
   assert.match(card,/Choose your adventure/);
   assert.match(card,/href="\/games"/);
@@ -39,7 +40,7 @@ test('all ten previews are local, content-versioned snapshots',async()=>{
     assert.equal(createHash('sha256').update(file).digest('hex').slice(0,12),version,path);
     assert.match(tag,/loading="lazy"/);assert.match(tag,/width="\d+" height="\d+"/);
   }
-  assert.match(gallery,/not live embeds/);assert.match(gallery,/fictional demonstration/);
+  assert.match(gallery,/site and gameplay snapshots/);assert.match(gallery,/fictional demonstration/);
   assert.doesNotMatch(gallery,/<iframe|fetch\(|localStorage|OPENAI_API_KEY/i);
   assert.equal((await readdir(join(root,'assets/websites'))).filter(file=>file.endsWith('.jpg')).length,10);
 });
