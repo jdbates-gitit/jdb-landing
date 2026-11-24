@@ -12,7 +12,8 @@ test('launch page links to each live game',()=>{
     ['battlefield','Battlefield',host],['last-line','Last Line',host+'last-line/'],
     ['lost-orbit','Lost Orbit',host+'lost-orbit/'],['hollowtown','Hollowtown',host+'hollowtown/'],
     ['flightschool','Pencil FlightSchool',host+'pencil-flightschool/'],
-    ['hadal-echo','Hadal Echo',host+'hadal-echo/']
+    ['hadal-echo','Hadal Echo',host+'hadal-echo/'],
+    ['moonstone-foundry','Moonstone Foundry','https://moonstone-foundry.jdb-builds.com/']
   ];
   assert.equal(cards.length,games.length);
   for(const [id,name,url] of games) {
@@ -26,7 +27,7 @@ test('launch page links to each live game',()=>{
   assert.match(page,/Small beginnings\./);assert.match(page,/Big worlds\./);
   assert.match(page,/href="\/websites#playful-builds"/);
   assert.match(page,/href="https:\/\/jdb-builds\.com\/games"/);
-  assert.doesNotMatch(page,/iframe|fetch\(|localStorage|sessionStorage|api\/|yourtime|watchtower|moonstone/i);
+  assert.doesNotMatch(page,/iframe|fetch\(|localStorage|sessionStorage|api\/|yourtime|watchtower/i);
   assert.equal((page.match(/<script\b/g)||[]).length,1);
 });
 test('launch artwork and stylesheet are local and build-ready',async()=>{
