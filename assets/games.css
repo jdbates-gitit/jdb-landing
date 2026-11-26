@@ -19,3 +19,5 @@
   width:112px;min-height:44px;padding:8px 14px;border:1px solid #599588;
   border-radius:6px;background:#213f47;color:#d6fff4
 }
+.game-card[data-game=fifth-shrine]{--accent:#efd18c;--surface:#192a3d}
+.game-card[data-game=fifth-shrine] .game-art img{object-position:50% 37%}

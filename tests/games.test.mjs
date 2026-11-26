@@ -13,7 +13,8 @@ test('launch page links to each live game',()=>{
     ['lost-orbit','Lost Orbit',host+'lost-orbit/'],['hollowtown','Hollowtown',host+'hollowtown/'],
     ['flightschool','Pencil FlightSchool',host+'pencil-flightschool/'],
     ['hadal-echo','Hadal Echo',host+'hadal-echo/'],
-    ['moonstone-foundry','Moonstone Foundry','https://moonstone-foundry.jdb-builds.com/']
+    ['moonstone-foundry','Moonstone Foundry','https://moonstone-foundry.jdb-builds.com/'],
+    ['fifth-shrine','The Fifth Shrine',host+'fifth-shrine/']
   ];
   assert.equal(cards.length,games.length);
   for(const [id,name,url] of games) {
